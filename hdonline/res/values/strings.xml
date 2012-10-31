@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">hdonline</string>
+    <!-- Tieu de cua tab-->
+    <string name="title_noi_bat">Nổi bật</string>
+    <string name="title_xem_nhieu_nhat">Xem nhiều nhất</string>
+    <string name="title_timkiem">Tìm kiếm</string>
+    <string name="title_muc_ua_thich">Mục ưa thích</string>
+    <string name="title_them">Thêm</string>
 </resources>
