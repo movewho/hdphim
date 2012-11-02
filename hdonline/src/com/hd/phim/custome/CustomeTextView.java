@@ -3,8 +3,11 @@
  */
 package com.hd.phim.custome;
 
+import com.movie.hdonline.R;
+
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -33,9 +36,11 @@ public class CustomeTextView extends TextView{
 	protected void drawableStateChanged() {
 		if (isSelected()) {
 			setTextColor(Color.WHITE);
+			setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.BOLD);
 		}
 		else {
-			setTextColor(getResources().getColor(Color.GRAY));
+			setTextColor(getResources().getColor(R.color.bfbfbf));
+			setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL), Typeface.NORMAL);
 		}
 		super.drawableStateChanged();
 	}

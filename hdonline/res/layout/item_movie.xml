@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:vtmmanga="http://schemas.android.com/apk/res/com.vtmmobile.dook2"
+    android:id="@+id/layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_list"
+    android:paddingLeft="3dp" >
+
+    <ImageView
+        android:id="@+id/imageStory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/border"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@android:id/empty"
+        android:layout_toRightOf="@+id/imageStory"
+        android:orientation="vertical" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/mMainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tội Ác Buôn Người trong cuoc khang chien chong my cuu nuoc"
+            android:textColor="@android:color/black"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ems="8"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/txtAuthor"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="  95% 123.456.124 lần"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:singleLine="true"
+            android:textColor="@android:color/black" 
+            android:drawableLeft="@drawable/like"
+            android:gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/textDescriptions"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="10"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="06:32 nguyenquocchinh"
+            android:textColor="@android:color/black" 
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/arrows"
+        android:paddingRight="3dp" />
+
+</RelativeLayout>

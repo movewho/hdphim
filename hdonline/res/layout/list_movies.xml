@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <ListView
+        android:id="@+id/list_movies"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@drawable/background_list"
+        android:soundEffectsEnabled="true"
+        android:scrollbars="none"
+        android:smoothScrollbar="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:cacheColorHint="#6c9010"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:fadingEdge="none"
+        >
+    </ListView>
+</LinearLayout>

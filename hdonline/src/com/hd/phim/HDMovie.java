@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.hd.phim.Utility.Configs;
 import com.hd.phim.custome.CustomViewPager;
+import com.hd.phim.custome.CustomeTextView;
 import com.movie.hdonline.R;
 
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ import android.widget.TextView;
  * @author nguyenquocchinh
  * 
  */
-public class HDMovie extends Activity {
+public class HDMovie extends FragmentActivity {
 
 	private TabHost mTabHost;
 	private CustomViewPager mCustomViewPage;
@@ -62,17 +63,26 @@ public class HDMovie extends Activity {
 		setContentView(R.layout.main);
 
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
+		mTabHost.setup();
 		mCustomViewPage = (CustomViewPager) findViewById(R.id.pager);
+		mCustomViewPage.setPagingEnabled(true);
+		mTabsAdapter = new TabsAdapter(this, mTabHost, mCustomViewPage);
 		
-		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_LIST_NOIBAT), titleNoiBat, TextView.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.btn_dook), Configs.SCREEN_NOI_BAT);
+		titleNoiBat = getResources().getString(R.string.title_noi_bat);
+		titleXemNhieuNhat = getResources().getString(R.string.title_xem_nhieu_nhat);
+		titleTimKiem = getResources().getString(R.string.title_timkiem);
+		titleMucUaThich = getResources().getString(R.string.title_muc_ua_thich);
+		titleThem = getResources().getString(R.string.title_them);
+		
+		mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_LIST_NOIBAT), titleNoiBat, Outstanding.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_outstanding), Configs.SCREEN_NOI_BAT);
 
-        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_XEM_NHIEU_NHAT),titleXemNhieuNhat, TextView.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.btn_downloadmore), Configs.SCREEN_XEM_NHIEU_NHAT);
+        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_XEM_NHIEU_NHAT),titleXemNhieuNhat, ReviewMore.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_reviewmore), Configs.SCREEN_XEM_NHIEU_NHAT);
         
-        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_TIM_KIEM),titleTimKiem,TextView.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.btn_list_story), Configs.SCREEN_TIM_KIEM);
+        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_TIM_KIEM),titleTimKiem,Outstanding.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_search), Configs.SCREEN_TIM_KIEM);
 
-        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MUC_UA_THICH),titleMucUaThich, TextView.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.btn_setup), Configs.SCREEN_MUC_UA_THICH);
+        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MUC_UA_THICH),titleMucUaThich, Outstanding.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_favorite), Configs.SCREEN_MUC_UA_THICH);
         
-        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_THEM), titleThem, TextView.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.btn_setup), Configs.SCREEN_THEM);
+        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_THEM), titleThem, More.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_more), Configs.SCREEN_THEM);
 	}
 
 	public static class TabsAdapter extends FragmentPagerAdapter implements

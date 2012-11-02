@@ -2,8 +2,24 @@
     <string name="app_name">hdonline</string>
     <!-- Tieu de cua tab-->
     <string name="title_noi_bat">Nổi bật</string>
-    <string name="title_xem_nhieu_nhat">Xem nhiều nhất</string>
+    <string name="title_xem_nhieu_nhat">Xem nhiều</string>
     <string name="title_timkiem">Tìm kiếm</string>
-    <string name="title_muc_ua_thich">Mục ưa thích</string>
+    <string name="title_muc_ua_thich">Ưa thích</string>
     <string name="title_them">Thêm</string>
+    
+    <!-- more -->
+    <string name="label_edit">Sửa</string>
+    <string name="lable_login">Đăng nhập</string>
+    <string name="label_recent">Gần đây nhất</string>
+    <string name="label_top_rated">Xếp hạng nhất</string>
+    <string name="label_history">Lịch sử</string>
+    <string name="label_mymovie">Video của tôi</string>
+    <string name="label_register">Đăng ký</string>
+    <string name="label_playlist">Danh sách phát</string>
+    
+    <!-- review more -->
+    <string name="lablel_tody">Hôm nay</string>
+    <string name="label_week">Tuần này</string>
+    <string name="label_all">Tất cả</string>
+    
 </resources>

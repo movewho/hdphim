@@ -1,0 +1,34 @@
+/**
+ * 
+ */
+package com.hd.phim;
+
+import com.movie.hdonline.R;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+/**
+ * @author nguyenquocchinh
+ *
+ */
+public class Outstanding extends Fragment {
+	private View mContentView;
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+        mContentView = inflater.inflate(R.layout.list_view_more, null);
+
+        return mContentView;
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+	}
+
+}

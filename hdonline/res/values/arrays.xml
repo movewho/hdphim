@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+          <string-array name="iconsArrayRes">
+        <item>@drawable/recent</item>
+        <item>@drawable/top_rated</item>
+        <item>@drawable/history</item>
+        <item>@drawable/my_movie</item>
+        <item>@drawable/register</item>
+        <item>@drawable/playlist</item>
+    </string-array>
+   <string-array name="titleArrayRes">
+        <item>@string/label_recent</item>
+        <item>@string/label_top_rated</item>
+        <item>@string/label_history</item>
+        <item>@string/label_mymovie</item>
+        <item>@string/label_register</item>
+        <item>@string/label_playlist</item>
+    </string-array>
+    <string-array name="urlsArrayRes">
+        <item>recent</item>
+        <item>toprated</item>
+        <item>history</item>
+        <item>mymovies</item>
+        <item>register</item>
+        <item>playlist</item>
+        </string-array>
+</resources>
