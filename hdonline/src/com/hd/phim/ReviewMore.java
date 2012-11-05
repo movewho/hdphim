@@ -56,9 +56,6 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 
 	@Override
 	protected void initVariables() {
-		
-		
-		
 		listParams =  new ArrayList<NameValuePair>();
 		listParams.add(new BasicNameValuePair("format", "json"));
 		listParams.add(new BasicNameValuePair("page", "1"));
