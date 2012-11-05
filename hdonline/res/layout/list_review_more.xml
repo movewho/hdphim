@@ -24,7 +24,7 @@
             android:layout_marginRight="10dp">
 
             <Button
-                android:id="@+id/Button02"
+                android:id="@+id/button_pre_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/blue_button_left"
@@ -34,7 +34,7 @@
                 android:layout_marginRight="-1dp"/>
 
             <Button
-                android:id="@+id/Button01"
+                android:id="@+id/button_pre_week"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/blue_button_center"
@@ -43,7 +43,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button_pre_toolbar_top_detail"
+                android:id="@+id/button_pre_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/blue_button_right"

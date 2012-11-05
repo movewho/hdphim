@@ -3,9 +3,7 @@
  */
 package com.hd.phim;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
@@ -19,16 +17,14 @@ import org.json.JSONObject;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
-import com.hd.phim.data.adapter.ListAdapterMore;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.movie.hdonline.R;
 
@@ -40,9 +36,11 @@ public class ReviewMore extends BaseFragment{
 	
 	private View mContentView;
 	private ListView mListView;
-	private ArrayList<JSONObject> jsonData;
 	private List<NameValuePair> listParams;
 	private ListAdaperReview listAdapter;
+	private Button mBtnPreWeek;
+	private Button mBtnPreDay;
+	private Button mBtnPreAll;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +54,7 @@ public class ReviewMore extends BaseFragment{
 	protected void initVariables() {
 		
 		
-		jsonData = new ArrayList<JSONObject>();
+		
 		listParams =  new ArrayList<NameValuePair>();
 		listParams.add(new BasicNameValuePair("format", "json"));
 		listParams.add(new BasicNameValuePair("page", "1"));
@@ -95,32 +93,22 @@ public class ReviewMore extends BaseFragment{
 		protected void onPostExecute(JSONArray result) {
 			super.onPostExecute(result);
 			int len = result.length();
+			ArrayList<JSONObject> jsonData = new ArrayList<JSONObject>();
 			try {
 				for (int i = 0; i < len; i++) {
-					
 						jsonData.add(i, result.getJSONObject(i));
-	
 				}
-				listAdapter = new ListAdaperReview(mContext, jsonData);
-				mListView.setBackgroundColor(Color.BLUE);
-				
-				mListView.setAdapter(listAdapter);
 //				listAdapter.notifyDataSetChanged();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Toast.makeText(mContext, "Da ket thu: " + jsonData.size(), Toast.LENGTH_SHORT).show();
+			updateListView(jsonData);
 		}
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			super.onPreExecute();
-			
-			Toast.makeText(mContext, "Da vao day roi", Toast.LENGTH_SHORT).show();
-		}
-		
 	}
-
+private void updateListView(ArrayList<JSONObject> listJson){
+	listAdapter = new ListAdaperReview(mContext,0, listJson);
+	mListView.setBackgroundColor(Color.BLUE);
+	mListView.setAdapter(listAdapter);
+}
 }

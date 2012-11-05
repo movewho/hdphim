@@ -6,6 +6,8 @@
     <string name="title_timkiem">Tìm kiếm</string>
     <string name="title_muc_ua_thich">Ưa thích</string>
     <string name="title_them">Thêm</string>
+    <!-- item listView -->
+    <string name="count">lần</string>
     
     <!-- more -->
     <string name="label_edit">Sửa</string>

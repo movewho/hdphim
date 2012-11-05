@@ -8,15 +8,15 @@
 
     <com.loopj.android.image.SmartImageView
         android:id="@+id/image_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:scaleType="centerInside"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/border"/>
+        android:layout_marginTop="8dp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -36,9 +36,9 @@
             android:textColor="@android:color/black"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold"
-            android:maxLines="2"
-            android:ems="8"
-            android:ellipsize="end"/>
+            android:lines="2"
+            android:singleLine="false"
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/txt_count_view"

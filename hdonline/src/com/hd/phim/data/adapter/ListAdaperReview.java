@@ -5,55 +5,39 @@ package com.hd.phim.data.adapter;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.androidquery.AQuery;
-import com.loopj.android.image.SmartImageView;
-import com.movie.hdonline.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.hd.phim.Utility.ConverDecimalToPercent;
+import com.loopj.android.image.SmartImageView;
+import com.movie.hdonline.R;
 
 /**
  * @author nguyenquocchinh
  *
  */
-public class ListAdaperReview extends BaseAdapter{
+public class ListAdaperReview extends ArrayAdapter<JSONObject>{
+
+	
 
 	private LayoutInflater layout;
 	private ArrayList<JSONObject> mJson;
 	private Context mContext;
-	public ListAdaperReview(Context context, ArrayList<JSONObject> json) {
-
+	
+	public ListAdaperReview(Context context, int textViewResourceId,
+			ArrayList<JSONObject> objects) {
+		super(context, textViewResourceId, objects);
 		this.mContext = context;
-		this.mJson = json;
+		this.mJson = objects;
 		this.layout = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
-
-	@Override
-	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -67,8 +51,8 @@ public class ListAdaperReview extends BaseAdapter{
 			
 			holder.title = (TextView) convertView.findViewById(R.id.txt_title);
 			holder.viewCount = (TextView) convertView.findViewById(R.id.txt_count_view);
-			holder.time = (TextView) convertView.findViewById(R.id.txt_title);
-			
+			holder.time = (TextView) convertView.findViewById(R.id.text_time);
+			holder.thumbnai = (SmartImageView) convertView.findViewById(R.id.image_movie);
 			convertView.setTag(holder);
 		}
 		else {
@@ -77,13 +61,12 @@ public class ListAdaperReview extends BaseAdapter{
 		
 		try {
 			holder.title.setText(mJson.get(position).getString("TITLE"));
-			holder.viewCount.setText(mJson.get(position).getString("VIEWED"));
-			holder.time.setText(mJson.get(position).getString("TIME"));
+			holder.viewCount.setText(ConverDecimalToPercent.converDecimalToPercent(mJson.get(position).getString("IMDB"))+"% "+mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count));
+			holder.time.setText(mJson.get(position).getString("TIME")+" "+mJson.get(position).getString("UPDATE"));
 			holder.thumbnai.setImageUrl(mJson.get(position).getString("IMG"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 		
 		return convertView;
 	}
