@@ -21,9 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
 import com.hd.phim.network.GetDataJsonFromServer;
@@ -39,9 +42,10 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 	private ListView mListView;
 	private List<NameValuePair> listParams;
 	private ListAdaperReview listAdapter;
-	private Button mBtnPreWeek;
-	private Button mBtnPreDay;
-	private Button mBtnPreAll;
+	private RadioButton mBtnPreWeek;
+	private RadioButton mBtnPreDay;
+	private RadioButton mBtnPreAll;
+	private ProgressBar mProgressUpdate;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,9 +66,10 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 	@Override
 	protected void initControls() {
 		mListView = (ListView) mContentView.findViewById(R.id.list_review_count);
-		mBtnPreAll = (Button) mContentView.findViewById(R.id.button_pre_all);
-		mBtnPreWeek = (Button) mContentView.findViewById(R.id.button_pre_week);
-		mBtnPreDay = (Button) mContentView.findViewById(R.id.button_pre_day);
+		mBtnPreAll = (RadioButton) mContentView.findViewById(R.id.button_pre_all);
+		mBtnPreWeek = (RadioButton) mContentView.findViewById(R.id.button_pre_week);
+		mBtnPreDay = (RadioButton) mContentView.findViewById(R.id.button_pre_day);
+		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.review_more_progress_update);
 		
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
 		if(null == listAdapter){
@@ -75,19 +80,20 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 		
 		mBtnPreAll.setOnClickListener(this);
 		mBtnPreAll.setTag(listLink[1]);
-		mBtnPreAll.setPressed(true);
+		mBtnPreAll.setChecked(true);
 		mBtnPreWeek.setOnClickListener(this);
 		mBtnPreWeek.setTag(listLink[3]);
 		mBtnPreDay.setOnClickListener(this);
 		mBtnPreDay.setTag(listLink[2]);
+		mProgressUpdate.setVisibility(View.GONE);
 	}
 
-	class LoadData extends AsyncTask<String, Void, JSONArray>{
+	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
 
 		private JSONArray jsonArray;
 		@Override
 		protected JSONArray doInBackground(String... params) {
-			
+			publishProgress(true);
 			for (String param : params) {
 				
 				try {
@@ -96,12 +102,22 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 					e.printStackTrace();
 				}
 			}
+			publishProgress(false);
 			return jsonArray;
 		}
-
+		@Override
+		protected void onProgressUpdate(Boolean... values) {
+			super.onProgressUpdate(values);
+			if(values[0]){
+			mProgressUpdate.setVisibility(View.VISIBLE);
+			}else{
+				mProgressUpdate.setVisibility(View.GONE);
+			}
+		}
 		@Override
 		protected void onPostExecute(JSONArray result) {
 			super.onPostExecute(result);
+			if(null != result){
 			int len = result.length();
 			ArrayList<JSONObject> jsonData = new ArrayList<JSONObject>();
 			try {
@@ -112,6 +128,9 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 				e.printStackTrace();
 			}
 			updateListView(jsonData);
+			}else{
+				showToast(getString(R.string.not_json_data));
+			}
 		}
 	}
 private void updateListView(ArrayList<JSONObject> listJson){
@@ -122,27 +141,19 @@ private void updateListView(ArrayList<JSONObject> listJson){
 
 @Override
 public void onClick(View v) {
-	if(v == mBtnPreAll){
-		mBtnPreAll.setPressed(true);
-		mBtnPreDay.setClickable(true);
-		mBtnPreWeek.setClickable(true);
-		mBtnPreAll.setClickable(false);
-	}else if(v == mBtnPreWeek){
-		mBtnPreWeek.setPressed(true);
-		mBtnPreDay.setClickable(true);
-		mBtnPreWeek.setClickable(false);
-		mBtnPreAll.setClickable(true);
-	}else if(v == mBtnPreDay){
-		mBtnPreDay.setPressed(true);
-		mBtnPreDay.setClickable(false);
-		mBtnPreWeek.setClickable(true);
-		mBtnPreAll.setClickable(true);
-	}
 	loadListFilm(v.getTag().toString());
 }
 
 private void loadListFilm(String url){
+	if (CheckConnectInternet
+			.checkInternetConnection(getActivity().getApplicationContext())){
 	LoadData loadData = new LoadData();
 	loadData.execute(url);
+	}else{
+		showToast(getString(R.string.not_connect_internet));
+	}
+}
+private void showToast(String message){
+	Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 }
 }

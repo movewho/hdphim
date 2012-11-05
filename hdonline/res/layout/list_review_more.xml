@@ -3,11 +3,6 @@
      xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-<RelativeLayout
-    android:id="@+id/tooltop"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true">
 
     <LinearLayout
         android:id="@+id/relayout_toolbar_top_message_view"
@@ -17,18 +12,11 @@
         android:orientation="horizontal" 
         android:gravity="center"
         >
-
-        <LinearLayout
+        <RadioGroup 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
+            android:orientation="horizontal">
+            <RadioButton
                 android:id="@+id/button_pre_day"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -37,10 +25,12 @@
                 android:text="@string/lablel_tody"
                 android:textColor="@android:color/white"
                 android:lines="1"
+                android:button="@null"
+                android:layout_marginLeft="30dp"
                 android:textStyle="bold" 
                 android:layout_marginRight="-1dp"/>
 
-            <Button
+            <RadioButton
                 android:id="@+id/button_pre_week"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -48,10 +38,11 @@
                 android:background="@drawable/blue_button_center"
                 android:text="@string/label_week"
                 android:lines="1"
+                android:button="@null"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/button_pre_all"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -60,34 +51,29 @@
                 android:text="@string/label_all"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" 
+                android:layout_marginRight="30dp"
                 android:lines="1"
+                android:button="@null"
                 android:layout_marginLeft="-1dp"/>
-
-        </LinearLayout>
-
+		</RadioGroup>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal" 
-        android:layout_alignParentLeft="true">
-    </LinearLayout>
-
-</RelativeLayout>
 
 <ListView
     android:id="@+id/list_review_count"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/tooltop"
+    android:layout_below="@+id/relayout_toolbar_top_message_view"
     android:layout_centerHorizontal="true"
+    android:scrollbars="none"
     android:background="@android:color/white"
     android:divider="@drawable/divider" >
 
 </ListView>
+<ProgressBar 
+    android:id="@+id/review_more_progress_update"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/relayout_toolbar_top_message_view"
+    android:layout_alignParentRight="true"/>
 
 </RelativeLayout>
