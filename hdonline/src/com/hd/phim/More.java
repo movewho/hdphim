@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.hd.phim.custome.BaseFragment;
+import com.hd.phim.data.adapter.ListAdapterMore;
 import com.movie.hdonline.R;
 
 /**
@@ -18,6 +19,7 @@ import com.movie.hdonline.R;
  *
  */
 public class More extends BaseFragment{
+	
 	private View mContentView;
 	private ListView mListView;
 	@Override

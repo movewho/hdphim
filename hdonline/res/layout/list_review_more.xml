@@ -69,13 +69,13 @@
 </RelativeLayout>
 
 <ListView
-    android:id="@+id/listView1"
+    android:id="@+id/list_review_count"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/tooltop"
-    android:layout_centerHorizontal="true" 
+    android:layout_centerHorizontal="true"
     android:background="@android:color/white"
-    android:divider="@drawable/divider">
+    android:divider="@drawable/divider" >
 
 </ListView>
 

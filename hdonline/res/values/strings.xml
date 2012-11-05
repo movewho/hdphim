@@ -22,4 +22,74 @@
     <string name="label_week">Tuần này</string>
     <string name="label_all">Tất cả</string>
     
+    <!-- by order label -->
+    <string-array name="byorder_abel">
+		<item>Xếp theo ngày</item>
+		<item>Xếp theo năm</item>
+		<item>Xếp theo tên</item>
+		<item>Xếp theo lượt xem</item>
+		<item>Xếp theo bình chọn</item>
+		<item>Xếp theo điểm IMDB</item>
+	</string-array>
+
+	<!-- by order value -->
+	<string-array name="byorder_value">
+		<item>year</item>
+		<item>name</item>
+		<item>view</item>
+		<item>rate</item>
+		<item>imdb</item>	
+	</string-array>  
+	
+		<!-- by sort albel -->
+	<string-array name="bysort_label">
+		<item>Tăng dần</item>
+		<item>Giản dần</item>
+	</string-array>  
+	
+		<!-- by sort albel -->
+	<string-array name="bysort_value">
+		<item>asc</item>
+		<item>desc</item>
+	</string-array> 
+	
+		<!-- by cat -->
+	<string-array name="bycat_label">
+		<item>Phim Hành Động</item>
+		<item>Phim Phiêu Lưu</item>
+		<item>Phim Kinh Dị</item>
+		<item>Phim Tình Cảm</item>
+		<item>Phim Hoạt Hình</item>
+		<item>Phim Võ Thuật</item>
+		<item>Phim hài hước</item>
+		<item>Phim tâm Lý</item>
+		<item>Phim Viễn Tưởng</item>
+		<item>Phim Thần Thoại</item>
+		<item>Phim Chiến Tranh</item>
+		<item>Phim Cổ Trang</item>
+		<item>Phim Âm Nhạc</item>
+		<item>Hình Sự</item>
+		<item>Tv-Show</item>
+		<item>3D</item>
+		<item>Khoa Học</item>
+		<item>Tài liệu</item>
+		<item>Gia đình</item>
+		<item>Lịch sử</item>
+	</string-array>
+
+		<!-- by country -->
+	<string-array name="bycat_counttry">
+		<item>Việt nam</item>
+		<item>Trung quốc</item>
+		<item>Hàn quốc</item>
+		<item>Đài loan</item>
+		<item>Mỹ</item>
+		<item>Châu âu</item>
+		<item>Nhật bản</item>
+		<item>Hồng kông</item>
+		<item>Thái lan</item>
+		<item>Châu á</item>
+		<item>Ấn độ</item>
+	</string-array>
+	
 </resources>

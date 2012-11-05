@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-          <string-array name="iconsArrayRes">
+    	
+    		<!-- icon array res -->
+   <string-array name="iconsArrayRes">
         <item>@drawable/recent</item>
         <item>@drawable/top_rated</item>
         <item>@drawable/history</item>
@@ -8,6 +10,8 @@
         <item>@drawable/register</item>
         <item>@drawable/playlist</item>
     </string-array>
+    
+   			<!-- title array res -->
    <string-array name="titleArrayRes">
         <item>@string/label_recent</item>
         <item>@string/label_top_rated</item>
@@ -16,6 +20,8 @@
         <item>@string/label_register</item>
         <item>@string/label_playlist</item>
     </string-array>
+    
+   			<!-- url arraty res -->
     <string-array name="urlsArrayRes">
         <item>recent</item>
         <item>toprated</item>
@@ -23,5 +29,32 @@
         <item>mymovies</item>
         <item>register</item>
         <item>playlist</item>
-        </string-array>
+     </string-array>
+     
+    		<!-- link movies by cat country-->
+	<string-array name="link_country">
+		<item>http://hdonline.vn/phim-bo-viet-nam.html</item>
+		<item>http://hdonline.vn/phim-bo-trung-quoc.html</item>
+		<item>http://hdonline.vn/phim-bo-han-quoc.html</item>
+		<item>http://hdonline.vn/phim-bo-dai-loan.html</item>
+		<item>http://hdonline.vn/phim-bo-my.html</item>
+		<item>http://hdonline.vn/phim-bo-chau-au.html</item>
+		<item>http://hdonline.vn/phim-bo-nhat-ban.html</item>
+		<item>http://hdonline.vn/phim-bo-hong-kong.html</item>
+		<item>http://hdonline.vn/phim-bo-thai-lan.html</item>
+		<item>http://hdonline.vn/phim-bo-chau-a.html</item>
+		<item>http://hdonline.vn/phim-bo-an-do.html</item>
+	</string-array>
+	
+			<!-- link top movies-->
+	<string-array name="link_top_movies">
+		<item>http://hdonline.vn/danh-sach/top-imdb.html</item>
+		<item>http://hdonline.vn/danh-sach/xem-nhieu.html</item>
+		<item>http://hdonline.vn/danh-sach/xem-nhieu-trong-ngay.html</item>
+		<item>http://hdonline.vn/danh-sach/xem-nhieu-trong-tuan.html</item>
+		<item>http://hdonline.vn/danh-sach/xem-nhieu-trong-thang.html</item>
+		<item>http://hdonline.vn/danh-sach/binh-chon-nhieu.html</item>
+		<item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
+		<item>http://hdonline.vn/danh-sach/de-cu.html</item>
+	</string-array>
 </resources>

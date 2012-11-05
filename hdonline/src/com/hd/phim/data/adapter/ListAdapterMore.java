@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hd.phim;
+package com.hd.phim.data.adapter;
 
 import com.movie.hdonline.R;
 

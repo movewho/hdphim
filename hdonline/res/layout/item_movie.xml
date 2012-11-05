@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:vtmmanga="http://schemas.android.com/apk/res/com.vtmmobile.dook2"
     android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_list"
     android:paddingLeft="3dp" >
 
-    <ImageView
-        android:id="@+id/imageStory"
+    <com.loopj.android.image.SmartImageView
+        android:id="@+id/image_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -24,13 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@android:id/empty"
-        android:layout_toRightOf="@+id/imageStory"
+        android:layout_toRightOf="@+id/image_movie"
         android:orientation="vertical" 
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
 
         <TextView
-            android:id="@+id/mMainTitle"
+            android:id="@+id/txt_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tội Ác Buôn Người trong cuoc khang chien chong my cuu nuoc"
@@ -42,7 +41,7 @@
             android:ellipsize="end"/>
 
         <TextView
-            android:id="@+id/txtAuthor"
+            android:id="@+id/txt_count_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="  95% 123.456.124 lần"
@@ -53,7 +52,7 @@
             android:gravity="center_vertical"/>
 
         <TextView
-            android:id="@+id/textDescriptions"
+            android:id="@+id/text_time"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
