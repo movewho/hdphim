@@ -19,37 +19,48 @@
         >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/button_pre_day"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/blue_button_left"
                 android:text="@string/lablel_tody"
                 android:textColor="@android:color/white"
+                android:lines="1"
                 android:textStyle="bold" 
                 android:layout_marginRight="-1dp"/>
 
             <Button
                 android:id="@+id/button_pre_week"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/blue_button_center"
                 android:text="@string/label_week"
+                android:lines="1"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/button_pre_all"
-                android:layout_width="wrap_content"
+                android:layout_width="0px"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/blue_button_right"
                 android:text="@string/label_all"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" 
+                android:lines="1"
                 android:layout_marginLeft="-1dp"/>
 
         </LinearLayout>
