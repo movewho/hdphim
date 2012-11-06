@@ -109,5 +109,61 @@ public class GetDataJsonFromServer {
     
 	    return jArray;
 	}
+	public static JSONArray postJSONfromURL(String url, List<NameValuePair> params ,int socketFactory, String userAgent) throws SSLPeerUnverifiedException{
+		InputStream is = null;
+		String result = "";
+		JSONArray jArray = null;
+	    try{
+	    		SchemeRegistry scheme = new SchemeRegistry();
+	    		scheme.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), socketFactory));
+	    		
+	            HttpClient httpclient = new DefaultHttpClient();
+	            HttpProtocolParams.setUserAgent(httpclient.getParams(), userAgent);
+	            
+//	            HttpParams para = new BasicHttpParams();
+//	            
+//	            int len = params.size();
+//	            for (int i = 0; i < len; i++) {
+//	            	para.setParameter(params.get(i).getName(), params.get(i).getValue());
+//				}
+//	            
+//	            httpget.setParams(para);
+	            
+	            if(!url.endsWith("?"))
+	                url += "?";
+	            String paramString = URLEncodedUtils.format(params, "utf-8");
 
+	            HttpPost httpget = new HttpPost(url + paramString);
+	            HttpResponse response = httpclient.execute(httpget);
+	            HttpEntity entity = response.getEntity();
+	            is = entity.getContent();
+	            
+
+	    }catch(Exception e){
+	            Log.e(Configs.TAG_LOG, "Error in http connection "+e.toString());
+	    }
+	    
+	  //convert response to string
+	    try{
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(is,"utf-8"), 8);
+	            StringBuilder sb = new StringBuilder();
+	            String line = null;
+	            while ((line = reader.readLine()) != null) {
+	                    sb.append(line + "\n");
+	            }
+	            is.close();
+	            result=sb.toString();
+	    }catch(Exception e){
+	            Log.e(Configs.TAG_LOG, "Error converting result "+e.toString());
+	    }
+	    
+	    try{
+	    	
+            jArray = new JSONArray(result);            
+	    }catch(JSONException e){
+	            Log.e(Configs.TAG_LOG, "Error parsing data "+e.toString());
+	    }
+    
+	    return jArray;
+	}
 }

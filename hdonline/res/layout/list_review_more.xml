@@ -21,14 +21,15 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/blue_button_left"
+                android:background="@drawable/blue_button_center"
                 android:text="@string/lablel_tody"
                 android:textColor="@android:color/white"
                 android:lines="1"
                 android:button="@null"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold" 
-                android:layout_marginRight="-1dp"/>
+                android:layout_marginRight="-1dp"
+                android:gravity="center"/>
 
             <RadioButton
                 android:id="@+id/button_pre_week"
@@ -40,21 +41,23 @@
                 android:lines="1"
                 android:button="@null"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold" 
+                android:gravity="center"/>
 
             <RadioButton
                 android:id="@+id/button_pre_all"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/blue_button_right"
+                android:background="@drawable/blue_button_center"
                 android:text="@string/label_all"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" 
                 android:layout_marginRight="10dp"
                 android:lines="1"
                 android:button="@null"
-                android:layout_marginLeft="-1dp"/>
+                android:layout_marginLeft="-1dp"
+                android:gravity="center"/>
 		</RadioGroup>
     </LinearLayout>
 
