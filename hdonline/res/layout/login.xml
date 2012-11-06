@@ -22,14 +22,14 @@
         android:ems="10" 
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="Tên đăng nhập"/>
+        android:hint="@string/username"/>
         <EditText
         android:id="@+id/edit_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_edittext"
         android:ems="10" 
-        android:hint="Mật khẩu"
+        android:hint="@string/password"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
@@ -45,14 +45,13 @@
     android:layout_marginTop="10dp" >
 
     <EditText
-        android:id="@+id/edit_password"
+        android:id="@+id/edit_security"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:background="@drawable/background_edittext"
         android:ems="10"
-        android:hint="Bảo mật"
-        android:inputType="textWebPassword" />
+        android:hint="@string/security" />
 
     <WebView
         android:id="@+id/security"
@@ -60,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/button1"
-        android:layout_toRightOf="@+id/edit_password" />
+        android:layout_toRightOf="@+id/edit_security" />
 
     <Button
         android:id="@+id/button1"
@@ -75,24 +74,23 @@
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Đăng nhập" 
+            android:text="@string/login" 
             android:background="@drawable/blue_button"
-                    android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/white"/>
+            android:layout_marginLeft="10dp"
+        	android:layout_marginRight="10dp"
+        	android:layout_marginTop="10dp"
+        	android:textColor="@android:color/white"/>
 
         <View
             android:id="@+id/textView1"
             android:layout_width="fill_parent"
-            android:layout_height="20dp"
-            android:text="TextView" />
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tạo tài khoản mơi?" 
+            android:text="@string/new_account" 
             android:textColor="@android:color/white"/>
 
 </LinearLayout>

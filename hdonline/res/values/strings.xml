@@ -97,4 +97,14 @@
 		<item>Ấn độ</item>
 	</string-array>
 	
+	<!-- login -->
+	<string name="login_url">http://hdonline.vn/thanh-vien/dang-nhap.html</string>
+	<string name="pass_empty">Mật khẩu chưa được nhập</string>
+	<string name="accout_empty">Tên đăng nhập chưa được nhập</string>
+	<string name="new_account">Tạo tài khoản mới</string>
+	<string name="security">Bảo Mật</string>
+	<string name="username">Tên đăng nhập</string>
+	<string name="password">Mật khẩu</string>
+	<string name="login">Đăng nhập</string>
+	<string name="connecting">Đang kết nối...</string>
 </resources>

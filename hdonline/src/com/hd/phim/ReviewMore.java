@@ -21,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -36,7 +38,7 @@ import com.movie.hdonline.R;
  * @author nguyenquocchinh
  *
  */
-public class ReviewMore extends BaseFragment implements OnClickListener{
+public class ReviewMore extends BaseFragment implements OnClickListener, OnItemClickListener{
 	
 	private View mContentView;
 	private ListView mListView;
@@ -75,6 +77,7 @@ public class ReviewMore extends BaseFragment implements OnClickListener{
 			mListView.setAdapter(listAdapter);
 		}
 		
+		mListView.setOnItemClickListener(this);
 		mBtnPreAll.setOnClickListener(this);
 		mBtnPreAll.setTag(listLink[1]);
 		mBtnPreAll.setChecked(true);
@@ -152,5 +155,10 @@ private void loadListFilm(String url){
 }
 private void showToast(String message){
 	Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+}
+
+@Override
+public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	
 }
 }
