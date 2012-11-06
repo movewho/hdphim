@@ -119,21 +119,15 @@ public class GetDataJsonFromServer {
 	    		
 	            HttpClient httpclient = new DefaultHttpClient();
 	            HttpProtocolParams.setUserAgent(httpclient.getParams(), userAgent);
+	            HttpPost httpget = new HttpPost(url);
+	            HttpParams para = new BasicHttpParams();
 	            
-//	            HttpParams para = new BasicHttpParams();
-//	            
-//	            int len = params.size();
-//	            for (int i = 0; i < len; i++) {
-//	            	para.setParameter(params.get(i).getName(), params.get(i).getValue());
-//				}
-//	            
-//	            httpget.setParams(para);
+	            int len = params.size();
+	            for (int i = 0; i < len; i++) {
+	            	para.setParameter(params.get(i).getName(), params.get(i).getValue());
+				}
 	            
-	            if(!url.endsWith("?"))
-	                url += "?";
-	            String paramString = URLEncodedUtils.format(params, "utf-8");
-
-	            HttpPost httpget = new HttpPost(url + paramString);
+	            httpget.setParams(para);
 	            HttpResponse response = httpclient.execute(httpget);
 	            HttpEntity entity = response.getEntity();
 	            is = entity.getContent();
