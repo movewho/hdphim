@@ -15,12 +15,14 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -109,17 +111,27 @@ public class GetDataJsonFromServer {
     
 	    return jArray;
 	}
-	public static JSONArray postJSONfromURL(String url, List<NameValuePair> params ,int socketFactory, String userAgent) throws SSLPeerUnverifiedException{
+	
+	/**
+	 * 
+	 * @param url
+	 * @param params
+	 * @param socketFactory
+	 * @param userAgent
+	 * @return
+	 * @throws SSLPeerUnverifiedException
+	 */
+	public static JSONObject postJSONfromURL(String url, List<NameValuePair> params ,int socketFactory, String userAgent) throws SSLPeerUnverifiedException{
 		InputStream is = null;
 		String result = "";
-		JSONArray jArray = null;
+		JSONObject jArray = null;
 	    try{
 	    		SchemeRegistry scheme = new SchemeRegistry();
 	    		scheme.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), socketFactory));
 	    		
 	            HttpClient httpclient = new DefaultHttpClient();
 	            HttpProtocolParams.setUserAgent(httpclient.getParams(), userAgent);
-	            HttpPost httpget = new HttpPost(url);
+	            HttpPost httpost = new HttpPost(url);
 	            HttpParams para = new BasicHttpParams();
 	            
 	            int len = params.size();
@@ -127,8 +139,9 @@ public class GetDataJsonFromServer {
 	            	para.setParameter(params.get(i).getName(), params.get(i).getValue());
 				}
 	            
-	            httpget.setParams(para);
-	            HttpResponse response = httpclient.execute(httpget);
+	            httpost.setParams(para);
+	            httpost.setEntity(new UrlEncodedFormEntity(params));
+	            HttpResponse response = httpclient.execute(httpost);
 	            HttpEntity entity = response.getEntity();
 	            is = entity.getContent();
 	            
@@ -153,7 +166,7 @@ public class GetDataJsonFromServer {
 	    
 	    try{
 	    	
-            jArray = new JSONArray(result);            
+            jArray = new JSONObject(result);            
 	    }catch(JSONException e){
 	            Log.e(Configs.TAG_LOG, "Error parsing data "+e.toString());
 	    }
