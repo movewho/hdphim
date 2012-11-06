@@ -120,9 +120,8 @@ public void onClick(View v) {
 	}
 	
 	if(isValid)
-		if(mEditPass.getText().toString().equals(mEditConfirmPass.getText().toString())){
-			showToast(getString(R.string.confirm_pass_wrong));
-			isValid = false;
+		if(!mEditPass.getText().toString().equals(mEditConfirmPass.getText().toString())){
+			mEditConfirmPass.setError(getString(R.string.confirm_pass_wrong));
 		}else
 	connectServer();
 	else
@@ -179,11 +178,6 @@ private class LoginSever extends AsyncTask<String, Boolean, JSONObject> {
 				jsonObj = GetDataJsonFromServer.postJSONfromURL(param,
 						listParams, 80, "HD Online version for Android");
 			} catch (SSLPeerUnverifiedException e) {
-				e.printStackTrace();
-			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}

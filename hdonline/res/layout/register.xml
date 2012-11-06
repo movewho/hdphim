@@ -47,7 +47,7 @@
                 android:ems="10"
                 android:lines="1"
                 android:hint="@string/password"
-                android:inputType="textWebPassword" />
+                android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/edit_confirm_password_regis"
@@ -60,7 +60,7 @@
                 android:ems="10"
                 android:lines="1"
                 android:hint="@string/confirm_password"
-                android:inputType="textWebPassword" />
+                android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/edit_fullname_regis"
@@ -172,7 +172,7 @@
                 <WebView
                     android:id="@+id/webview_security_regis"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_centerVertical="true"
                     android:layout_toLeftOf="@+id/button1_regis"
                     android:layout_toRightOf="@+id/edit_security_regis" />
