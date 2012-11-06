@@ -127,4 +127,10 @@
 	<string name="male">Nam</string>
 	<string name="female">Nữ</string>
 	<string name="confirm_pass_wrong">Mật khẩu không trùng</string>
+	<string name="email_address_not_valid">Địa chỉ email không đúng</string>
+	<string name="not_agree">Bạn chưa đồng ý với điều khoản của chúng tôi</string>
+	
+	<!-- detailfilm -->
+	<string name="like">Ưa thích</string>
+	<string name="related_videos">Video liên quan</string>
 </resources>

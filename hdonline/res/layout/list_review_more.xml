@@ -78,5 +78,14 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/relayout_toolbar_top_message_view"
     android:layout_alignParentRight="true"/>
-
+<ViewFlipper 
+    android:id="@+id/view_detail_film"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+        <include 
+            android:id="@+id/layout_empty"
+            layout="@layout/layout_empty"/>
+        <include layout="@layout/detail_film"/>
+    
+</ViewFlipper>
 </RelativeLayout>

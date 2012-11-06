@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hd.phim.Utility.CheckConnectInternet;
+import com.hd.phim.Utility.DataUtils;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.movie.hdonline.R;
 
@@ -70,6 +71,11 @@ public class ForgotPassword extends Activity implements OnClickListener {
 		if(mEditEmail.getText().length() <= 0){
 			mEditEmail.setError(getString(R.string.edit_empty));
 			isValid = false;
+		}else{
+			if(!DataUtils.isEmailValid(mEditEmail.getText().toString())){
+				mEditEmail.setError(getString(R.string.email_address_not_valid));
+				isValid = false;
+			}
 		}
 		if(mEditSecurity.getText().length() <= 0){
 			mEditSecurity.setError(getString(R.string.edit_empty));

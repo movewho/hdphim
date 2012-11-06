@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.hd.phim.Utility.CheckConnectInternet;
+import com.hd.phim.Utility.DataUtils;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.movie.hdonline.R;
 
@@ -72,7 +73,6 @@ private void initView() {
 	mEditFullName = (EditText) this.findViewById(R.id.edit_fullname_regis);
 	mEditYear = (EditText) this.findViewById(R.id.edit_year_regis);
 	mRdbMale = (RadioButton) this.findViewById(R.id.radio_male);
-//	mRdbFemale = (RadioButton) this.findViewById(R.id.radio_female);
 	mEditPhone = (EditText) this.findViewById(R.id.edit_phone_regis);
 	mChxAgree = (CheckBox) this.findViewById(R.id.check_agree_regis);
 	mEditSecurity = (EditText) findViewById(R.id.edit_security_regis);
@@ -86,6 +86,10 @@ private void initActions() {
 }
 @Override
 public void onClick(View v) {
+	if(!mChxAgree.isChecked()){
+		showToast(getString(R.string.not_agree));
+		isValid = false;
+	}
 	if(mEditUserName.getText().length() <= 0){
 		mEditUserName.setError(getString(R.string.edit_empty));
 		isValid = false;
@@ -101,7 +105,11 @@ public void onClick(View v) {
 	if(mEditEmail.getText().length() <= 0){
 		mEditEmail.setError(getString(R.string.edit_empty));
 		isValid = false;
-	}
+	}else
+		if(DataUtils.isEmailValid(mEditEmail.getText().toString())){
+			mEditEmail.setError(getString(R.string.email_address_not_valid));
+			isValid = false;
+		}
 	if(mEditFullName.getText().length() <= 0){
 		mEditFullName.setError(getString(R.string.edit_empty));
 		isValid = false;
@@ -118,7 +126,6 @@ public void onClick(View v) {
 		mEditSecurity.setError(getString(R.string.edit_empty));
 		isValid = false;
 	}
-	
 	if(isValid)
 		if(!mEditPass.getText().toString().equals(mEditConfirmPass.getText().toString())){
 			mEditConfirmPass.setError(getString(R.string.confirm_pass_wrong));
