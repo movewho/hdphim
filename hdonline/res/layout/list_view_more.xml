@@ -12,12 +12,13 @@
         android:background="@drawable/top_bar" >
 
         <TextView
+            android:id="@+id/title"
             style="@android:style/TextAppearance.Large"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Nổi bật"
+            android:text="@string/title_noi_bat"
             android:textStyle="bold" />
     </LinearLayout>
 

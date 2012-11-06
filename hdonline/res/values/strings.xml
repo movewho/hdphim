@@ -99,12 +99,32 @@
 	
 	<!-- login -->
 	<string name="login_url">http://hdonline.vn/thanh-vien/dang-nhap.html</string>
-	<string name="pass_empty">Mật khẩu chưa được nhập</string>
-	<string name="accout_empty">Tên đăng nhập chưa được nhập</string>
+	<string name="edit_empty">Trường này chưa được nhập</string>
 	<string name="new_account">Tạo tài khoản mới</string>
-	<string name="security">Bảo Mật</string>
+	<string name="forgot_password">Quên mật khẩu</string>
+	<string name="security">Mã bảo vệ</string>
 	<string name="username">Tên đăng nhập</string>
 	<string name="password">Mật khẩu</string>
 	<string name="login">Đăng nhập</string>
 	<string name="connecting">Đang kết nối...</string>
+	
+	<!-- forgot password -->
+	<string name="title_forgot_password">Quên mật khẩu</string>
+	<string name="forgot_url">http://hdonline.vn/thanh-vien/quen-mat-khau.html</string>
+	<string name="email">Email đăng ký</string>
+	<string name="get_password">Lấy Mật Khẩu</string>
+	<string name="security_url">http://hdonline.vn/security.php</string>
+	
+	<!-- register -->
+	<string name="title_register">Đăng ký</string>
+	<string name="regis_url">http://hdonline.vn/thanh-vien/dang-ky.html</string>
+	<string name="confirm_password">Nhập lại mật khẩu</string>
+	<string name="fullname">Tên đầy đủ</string>
+	<string name="year">Năm sinh</string>
+	<string name="gender">Giới tính</string>
+	<string name="phone">Số điện thoại</string>
+	<string name="agree">Đồng ý điều khoản</string>
+	<string name="male">Nam</string>
+	<string name="female">Nữ</string>
+	<string name="confirm_pass_wrong">Mật khẩu không trùng</string>
 </resources>

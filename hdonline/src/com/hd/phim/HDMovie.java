@@ -119,7 +119,7 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
         
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_TIM_KIEM),titleTimKiem,Outstanding.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_search), Configs.SCREEN_TIM_KIEM);
 
-        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MUC_UA_THICH),titleMucUaThich, Outstanding.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_favorite), Configs.SCREEN_MUC_UA_THICH);
+        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MUC_UA_THICH),titleMucUaThich, Favorite.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_favorite), Configs.SCREEN_MUC_UA_THICH);
         
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_THEM), titleThem, More.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_more), Configs.SCREEN_THEM);
 	}

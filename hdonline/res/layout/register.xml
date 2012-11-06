@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroung_login"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/title_register"
+                android:textColor="#2E9AFE"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_username_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/username" />
+
+            <EditText
+                android:id="@+id/edit_password_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/password"
+                android:inputType="textWebPassword" />
+
+            <EditText
+                android:id="@+id/edit_confirm_password_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/confirm_password"
+                android:inputType="textWebPassword" />
+
+            <EditText
+                android:id="@+id/edit_fullname_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/fullname" />
+
+            <EditText
+                android:id="@+id/edit_year_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/year"
+                android:inputType="number"
+                android:maxLength="4" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/male" />
+
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:drawableRight="@android:drawable/btn_radio"
+                    android:gravity="center"
+                    android:text="@string/female" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edit_phone_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/phone"
+                android:inputType="phone" />
+
+            <CheckBox
+                android:id="@+id/check_agree_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/agree" />
+
+            <EditText
+                android:id="@+id/edit_email_regis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_edittext"
+                android:ems="10"
+                android:lines="1"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edit_security_regis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/background_edittext"
+                    android:ems="10"
+               		android:lines="1"
+                    android:hint="@string/security" />
+                <WebView
+                    android:id="@+id/webview_security_regis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/button1_regis"
+                    android:layout_toRightOf="@+id/edit_security_regis" />
+
+                <Button
+                    android:id="@+id/button1_regis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@android:drawable/ic_menu_search" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_regis"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/blue_button"
+                android:text="@string/title_register"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

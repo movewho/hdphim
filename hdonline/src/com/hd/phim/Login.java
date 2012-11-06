@@ -4,21 +4,18 @@
 package com.hd.phim;
 
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,10 +24,10 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hd.phim.data.adapter.ListAdaperReview;
+import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.movie.hdonline.R;
 
@@ -46,7 +43,8 @@ public class Login extends Activity implements OnClickListener{
 	private Button btnLogin;
 	private WebView security;
 	private LoginSever mLogin;
-	private ProgressDialog mPrgDialog;
+	private TextView mTxtForgotPassword;
+	private TextView mTxtRegister;
 	
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +56,12 @@ protected void onCreate(Bundle savedInstanceState) {
 	edtitUsername = (EditText) findViewById(R.id.edit_username);
 	editPassword = (EditText) findViewById(R.id.edit_password);
 	editSecurity = (EditText) this.findViewById(R.id.edit_security);
+	mTxtForgotPassword = (TextView) this.findViewById(R.id.txt_forgot);
+	mTxtForgotPassword.setOnClickListener(this);
+	mTxtRegister = (TextView) this.findViewById(R.id.txt_regis);
+	mTxtRegister.setOnClickListener(this);
 	security = (WebView) findViewById(R.id.security);
-	mPrgDialog = new ProgressDialog(getApplicationContext());
-	mPrgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-	
-	security.loadUrl("http://hdonline.vn/security.php");
+	security.loadUrl(getString(R.string.security_url));
 	
 	btnLogin = (Button) findViewById(R.id.btn_login);
 	btnLogin.setOnClickListener(this);
@@ -76,71 +75,86 @@ public void onClick(View v) {
 	case R.id.btn_login:
 	{
 		if (edtitUsername.getText().length() == 0){
-			edtitUsername.setError(getString(R.string.accout_empty));
+			edtitUsername.setError(getString(R.string.edit_empty));
 		}else
 		if( editPassword.getText().length() == 0){
-			editPassword.setError(getString(R.string.pass_empty));
+			editPassword.setError(getString(R.string.edit_empty));
+		}else if(editSecurity.getText().length() == 0){
+			editSecurity.setError(getString(R.string.edit_empty));
 		}else{
-			mLogin = new LoginSever();
-			mLogin.execute(getString(R.string.login_url));
+			connectServer();
+			btnLogin.setEnabled(false);
 		}
 	}
 		break;
+	case R.id.txt_forgot:
+		moveActivity(ForgotPassword.class);
+		break;
+	case R.id.txt_regis:
+		moveActivity(Register.class);
+		break;
 	}
-	//mac dinh dang nhap thanh cong
-//	Intent i = new Intent(Login.this, HDMovie.class);
-//	startActivity(i);
 }
-
-private class LoginSever extends AsyncTask<String, Boolean, JSONArray>{
+private void connectServer(){
+	if(CheckConnectInternet.checkInternetConnection(Login.this)){
+		mLogin = new LoginSever();
+		mLogin.execute(getString(R.string.login_url));
+	}else{
+		showToast(getString(R.string.not_connect_internet));
+	}
+}
+private class LoginSever extends AsyncTask<String, Boolean, JSONObject>{
 	
-	private View mContentView;
-	private ListView mListOutstanding;
-	private ListAdaperReview mAdapter;
 	private List<NameValuePair> listParams;
-	private JSONArray jsonArray;
+	private JSONObject jsonObj;
+	private ProgressDialog mPrgDialog;
 	
 	@Override
-	protected JSONArray doInBackground(String... params) {
+	protected JSONObject doInBackground(String... params) {
 		publishProgress(true);
 		for (String param : params) {
 			
 			try {
-				jsonArray = GetDataJsonFromServer.postJSONfromURL(param, listParams, 80, "HD Online version for Android");
+				jsonObj = GetDataJsonFromServer.postJSONfromURL(param, listParams, 80, "HD Online version for Android");
 			} catch (SSLPeerUnverifiedException e) {
+				e.printStackTrace();
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		publishProgress(false);
-		return jsonArray;
+		return jsonObj;
 	}
-	
 	@Override
 	protected void onProgressUpdate(Boolean... values) {
 		super.onProgressUpdate(values);
+		if(values[0]){
+			if(!mPrgDialog.isShowing())
+				mPrgDialog.show();
+		}
 	}
 	@Override
-	protected void onPostExecute(JSONArray result) {
+	protected void onPostExecute(JSONObject result) {
 		super.onPostExecute(result);
+		if(mPrgDialog.isShowing())
+				mPrgDialog.dismiss();
 		if(null != result){
-			int len = result.length();
-			JSONObject jsonData = new JSONObject();
-			try {
-				for (int i = 0; i < len; i++) {
-						jsonData = result.getJSONObject(i);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			checkLoginCompleted(jsonData);
-			}else{
-				showToast(getString(R.string.not_json_data));
-			}
+			checkLoginCompleted(result);
+		}else{
+			showToast(getString(R.string.not_json_data));
+		}
+		btnLogin.setEnabled(true);
 	}
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		mPrgDialog.setMessage(Login.this.getString(R.string.connecting));
+		mPrgDialog = new ProgressDialog(Login.this);
+		mPrgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+		mPrgDialog.setMessage(getString(R.string.connecting));
+		
 		listParams =  new ArrayList<NameValuePair>();
 		listParams.add(new BasicNameValuePair("login_box", "true"));
 		listParams.add(new BasicNameValuePair("username", edtitUsername.getText().toString()));
@@ -151,17 +165,21 @@ private class LoginSever extends AsyncTask<String, Boolean, JSONArray>{
 private void showToast(String message){
 	Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 }
+private void moveActivity(Class<?> className){
+	Intent i = new Intent(Login.this, className);
+	startActivity(i);
+	overridePendingTransition(R.anim.fade_in_right, R.anim.fade_out_right);
+}
 private void checkLoginCompleted(JSONObject jsonData){
 	try {
+		showToast(jsonData.getString("message"));
+		
 		if(jsonData.getBoolean("success")){
-			Intent i = new Intent(Login.this, HDMovie.class);
-			startActivity(i);
+			moveActivity(HDMovie.class);
 			this.finish();
-		}else{
-			showToast(jsonData.getString("message"));
 		}
 	} catch (JSONException e) {
-		Log.v("get json", "loi");
+		Log.e("get json", "loi");
 		e.printStackTrace();
 	}
 }
