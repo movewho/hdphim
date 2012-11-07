@@ -144,4 +144,10 @@
 	<string name="drama">Phim bộ</string>
 	<string name="movie_theaters">Phim chiếu rạp</string>
 	<string name="enter_filmname">Nhập tên phim</string>
+	<string name="view_more">Thêm kết quả</string>
+	
+	<!-- dialog -->
+	<string name="OK">Đồng ý</string>
+	<string name="cancel">Hủy bỏ</string>
+	<string name="you_want_exit">Bạn có muốn thoát ứng dụng?</string>
 </resources>

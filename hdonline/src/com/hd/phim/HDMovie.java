@@ -6,21 +6,13 @@ package com.hd.phim;
 import java.util.ArrayList;
 
 import shared.ui.actionscontentview.ActionsContentView;
-
-import com.hd.phim.Utility.Configs;
-import com.hd.phim.custome.CustomViewPager;
-import com.hd.phim.custome.CustomeTextView;
-import com.hd.phim.data.adapter.SitesAdapter;
-import com.movie.hdonline.R;
-
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,11 +22,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+
+import com.hd.phim.Utility.Configs;
+import com.hd.phim.Utility.MyDialog;
+import com.hd.phim.Utility.MyDialog.OnMyDialogListener;
+import com.hd.phim.custome.CustomViewPager;
+import com.movie.hdonline.R;
 
 /**
  * @author nguyenquocchinh
@@ -281,5 +278,19 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
 		@Override
 		public void onPageScrollStateChanged(int state) {
 		}
+	}
+	@Override
+	public void onBackPressed() {
+		MyDialog mDialog = new MyDialog(this);
+		mDialog.setMessage(getString(R.string.you_want_exit));
+		mDialog.setOnMyDialogListener(new OnMyDialogListener() {
+			
+			public void onItemClick(boolean isOk) {
+				if(isOk){
+					HDMovie.this.finish();
+				}
+			}
+		});
+		mDialog.show();
 	}
 }

@@ -14,9 +14,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,7 +30,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -72,6 +73,10 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private ProgressBar mProgressDetail;
 	private TextView mTxtListData;
 	private TextView mTxtListSearchData;
+	private View footerListSearch;
+	private View footerListDetail;
+	private static int countListSearch;
+	private static int countListDetail;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +102,6 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnMovieTheater = (Button) mContentView.findViewById(R.id.btn_movie_theaters);
 		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.search_progress_update);
 		mTxtListSearchData = (TextView) mContentView.findViewById(R.id.txt_list_search_not_data);
-		mTxtListSearchData.setVisibility(View.GONE);
 		
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
 		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
@@ -109,17 +113,21 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
 		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
-		mTxtListData.setVisibility(View.GONE);
 		mTxtTitleFilm.setSelected(true);
 		
 		String[] listLink = getResources().getStringArray(R.array.link_search_movies);
 		if(null == listAdapter){
 			url = listLink[0];
+			countListSearch = 1;
+			countListDetail = 1;
 		loadListFilm(listLink[0],mListParams);
 		}else{
 			mListSearch.setAdapter(listAdapter);
 		}
-		
+		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		mListDetail.addFooterView(footerListDetail);
+		mListSearch.addFooterView(footerListSearch);
 		mListSearch.setOnItemClickListener(this);
 		mBtnMovies.setOnClickListener(this);
 		mBtnMovies.setTag(listLink[0]);
@@ -127,8 +135,6 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnDrama.setTag(listLink[1]);
 		mBtnMovieTheater.setOnClickListener(this);
 		mBtnMovieTheater.setTag(listLink[2]);
-		mProgressUpdate.setVisibility(View.INVISIBLE);
-		mProgressDetail.setVisibility(View.INVISIBLE);
 		mBtnLike.setOnClickListener(this);
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
@@ -190,13 +196,23 @@ private void updateListView(ArrayList<JSONObject> listJson){
 	mTxtListSearchData.setVisibility(View.GONE);
 	mTxtListData.setVisibility(View.GONE);
 	if(mViewDetail.getDisplayedChild() == 0){
+		if(null == listAdapter){
 	listAdapter = new ListAdaperReview(mContext,0, listJson, true);
 	mListSearch.setBackgroundColor(Color.BLUE);
 	mListSearch.setAdapter(listAdapter);
+	}else{
+		listAdapter.addAll(listJson);
+		listAdapter.notifyDataSetChanged();
+	}
 	}else if(mViewDetail.getDisplayedChild() == 1){
+		if(null == mAdapterDetail){
 		mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
 		mListDetail.setBackgroundColor(Color.BLUE);
 		mListDetail.setAdapter(mAdapterDetail);
+		}else{
+			mAdapterDetail.addAll(listJson);
+			mAdapterDetail.notifyDataSetChanged();
+		}
 	}
 }
 
@@ -208,6 +224,7 @@ public void onClick(View v) {
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
 		mViewDetail.showPrevious();
+		mAdapterDetail.clear();
 	}else if(v == mImgBtnSearch){
 		if(mEditFilmName.getText().length() <= 0){
 			mEditFilmName.setError(getString(R.string.edit_empty));
@@ -238,24 +255,35 @@ private void showToast(String message){
 @Override
 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	if(mViewDetail.getDisplayedChild() == 0){
-	mItemFilm = listAdapter.getItem(position);
-	}else {
+		if(view == footerListSearch){
+			countListSearch++;
+			onCreateParams(url, countListSearch);
+		}else{
+			mItemFilm = listAdapter.getItem(position);
+			showDetail(mItemFilm);
+			onCreateParams(url, countListDetail);
+		}
+	}else if(view == footerListDetail){
+			countListDetail++;
+			onCreateParams(url, countListDetail);
+		}else{
 		mItemFilm = mAdapterDetail.getItem(position);
-	}
-	showDetail(mItemFilm);
+		showDetail(mItemFilm);
+		}
+}
+private void onCreateParams(String url, int page){
+	ArrayList<NameValuePair> mListRelated = new ArrayList<NameValuePair>();
+	mListRelated.add(new BasicNameValuePair("format", "json"));
+	mListRelated.add(new BasicNameValuePair("page", ""+page));
+	loadListFilm(url,mListRelated);
 }
 private void showDetail(JSONObject data){
 	try {
-		ArrayList<NameValuePair> mListRelated = new ArrayList<NameValuePair>();
-		mListRelated.add(new BasicNameValuePair("format", "json"));
-		mListRelated.add(new BasicNameValuePair("page", "1"));
 		mSmartImgDetail.setImageUrl(data.getString("IMG"));
 		mTxtTitleDetail.setText(data.getString("TITLE"));
 		mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
 		mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
 		mTxtTitleFilm.setText(data.getString("NAME"));
-		mListRelated.add(new BasicNameValuePair("bycat", data.getString("CAT")));
-		loadListFilm(url,mListRelated);
 	} catch (JSONException e) {
 		e.printStackTrace();
 	}
