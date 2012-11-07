@@ -19,59 +19,101 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
+import com.hd.phim.Outstanding.LoadData;
 import com.hd.phim.Utility.CheckConnectInternet;
+import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
 import com.hd.phim.network.GetDataJsonFromServer;
+import com.loopj.android.image.SmartImageView;
 import com.movie.hdonline.R;
 
 /**
  * @author hdtua_000
  *
  */
-public class Favorite extends BaseFragment {
+public class Favorite extends BaseFragment implements OnItemClickListener, OnClickListener {
 
 	private View mContentView;
 	private ListView mListOutstanding;
 	private ListAdaperReview mAdapter;
-	private List<NameValuePair> listParams;
-	private TextView mTxtTitle;
+	private List<NameValuePair> mListParams;
+	
+	private JSONObject mItemFilm;
+	private ViewFlipper mViewDetail;
+	private ListView mListDetail;
+	private SmartImageView mSmartImgDetail;
+	private TextView mTxtTitleDetail;
+	private TextView mTxtCountDetail;
+	private TextView mTxtTimeDetail;
+	private Button mBtnLike;
+	private ListAdaperReview mAdapterDetail;
+	private Button mBtnBack;
+	private TextView mTxtTitleFilm;
+	private String url;
+	private ProgressBar mProgressDetail;
+	private TextView mTxtListData;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-        mContentView = inflater.inflate(R.layout.list_view_more, null);
+        mContentView = inflater.inflate(R.layout.outstanding, null);
 
         return mContentView;
 	}
 
 	@Override
 	protected void initVariables() {
-		listParams =  new ArrayList<NameValuePair>();
-		listParams.add(new BasicNameValuePair("format", "json"));
-		listParams.add(new BasicNameValuePair("page", "1"));
+		mListParams =  new ArrayList<NameValuePair>();
+		mListParams.add(new BasicNameValuePair("format", "json"));
+		mListParams.add(new BasicNameValuePair("page", "1"));
 	}
 
 	@Override
 	protected void initControls() {
-		mTxtTitle = (TextView) mContentView.findViewById(R.id.title);
-		mTxtTitle.setText(getString(R.string.title_muc_ua_thich));
 		mListOutstanding = (ListView) mContentView.findViewById(R.id.outstanding_listView);
+		mViewDetail = (ViewFlipper) mContentView.findViewById(R.id.view_outstanding);
+		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
+		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
+		mListDetail = (ListView) mContentView.findViewById(R.id.list_film_related);
+		mTxtTitleDetail = (TextView) mContentView.findViewById(R.id.txt_title_detail);
+		mTxtCountDetail = (TextView) mContentView.findViewById(R.id.txt_count_view_detail);
+		mTxtTimeDetail = (TextView) mContentView.findViewById(R.id.text_time_detail);
+		mBtnLike = (Button) mContentView.findViewById(R.id.btn_like);
+		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
+		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
+		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
+		mTxtListData.setVisibility(View.GONE);
+		mTxtTitleFilm.setSelected(true);
+		
+		
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
 		if(null == mAdapter){
-		loadListFilm(listLink[5]);
+			url = listLink[5];
+		loadListFilm(url,mListParams);
 		}else{
 			mListOutstanding.setAdapter(mAdapter);
 		}
+		mListOutstanding.setOnItemClickListener(this);
+		mListDetail.setOnItemClickListener(this);
+		mBtnBack.setOnClickListener(this);
+		mBtnLike.setOnClickListener(this);
 	}
-	private void loadListFilm(String url){
+	private void loadListFilm(String url, List<NameValuePair> listParams){
 		if (CheckConnectInternet
 				.checkInternetConnection(getActivity().getApplicationContext())){
-		LoadData loadData = new LoadData();
+		LoadData loadData = new LoadData(listParams);
 		loadData.execute(url);
 		}else{
 			showToast(getString(R.string.not_connect_internet));
@@ -80,6 +122,10 @@ public class Favorite extends BaseFragment {
 	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
 
 		private JSONArray jsonArray;
+		private List<NameValuePair> listParams;
+		public LoadData(List<NameValuePair> listParams){
+			this.listParams = listParams;
+		}
 		@Override
 		protected JSONArray doInBackground(String... params) {
 			publishProgress(true);
@@ -94,7 +140,15 @@ public class Favorite extends BaseFragment {
 			publishProgress(false);
 			return jsonArray;
 		}
-	
+		@Override
+		protected void onProgressUpdate(Boolean... values) {
+			super.onProgressUpdate(values);
+			if(values[0]){
+			mProgressDetail.setVisibility(View.VISIBLE);
+			}else{
+				mProgressDetail.setVisibility(View.INVISIBLE);
+			}
+		}
 		@Override
 		protected void onPostExecute(JSONArray result) {
 			super.onPostExecute(result);
@@ -115,11 +169,63 @@ public class Favorite extends BaseFragment {
 		}
 	}
 	private void updateListView(ArrayList<JSONObject> listJson){
-		mAdapter = new ListAdaperReview(mContext,0, listJson);
-		mListOutstanding.setBackgroundColor(Color.BLUE);
-		mListOutstanding.setAdapter(mAdapter);
+		mTxtListData.setVisibility(View.GONE);
+		if(mViewDetail.getDisplayedChild() == 0){
+			mAdapter = new ListAdaperReview(mContext,0, listJson,false);
+			mListOutstanding.setBackgroundColor(Color.BLUE);
+			mListOutstanding.setAdapter(mAdapter);
+			}else if(mViewDetail.getDisplayedChild() == 1){
+				mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
+				mListDetail.setBackgroundColor(Color.BLUE);
+				mListDetail.setAdapter(mAdapterDetail);
+			}
 	}
 	private void showToast(String message){
+		mTxtListData.setVisibility(View.VISIBLE);
 		Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		if(mViewDetail.getDisplayedChild() == 0){
+			mItemFilm = mAdapter.getItem(position);
+			}else {
+				mItemFilm = mAdapterDetail.getItem(position);
+			}
+			showDetail(mItemFilm);
+	}
+
+	@Override
+	public void onClick(View v) {
+		if(v == mBtnLike){
+			
+		}else if(v == mBtnBack){
+			mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
+			mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
+			mViewDetail.showPrevious();
+		}
+	}
+	
+	private void showDetail(JSONObject data){
+		try {
+			ArrayList<NameValuePair> mListRelated = new ArrayList<NameValuePair>();
+			mListRelated.add(new BasicNameValuePair("format", "json"));
+			mListRelated.add(new BasicNameValuePair("page", "1"));
+			mSmartImgDetail.setImageUrl(data.getString("IMG"));
+			mTxtTitleDetail.setText(data.getString("TITLE"));
+			mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
+			mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
+			mTxtTitleFilm.setText(data.getString("NAME"));
+			mListRelated.add(new BasicNameValuePair("bycat", data.getString("CAT")));
+			loadListFilm(url,mListRelated);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		if(mViewDetail.getDisplayedChild() == 0){
+		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
+		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+		mViewDetail.showNext();
+		}
 	}
 }

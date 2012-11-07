@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -39,9 +38,7 @@ public class Login extends Activity implements OnClickListener{
 	
 	private EditText edtitUsername;
 	private EditText editPassword;
-	private EditText editSecurity;
 	private Button btnLogin;
-	private WebView security;
 	private LoginSever mLogin;
 	private TextView mTxtForgotPassword;
 	private TextView mTxtRegister;
@@ -55,13 +52,10 @@ protected void onCreate(Bundle savedInstanceState) {
 	
 	edtitUsername = (EditText) findViewById(R.id.edit_username);
 	editPassword = (EditText) findViewById(R.id.edit_password);
-	editSecurity = (EditText) this.findViewById(R.id.edit_security);
 	mTxtForgotPassword = (TextView) this.findViewById(R.id.txt_forgot);
 	mTxtForgotPassword.setOnClickListener(this);
 	mTxtRegister = (TextView) this.findViewById(R.id.txt_regis);
 	mTxtRegister.setOnClickListener(this);
-	security = (WebView) findViewById(R.id.security);
-	security.loadUrl(getString(R.string.security_url));
 	
 	btnLogin = (Button) findViewById(R.id.btn_login);
 	btnLogin.setOnClickListener(this);
@@ -79,8 +73,6 @@ public void onClick(View v) {
 		}else
 		if( editPassword.getText().length() == 0){
 			editPassword.setError(getString(R.string.edit_empty));
-		}else if(editSecurity.getText().length() == 0){
-			editSecurity.setError(getString(R.string.edit_empty));
 		}else{
 			connectServer();
 			btnLogin.setEnabled(false);
@@ -159,7 +151,6 @@ private class LoginSever extends AsyncTask<String, Boolean, JSONObject>{
 		listParams.add(new BasicNameValuePair("login_box", "true"));
 		listParams.add(new BasicNameValuePair("username", edtitUsername.getText().toString()));
 		listParams.add(new BasicNameValuePair("pass", editPassword.getText().toString()));
-		listParams.add(new BasicNameValuePair("security", editSecurity.getText().toString()));
 	}
 }
 private void showToast(String message){

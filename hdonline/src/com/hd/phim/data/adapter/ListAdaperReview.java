@@ -30,12 +30,14 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 	private LayoutInflater layout;
 	private ArrayList<JSONObject> mJson;
 	private Context mContext;
+	private boolean seachFilm;
 	
 	public ListAdaperReview(Context context, int textViewResourceId,
-			ArrayList<JSONObject> objects) {
+			ArrayList<JSONObject> objects, boolean isSearch) {
 		super(context, textViewResourceId, objects);
 		this.mContext = context;
 		this.mJson = objects;
+		seachFilm = isSearch;
 		this.layout = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -61,8 +63,15 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 		
 		try {
 			holder.title.setText(mJson.get(position).getString("TITLE"));
-			holder.viewCount.setText(ConverDecimalToPercent.converDecimalToPercent(mJson.get(position).getString("IMDB"))+"% "+mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count));
-			holder.time.setText(mJson.get(position).getString("TIME")+" "+mJson.get(position).getString("UPDATE"));
+			if(!seachFilm){
+				holder.viewCount.setText(ConverDecimalToPercent.converDecimalToPercent(mJson.get(position).getString("IMDB"))+"% "+mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count));
+				holder.time.setText(mJson.get(position).getString("TIME")+" "+mJson.get(position).getString("UPDATE"));
+			}else{
+				holder.viewCount.setText(mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count));
+				holder.viewCount.setCompoundDrawables(mContext.getResources().getDrawable(R.drawable.like), null, null, null);
+				holder.time.setText(mJson.get(position).getString("TIME"));
+
+			}
 			holder.thumbnai.setImageUrl(mJson.get(position).getString("IMG"));
 		} catch (JSONException e) {
 			e.printStackTrace();

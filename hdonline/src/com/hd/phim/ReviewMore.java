@@ -14,11 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.color;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -49,13 +47,14 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 	
 	private View mContentView;
 	private ListView mListView;
-	private List<NameValuePair> listParams;
+	private List<NameValuePair> mListParams;
 	private ListAdaperReview listAdapter;
 	private RadioButton mBtnPreWeek;
 	private RadioButton mBtnPreDay;
 	private RadioButton mBtnPreAll;
 	private ProgressBar mProgressUpdate;
 	private JSONObject mItemFilm;
+	
 	private ViewFlipper mViewDetail;
 	private ListView mListDetail;
 	private SmartImageView mSmartImgDetail;
@@ -64,19 +63,24 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 	private TextView mTxtTimeDetail;
 	private Button mBtnLike;
 	private ListAdaperReview mAdapterDetail;
+	private Button mBtnBack;
+	private TextView mTxtTitleFilm;
+	private String url;
+	private ProgressBar mProgressDetail;
+	private TextView mTxtListData;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-        mContentView = inflater.inflate(R.layout.list_review_more, null);
+        mContentView = inflater.inflate(R.layout.review_more, null);
         return mContentView;
 	}
 
 	@Override
 	protected void initVariables() {
-		listParams =  new ArrayList<NameValuePair>();
-		listParams.add(new BasicNameValuePair("format", "json"));
-		listParams.add(new BasicNameValuePair("page", "1"));
+		mListParams =  new ArrayList<NameValuePair>();
+		mListParams.add(new BasicNameValuePair("format", "json"));
+		mListParams.add(new BasicNameValuePair("page", "1"));
 	}
 	@Override
 	protected void initControls() {
@@ -86,16 +90,23 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnPreWeek = (RadioButton) mContentView.findViewById(R.id.button_pre_week);
 		mBtnPreDay = (RadioButton) mContentView.findViewById(R.id.button_pre_day);
 		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.review_more_progress_update);
-		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie);
+		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
+		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
 		mListDetail = (ListView) mContentView.findViewById(R.id.list_film_related);
-		mTxtTitleDetail = (TextView) mContentView.findViewById(R.id.txt_title);
-		mTxtCountDetail = (TextView) mContentView.findViewById(R.id.txt_count_view);
-		mTxtTimeDetail = (TextView) mContentView.findViewById(R.id.text_time);
+		mTxtTitleDetail = (TextView) mContentView.findViewById(R.id.txt_title_detail);
+		mTxtCountDetail = (TextView) mContentView.findViewById(R.id.txt_count_view_detail);
+		mTxtTimeDetail = (TextView) mContentView.findViewById(R.id.text_time_detail);
 		mBtnLike = (Button) mContentView.findViewById(R.id.btn_like);
+		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
+		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
+		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
+		mTxtListData.setVisibility(View.GONE);
+		mTxtTitleFilm.setSelected(true);
 		
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
 		if(null == listAdapter){
-		loadListFilm(listLink[1]);
+			url = listLink[1];
+		loadListFilm(listLink[1],mListParams);
 		}else{
 			mListView.setAdapter(listAdapter);
 		}
@@ -109,11 +120,19 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnPreDay.setOnClickListener(this);
 		mBtnPreDay.setTag(listLink[2]);
 		mProgressUpdate.setVisibility(View.GONE);
+		mProgressDetail.setVisibility(View.INVISIBLE);
+		mBtnLike.setOnClickListener(this);
+		mListDetail.setOnItemClickListener(this);
+		mBtnBack.setOnClickListener(this);
 	}
 
 	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
 
 		private JSONArray jsonArray;
+		private List<NameValuePair> listParams;
+		public LoadData(List<NameValuePair> listParams){
+			this.listParams = listParams;
+		}
 		@Override
 		protected JSONArray doInBackground(String... params) {
 			publishProgress(true);
@@ -133,8 +152,10 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 			super.onProgressUpdate(values);
 			if(values[0]){
 			mProgressUpdate.setVisibility(View.VISIBLE);
+			mProgressDetail.setVisibility(View.VISIBLE);
 			}else{
 				mProgressUpdate.setVisibility(View.GONE);
+				mProgressDetail.setVisibility(View.INVISIBLE);
 			}
 		}
 		@Override
@@ -157,12 +178,13 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		}
 	}
 private void updateListView(ArrayList<JSONObject> listJson){
+	mTxtListData.setVisibility(View.GONE);
 	if(mViewDetail.getDisplayedChild() == 0){
-	listAdapter = new ListAdaperReview(mContext,0, listJson);
+	listAdapter = new ListAdaperReview(mContext,0, listJson,false);
 	mListView.setBackgroundColor(Color.BLUE);
 	mListView.setAdapter(listAdapter);
 	}else if(mViewDetail.getDisplayedChild() == 1){
-		mAdapterDetail = new ListAdaperReview(mContext, 0, listJson);
+		mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
 		mListDetail.setBackgroundColor(Color.BLUE);
 		mListDetail.setAdapter(mAdapterDetail);
 	}
@@ -170,39 +192,60 @@ private void updateListView(ArrayList<JSONObject> listJson){
 
 @Override
 public void onClick(View v) {
-	loadListFilm(v.getTag().toString());
+	if(v == mBtnLike){
+		
+	}else if(v == mBtnBack){
+		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
+		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
+		mViewDetail.showPrevious();
+	}else{
+		url = v.getTag().toString();
+	loadListFilm(url,mListParams);
+	}
 }
 
-private void loadListFilm(String url){
+private void loadListFilm(String url, List<NameValuePair> listParams){
 	if (CheckConnectInternet
 			.checkInternetConnection(getActivity().getApplicationContext())){
-	LoadData loadData = new LoadData();
+	LoadData loadData = new LoadData(listParams);
 	loadData.execute(url);
 	}else{
 		showToast(getString(R.string.not_connect_internet));
 	}
 }
 private void showToast(String message){
+	mTxtListData.setVisibility(View.VISIBLE);
 	Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 }
 
 @Override
 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+	if(mViewDetail.getDisplayedChild() == 0){
 	mItemFilm = listAdapter.getItem(position);
-	Log.e("itemClick", mItemFilm.toString());
+	}else {
+		mItemFilm = mAdapterDetail.getItem(position);
+	}
 	showDetail(mItemFilm);
-	
 }
 private void showDetail(JSONObject data){
 	try {
+		ArrayList<NameValuePair> mListRelated = new ArrayList<NameValuePair>();
+		mListRelated.add(new BasicNameValuePair("format", "json"));
+		mListRelated.add(new BasicNameValuePair("page", "1"));
 		mSmartImgDetail.setImageUrl(data.getString("IMG"));
 		mTxtTitleDetail.setText(data.getString("TITLE"));
 		mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
 		mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
-		loadListFilm(data.getString("URL")+"?format=json");
+		mTxtTitleFilm.setText(data.getString("NAME"));
+		mListRelated.add(new BasicNameValuePair("bycat", data.getString("CAT")));
+		loadListFilm(url,mListRelated);
 	} catch (JSONException e) {
 		e.printStackTrace();
 	}
+	if(mViewDetail.getDisplayedChild() == 0){
+	mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
+	mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
 	mViewDetail.showNext();
+	}
 }
 }

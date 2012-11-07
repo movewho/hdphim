@@ -133,4 +133,15 @@
 	<!-- detailfilm -->
 	<string name="like">Ưa thích</string>
 	<string name="related_videos">Video liên quan</string>
+	<string name="back">Quay lại</string>
+	<string name="list_not_data">Không có danh sách</string>
+	
+	<!-- searchfilm -->
+	<string name="link_search_movies">http://hdonline.vn/tim-kiem/</string>
+	<string name="search">Tìm kiếm</string>
+	<string name="list_new_film">Danh sách phim mới</string>
+	<string name="movies">Phim lẻ</string>
+	<string name="drama">Phim bộ</string>
+	<string name="movie_theaters">Phim chiếu rạp</string>
+	<string name="enter_filmname">Nhập tên phim</string>
 </resources>

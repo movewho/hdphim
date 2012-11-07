@@ -48,7 +48,7 @@ public class hoho extends Activity{
 		loadData.execute(new String[]{listLink[1]});
 		
 		
-		listAdapter = new ListAdaperReview(hoho.this.getApplicationContext(),0, jsonData);
+		listAdapter = new ListAdaperReview(hoho.this.getApplicationContext(),0, jsonData,false);
 		mListView.setBackgroundColor(Color.BLUE);
 		
 		mListView.setAdapter(listAdapter);

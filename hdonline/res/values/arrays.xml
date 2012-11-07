@@ -57,4 +57,11 @@
 		<item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
 		<item>http://hdonline.vn/danh-sach/de-cu.html</item>
 	</string-array>
+	
+	<!-- link search movies -->
+	<string-array name="link_search_movies">
+	    <item>http://hdonline.vn/danh-sach/phim-le.html</item>
+	    <item>http://hdonline.vn/danh-sach/phim-bo.html</item>
+	    <item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
+	</string-array>
 </resources>
