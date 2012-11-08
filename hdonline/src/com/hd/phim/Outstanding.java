@@ -93,7 +93,7 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 	}
 
 	@Override
-	protected void initControls() {
+	protected void initView() {
 		mListOutstanding = (ListView) mContentView.findViewById(R.id.outstanding_listView);
 		mViewDetail = (ViewFlipper) mContentView.findViewById(R.id.view_outstanding);
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
@@ -107,17 +107,19 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
 		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
-		mTxtListData.setVisibility(View.GONE);
 		mRdbInfo = (RadioButton) mContentView.findViewById(R.id.btn_info);
 		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
 		mTxtContent = (TextView) mContentView.findViewById(R.id.txt_info);
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
-		mBtnBackInfo.setOnClickListener(this);
-		mTxtTitleFilm.setSelected(true);
-		mViewDetailMovie.setOnClickListener(this);
-		mRdbInfo.setChecked(true);
-		mRdbInfo.setOnCheckedChangeListener(this);
+		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		
+	}
+	
+	@Override
+	protected void initActions() {
+		mListOutstanding.addFooterView(footerListSearch);
+		mListDetail.addFooterView(footerListDetail);
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
 		if(null == mAdapter){
 			countListSearch = 1;
@@ -127,15 +129,17 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 		}else{
 			mListOutstanding.setAdapter(mAdapter);
 		}
-		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		mListDetail.addFooterView(footerListDetail);
-		mListOutstanding.addFooterView(footerListSearch);
 		mListOutstanding.setOnItemClickListener(this);
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
 		mBtnLike.setOnClickListener(this);
 		mTxtTitleInfo.setSelected(true);
+		mBtnBackInfo.setOnClickListener(this);
+		mTxtTitleFilm.setSelected(true);
+		mViewDetailMovie.setOnClickListener(this);
+		mRdbInfo.setChecked(true);
+		mRdbInfo.setOnCheckedChangeListener(this);
+		mTxtListData.setVisibility(View.GONE);
 	}
 	private void loadListFilm(String url, List<NameValuePair> listParams){
 		if (CheckConnectInternet
@@ -216,6 +220,7 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 				mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
 				mListDetail.setBackgroundColor(Color.BLUE);
 				mListDetail.setAdapter(mAdapterDetail);
+				
 				}else{
 					int n = listJson.size();
 					for (int i=0; i<n; i++){
@@ -270,6 +275,7 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 		else if(v == mViewDetailMovie){
 			mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
 			mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+			mRdbInfo.setSelected(true);
 			try {
 				showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
 			} catch (JSONException e) {
@@ -321,4 +327,5 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 			mTxtTitleInfo.setText(title);
 			mTxtContent.setText(content);
 	}
+
 }

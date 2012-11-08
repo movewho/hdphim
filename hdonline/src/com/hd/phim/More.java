@@ -4,7 +4,6 @@
 package com.hd.phim;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,18 +36,22 @@ public class More extends BaseFragment{
 	}
 
 	@Override
-	protected void initControls() {
+	protected void initView() {
 		mListView = (ListView) mContentView.findViewById(R.id.listViewMore);
+	}
+	@Override
+	protected void initActions() {
 		final ListAdapterMore listAdapter = new ListAdapterMore(getActivity().getApplicationContext(), R.array.titleArrayRes, R.array.urlsArrayRes, R.array.iconsArrayRes);
 		mListView.setAdapter(listAdapter);
 		
 	}
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 	}
+
+	
 
 
 	

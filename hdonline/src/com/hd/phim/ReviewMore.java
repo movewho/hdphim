@@ -96,7 +96,7 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mListParams.add(new BasicNameValuePair("page", "1"));
 	}
 	@Override
-	protected void initControls() {
+	protected void initView() {
 		mViewDetail = (ViewFlipper) mContentView.findViewById(R.id.view_detail_film);
 		mListView = (ListView) mContentView.findViewById(R.id.list_review_count);
 		mBtnPreAll = (RadioButton) mContentView.findViewById(R.id.button_pre_all);
@@ -120,16 +120,14 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
 		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		initActions();
 	}
-	
-	private void initActions(){
+	@Override
+	protected void initActions() {
 		mListDetail.addFooterView(footerListDetail);
 		mListView.addFooterView(footerListSearch);
 		mListView.setOnItemClickListener(this);
 		mBtnPreAll.setOnClickListener(this);
 		mProgressUpdate.setVisibility(View.GONE);
-		mProgressDetail.setVisibility(View.INVISIBLE);
 		mBtnLike.setOnClickListener(this);
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
@@ -250,6 +248,7 @@ public void onClick(View v) {
 	}else if(v == mViewDetailMovie){
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+		mRdbInfo.setSelected(true);
 		try {
 			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
 		} catch (JSONException e) {

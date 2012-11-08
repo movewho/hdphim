@@ -12,7 +12,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 	protected View mParent;
@@ -20,8 +22,9 @@ public abstract class BaseFragment extends Fragment {
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-//		this.setRetainInstance(true);
 		super.onActivityCreated(savedInstanceState);
+		initView();
+		initActions();
 	}
 	
 	@Override
@@ -42,14 +45,10 @@ public abstract class BaseFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 	}
 	
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		initControls();
-	}
-	
 	protected abstract void initVariables();
 	
-	protected abstract void initControls();
+	protected abstract void initView();
 	
+	protected abstract void initActions();
+		
 }

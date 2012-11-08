@@ -18,7 +18,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,8 +25,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -101,7 +100,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mListParams.add(new BasicNameValuePair("page", "1"));
 	}
 	@Override
-	protected void initControls() {
+	protected void initView() {
 		mViewDetail = (ViewFlipper) mContentView.findViewById(R.id.view_search_film);
 		mImgBtnSearch = (ImageButton) mContentView.findViewById(R.id.btn_search);
 		mEditFilmName = (EditText) mContentView.findViewById(R.id.edit_filmname);
@@ -111,7 +110,6 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnMovieTheater = (RadioButton) mContentView.findViewById(R.id.btn_movie_theaters);
 		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.search_progress_update);
 		mTxtListSearchData = (TextView) mContentView.findViewById(R.id.txt_list_search_not_data);
-		
 		mViewDetailMovie = (RelativeLayout) mContentView.findViewById(R.id.view_detail_movie);
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
 		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
@@ -127,13 +125,14 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
 		mTxtContent = (TextView) mContentView.findViewById(R.id.txt_info);
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
-		mBtnBackInfo.setOnClickListener(this);
-		mRdbInfo.setChecked(true);
-		mRdbInfo.setOnCheckedChangeListener(this);
-		mTxtTitleFilm.setSelected(true);
-		mViewDetailMovie.setOnClickListener(this);
-		mTxtTitleInfo.setSelected(true);
+		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		
+	}
+	@Override
+	protected void initActions() {
+		mListDetail.addFooterView(footerListDetail);
+		mListSearch.addFooterView(footerListSearch);
 		String[] listLink = getResources().getStringArray(R.array.link_search_movies);
 		if(null == listAdapter){
 			url = listLink[0];
@@ -143,10 +142,6 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		}else{
 			mListSearch.setAdapter(listAdapter);
 		}
-		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		mListDetail.addFooterView(footerListDetail);
-		mListSearch.addFooterView(footerListSearch);
 		mListSearch.setOnItemClickListener(this);
 		mBtnMovies.setOnClickListener(this);
 		mBtnMovies.setChecked(true);
@@ -159,8 +154,13 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
 		mImgBtnSearch.setOnClickListener(this);
+		mBtnBackInfo.setOnClickListener(this);
+		mRdbInfo.setChecked(true);
+		mRdbInfo.setOnCheckedChangeListener(this);
+		mTxtTitleFilm.setSelected(true);
+		mViewDetailMovie.setOnClickListener(this);
+		mTxtTitleInfo.setSelected(true);
 	}
-
 	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
 
 		private JSONArray jsonArray;
@@ -255,6 +255,7 @@ public void onClick(View v) {
 	}else if(v == mViewDetailMovie){
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+		mRdbInfo.setSelected(true);
 		try {
 			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
 		} catch (JSONException e) {
@@ -363,4 +364,5 @@ private void showInfo(String title, String content){
 		mTxtTitleInfo.setText(title);
 		mTxtContent.setText(content);
 }
+
 }

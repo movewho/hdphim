@@ -10,7 +10,7 @@
     <string name="count">lần</string>
     <string name="base_url">http://hdonline.vn/index.php</string>
     <string name="not_connect_internet">Không có kết nối internet!</string>
-    <string name="not_json_data">Không có dữ liệu</string>
+    <string name="not_json_data">Đang cập nhật</string>
     
     <!-- more -->
     <string name="label_edit">Sửa</string>
