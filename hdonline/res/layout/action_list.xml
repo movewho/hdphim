@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/backgroung_menu_list">
-<!-- <RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:id="@+id/relayout_toolbar_top_message_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_bar" >
+    </LinearLayout>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/relayout_toolbar_top_message_view"
+        android:background="@color/backgroung_menu_list" >
+
+        <!--
+     <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_alignParentTop="true" >
@@ -14,16 +29,18 @@
         android:layout_height="wrap_content" 
         android:background="@drawable/search_bar"
         android:hint="Tìm kiếm"
-        android:paddingLeft="10dp"/> -->
-    <com.hd.phim.data.sectionlist.SectionListView
-        android:id="@+id/actions"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cacheColorHint="@color/actions_bg"
-        android:dividerHeight="@dimen/divider_size"
-        android:layout_marginTop="-2.5dp">
+        android:paddingLeft="10dp"/>
+        -->
 
-    </com.hd.phim.data.sectionlist.SectionListView>
-<!-- </RelativeLayout>
- -->
-</FrameLayout>
+        <com.hd.phim.data.sectionlist.SectionListView
+            android:id="@+id/actions"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2.5dp"
+            android:cacheColorHint="@color/actions_bg"
+            android:dividerHeight="@dimen/divider_size" >
+        </com.hd.phim.data.sectionlist.SectionListView>
+<!--  </RelativeLayout> -->
+    </FrameLayout>
+
+</RelativeLayout>

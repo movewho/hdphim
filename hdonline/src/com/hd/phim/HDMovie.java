@@ -132,7 +132,7 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
             String title = Arr.get(i).get(0).substring(0, 2);//String.valueOf(Arr.get(i).get(0).charAt(0));
             for(int j=0;j<Arr.get(i).size();++j)
             {
-                exampleArray.add(new SectionListItem(Arr.get(i).get(j).substring(3, Arr.get(i).get(j).length()),getLabel(title)));
+                exampleArray.add(new SectionListItem(Arr.get(i).get(j), getLabel(title)));
             }
         }
         return exampleArray;

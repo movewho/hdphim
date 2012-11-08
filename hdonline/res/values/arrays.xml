@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    	
-    		<!-- icon array res -->
-   <string-array name="iconsArrayRes">
+
+    <!-- icon array res -->
+    <string-array name="iconsArrayRes">
         <item>@drawable/recent</item>
         <item>@drawable/top_rated</item>
         <item>@drawable/history</item>
@@ -10,9 +10,9 @@
         <item>@drawable/register</item>
         <item>@drawable/playlist</item>
     </string-array>
-    
-   			<!-- title array res -->
-   <string-array name="titleArrayRes">
+
+    <!-- title array res -->
+    <string-array name="titleArrayRes">
         <item>@string/label_recent</item>
         <item>@string/label_top_rated</item>
         <item>@string/label_history</item>
@@ -20,8 +20,8 @@
         <item>@string/label_register</item>
         <item>@string/label_playlist</item>
     </string-array>
-    
-   			<!-- url arraty res -->
+
+    <!-- url arraty res -->
     <string-array name="urlsArrayRes">
         <item>recent</item>
         <item>toprated</item>
@@ -29,118 +29,116 @@
         <item>mymovies</item>
         <item>register</item>
         <item>playlist</item>
-     </string-array>
-     
-    		<!-- link movies by cat country-->
-	<string-array name="link_country">
-		<item>http://hdonline.vn/phim-bo-viet-nam.html</item>
-		<item>http://hdonline.vn/phim-bo-trung-quoc.html</item>
-		<item>http://hdonline.vn/phim-bo-han-quoc.html</item>
-		<item>http://hdonline.vn/phim-bo-dai-loan.html</item>
-		<item>http://hdonline.vn/phim-bo-my.html</item>
-		<item>http://hdonline.vn/phim-bo-chau-au.html</item>
-		<item>http://hdonline.vn/phim-bo-nhat-ban.html</item>
-		<item>http://hdonline.vn/phim-bo-hong-kong.html</item>
-		<item>http://hdonline.vn/phim-bo-thai-lan.html</item>
-		<item>http://hdonline.vn/phim-bo-chau-a.html</item>
-		<item>http://hdonline.vn/phim-bo-an-do.html</item>
-	</string-array>
-	
-			<!-- link top movies-->
-	<string-array name="link_top_movies">
-		<item>http://hdonline.vn/danh-sach/top-imdb.html</item>
-		<item>http://hdonline.vn/danh-sach/xem-nhieu.html</item>
-		<item>http://hdonline.vn/danh-sach/xem-nhieu-trong-ngay.html</item>
-		<item>http://hdonline.vn/danh-sach/xem-nhieu-trong-tuan.html</item>
-		<item>http://hdonline.vn/danh-sach/xem-nhieu-trong-thang.html</item>
-		<item>http://hdonline.vn/danh-sach/binh-chon-nhieu.html</item>
-		<item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
-		<item>http://hdonline.vn/danh-sach/de-cu.html</item>
-	</string-array>
-	
-	    <!-- by order label -->
+    </string-array>
+
+    <!-- link movies by cat country -->
+    <string-array name="link_country">
+        <item>http://hdonline.vn/phim-bo-viet-nam.html</item>
+        <item>http://hdonline.vn/phim-bo-trung-quoc.html</item>
+        <item>http://hdonline.vn/phim-bo-han-quoc.html</item>
+        <item>http://hdonline.vn/phim-bo-dai-loan.html</item>
+        <item>http://hdonline.vn/phim-bo-my.html</item>
+        <item>http://hdonline.vn/phim-bo-chau-au.html</item>
+        <item>http://hdonline.vn/phim-bo-nhat-ban.html</item>
+        <item>http://hdonline.vn/phim-bo-hong-kong.html</item>
+        <item>http://hdonline.vn/phim-bo-thai-lan.html</item>
+        <item>http://hdonline.vn/phim-bo-chau-a.html</item>
+        <item>http://hdonline.vn/phim-bo-an-do.html</item>
+    </string-array>
+
+    <!-- link top movies -->
+    <string-array name="link_top_movies">
+        <item>http://hdonline.vn/danh-sach/top-imdb.html</item>
+        <item>http://hdonline.vn/danh-sach/xem-nhieu.html</item>
+        <item>http://hdonline.vn/danh-sach/xem-nhieu-trong-ngay.html</item>
+        <item>http://hdonline.vn/danh-sach/xem-nhieu-trong-tuan.html</item>
+        <item>http://hdonline.vn/danh-sach/xem-nhieu-trong-thang.html</item>
+        <item>http://hdonline.vn/danh-sach/binh-chon-nhieu.html</item>
+        <item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
+        <item>http://hdonline.vn/danh-sach/de-cu.html</item>
+    </string-array>
+
+    <!-- by order label -->
     <string-array name="byorder_abel">
-		<item>Xếp theo ngày</item>
-		<item>Xếp theo năm</item>
-		<item>Xếp theo tên</item>
-		<item>Xếp theo lượt xem</item>
-		<item>Xếp theo bình chọn</item>
-		<item>Xếp theo điểm IMDB</item>
-	</string-array>
+        <item>Xếp theo ngày</item>
+        <item>Xếp theo năm</item>
+        <item>Xếp theo tên</item>
+        <item>Xếp theo lượt xem</item>
+        <item>Xếp theo bình chọn</item>
+        <item>Xếp theo điểm IMDB</item>
+    </string-array>
 
-	<!-- by order value -->
-	<string-array name="byorder_value">
-		<item>year</item>
-		<item>name</item>
-		<item>view</item>
-		<item>rate</item>
-		<item>imdb</item>	
-	</string-array>  
-	
-		<!-- by sort albel -->
-	<string-array name="bysort_label">
-		<item>Tăng dần</item>
-		<item>Giản dần</item>
-	</string-array>  
-	
-		<!-- by sort albel -->
-	<string-array name="bysort_value">
-		<item>asc</item>
-		<item>desc</item>
-	</string-array> 
-	
-		<!-- by cat -->
-	<string-array name="bycat_label">
-		<item>TL-Phim Hành Động</item>
-		<item>TL-Phim Phiêu Lưu</item>
-		<item>TL-Phim Kinh Dị</item>
-		<item>TL-Phim Tình Cảm</item>
-		<item>TL-Phim Hoạt Hình</item>
-		<item>TL-Phim Võ Thuật</item>
-		<item>TL-Phim hài hước</item>
-		<item>TL-Phim tâm Lý</item>
-		<item>TL-Phim Viễn Tưởng</item>
-		<item>TL-Phim Thần Thoại</item>
-		<item>TL-Phim Chiến Tranh</item>
-		<item>TL-Phim Cổ Trang</item>
-		<item>TL-Phim Âm Nhạc</item>
-		<item>TL-Hình Sự</item>
-		<item>TL-Tv-Show</item>
-		<item>AC-3D</item>
-		<item>AC-Khoa Học</item>
-		<item>AC-Tài liệu</item>
-		<item>AC-Gia đình</item>
-		<item>AC-Lịch sử</item>
-	</string-array>
+    <!-- by order value -->
+    <string-array name="byorder_value">
+        <item>year</item>
+        <item>name</item>
+        <item>view</item>
+        <item>rate</item>
+        <item>imdb</item>
+    </string-array>
 
-		<!-- by country -->
-	<string-array name="bycat_counttry">
-		<item>Việt nam</item>
-		<item>Trung quốc</item>
-		<item>Hàn quốc</item>
-		<item>Đài loan</item>
-		<item>Mỹ</item>
-		<item>Châu âu</item>
-		<item>Nhật bản</item>
-		<item>Hồng kông</item>
-		<item>Thái lan</item>
-		<item>Châu á</item>
-		<item>Ấn độ</item>
-	</string-array>
-	
-	<string-array name="selection_list">
-	    <item>Tài khoản</item>
-	    <item>Thể loại</item>
-	    
-	</string-array>
-		<string-array name="selection_list_key">
-	    <item>AC</item>
-	    <item>TL</item>
-	</string-array>
-	
-		<string-array name="link_search_movies">
-		    <item>http://hdonline.vn/danh-sach/phim-le.html</item>
-		    <item >http://hdonline.vn/danh-sach/phim-bo.html</item>
-		    <item >http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
-		</string-array>
+    <!-- by sort albel -->
+    <string-array name="bysort_label">
+        <item>Tăng dần</item>
+        <item>Giản dần</item>
+    </string-array>
+
+    <!-- by sort albel -->
+    <string-array name="bysort_value">
+        <item>asc</item>
+        <item>desc</item>
+    </string-array>
+
+    <!-- by cat -->
+    <string-array name="bycat_label">
+        <item>TL-Phim Hành Động</item>
+        <item>TL-Phim Phiêu Lưu</item>
+        <item>TL-Phim Kinh Dị</item>
+        <item>TL-Phim Tình Cảm</item>
+        <item>TL-Phim Hoạt Hình</item>
+        <item>TL-Phim Võ Thuật</item>
+        <item>TL-Phim hài hước</item>
+        <item>TL-Phim tâm Lý</item>
+        <item>TL-Phim Viễn Tưởng</item>
+        <item>TL-Phim Thần Thoại</item>
+        <item>TL-Phim Chiến Tranh</item>
+        <item>TL-Phim Cổ Trang</item>
+        <item>TL-Phim Âm Nhạc</item>
+        <item>TL-Hình Sự</item>
+        <item>TL-Tv-Show</item>
+        <item>TL-3D</item>
+        <item>TL-Khoa Học</item>
+        <item>TL-Tài liệu</item>
+        <item>TL-Gia đình</item>
+        <item>TL-Lịch sử</item>
+    </string-array>
+
+    <!-- by country -->
+    <string-array name="bycat_counttry">
+        <item>Việt nam</item>
+        <item>Trung quốc</item>
+        <item>Hàn quốc</item>
+        <item>Đài loan</item>
+        <item>Mỹ</item>
+        <item>Châu âu</item>
+        <item>Nhật bản</item>
+        <item>Hồng kông</item>
+        <item>Thái lan</item>
+        <item>Châu á</item>
+        <item>Ấn độ</item>
+    </string-array>
+    <string-array name="selection_list">
+        <item>Tài khoản</item>
+        <item>Thể loại</item>
+    </string-array>
+    <string-array name="selection_list_key">
+        <item>AC</item>
+        <item>TL</item>
+    </string-array>
+    <string-array name="link_search_movies">
+        <item>http://hdonline.vn/danh-sach/phim-le.html</item>
+        <item>http://hdonline.vn/danh-sach/phim-bo.html</item>
+        <item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
+    </string-array>
+
 </resources>
