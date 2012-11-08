@@ -26,10 +26,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -46,14 +50,14 @@ import com.movie.hdonline.R;
  * @author hdtua_000
  *
  */
-public class Search extends BaseFragment implements OnItemClickListener, OnClickListener{
+public class Search extends BaseFragment implements OnItemClickListener, OnClickListener, OnCheckedChangeListener{
 	private View mContentView;
 	private ListView mListSearch;
 	private List<NameValuePair> mListParams;
 	private ListAdaperReview listAdapter;
-	private Button mBtnDrama;
-	private Button mBtnMovieTheater;
-	private Button mBtnMovies;
+	private RadioButton mBtnDrama;
+	private RadioButton mBtnMovieTheater;
+	private RadioButton mBtnMovies;
 	private ProgressBar mProgressUpdate;
 	private ImageButton mImgBtnSearch;
 	private EditText mEditFilmName;
@@ -77,6 +81,11 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private View footerListDetail;
 	private static int countListSearch;
 	private static int countListDetail;
+	private RadioButton mRdbInfo;
+	private TextView mTxtTitleInfo;
+	private TextView mTxtContent;
+	private Button mBtnBackInfo;
+	private RelativeLayout mViewDetailMovie;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,12 +106,13 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mImgBtnSearch = (ImageButton) mContentView.findViewById(R.id.btn_search);
 		mEditFilmName = (EditText) mContentView.findViewById(R.id.edit_filmname);
 		mListSearch = (ListView) mContentView.findViewById(R.id.list_search_film);
-		mBtnMovies = (Button) mContentView.findViewById(R.id.btn_movies);
-		mBtnDrama = (Button) mContentView.findViewById(R.id.btn_drama);
-		mBtnMovieTheater = (Button) mContentView.findViewById(R.id.btn_movie_theaters);
+		mBtnMovies = (RadioButton) mContentView.findViewById(R.id.btn_movies);
+		mBtnDrama = (RadioButton) mContentView.findViewById(R.id.btn_drama);
+		mBtnMovieTheater = (RadioButton) mContentView.findViewById(R.id.btn_movie_theaters);
 		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.search_progress_update);
 		mTxtListSearchData = (TextView) mContentView.findViewById(R.id.txt_list_search_not_data);
 		
+		mViewDetailMovie = (RelativeLayout) mContentView.findViewById(R.id.view_detail_movie);
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
 		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
 		mListDetail = (ListView) mContentView.findViewById(R.id.list_film_related);
@@ -113,7 +123,16 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
 		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
+		mRdbInfo = (RadioButton) mContentView.findViewById(R.id.btn_info);
+		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
+		mTxtContent = (TextView) mContentView.findViewById(R.id.txt_info);
+		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
+		mBtnBackInfo.setOnClickListener(this);
+		mRdbInfo.setChecked(true);
+		mRdbInfo.setOnCheckedChangeListener(this);
 		mTxtTitleFilm.setSelected(true);
+		mViewDetailMovie.setOnClickListener(this);
+		mTxtTitleInfo.setSelected(true);
 		
 		String[] listLink = getResources().getStringArray(R.array.link_search_movies);
 		if(null == listAdapter){
@@ -130,6 +149,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mListSearch.addFooterView(footerListSearch);
 		mListSearch.setOnItemClickListener(this);
 		mBtnMovies.setOnClickListener(this);
+		mBtnMovies.setChecked(true);
 		mBtnMovies.setTag(listLink[0]);
 		mBtnDrama.setOnClickListener(this);
 		mBtnDrama.setTag(listLink[1]);
@@ -195,6 +215,8 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 private void updateListView(ArrayList<JSONObject> listJson){
 	mTxtListSearchData.setVisibility(View.GONE);
 	mTxtListData.setVisibility(View.GONE);
+	mListDetail.setVisibility(View.VISIBLE);
+	mListSearch.setVisibility(View.VISIBLE);
 	if(mViewDetail.getDisplayedChild() == 0){
 		if(null == listAdapter){
 	listAdapter = new ListAdaperReview(mContext,0, listJson, true);
@@ -226,20 +248,35 @@ private void updateListView(ArrayList<JSONObject> listJson){
 public void onClick(View v) {
 	if(v == mBtnLike){
 		
+	}else if(v == mBtnBackInfo){
+		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
+		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
+		mViewDetail.showPrevious();
+	}else if(v == mViewDetailMovie){
+		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
+		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+		try {
+			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		mViewDetail.setDisplayedChild(2);
 	}else if(v == mBtnBack){
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
 		mViewDetail.showPrevious();
-		mAdapterDetail.clear();
 	}else if(v == mImgBtnSearch){
-		if(mEditFilmName.getText().length() <= 0){
-			mEditFilmName.setError(getString(R.string.edit_empty));
+		if(null != listAdapter){
+			listAdapter.clear();
 		}
 		url = getString(R.string.link_search_movies) + mEditFilmName.getText().toString().trim().replace(" ", "%20")+".html";
 		loadListFilm(url,mListParams);
 	}else{
+		if(null != listAdapter){
+			listAdapter.clear();
+		}
 		url = v.getTag().toString();
-	loadListFilm(url,mListParams);
+		loadListFilm(url,mListParams);
 	}
 }
 
@@ -255,6 +292,8 @@ private void loadListFilm(String url, List<NameValuePair> listParams){
 private void showToast(String message){
 	mTxtListSearchData.setVisibility(View.VISIBLE);
 	mTxtListData.setVisibility(View.VISIBLE);
+	mListDetail.setVisibility(View.GONE);
+	mListSearch.setVisibility(View.GONE);
 	Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 }
 
@@ -266,6 +305,8 @@ public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			onCreateParams(url, countListSearch);
 		}else{
 			mItemFilm = listAdapter.getItem(position);
+			if(null != mAdapterDetail)
+			mAdapterDetail.clear();
 			showDetail(mItemFilm);
 			onCreateParams(url, countListDetail);
 		}
@@ -273,8 +314,10 @@ public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			countListDetail++;
 			onCreateParams(url, countListDetail);
 		}else{
+			if(null != mAdapterDetail){
 		mItemFilm = mAdapterDetail.getItem(position);
 		showDetail(mItemFilm);
+			}
 		}
 }
 private void onCreateParams(String url, int page){
@@ -298,5 +341,26 @@ private void showDetail(JSONObject data){
 	mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
 	mViewDetail.showNext();
 	}
+}
+@Override
+public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	if(isChecked){
+		try {
+			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}else{
+		try {
+			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("ACTOR"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+private void showInfo(String title, String content){
+		mTxtTitleInfo.setText(title);
+		mTxtContent.setText(content);
 }
 }

@@ -73,6 +73,7 @@
     android:layout_below="@+id/review_more_progress_update"
     android:layout_centerHorizontal="true"
     android:scrollbars="none"
+    android:fadingEdge="none"
     android:background="@android:color/white"
     android:divider="@drawable/divider" >
 

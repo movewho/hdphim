@@ -25,8 +25,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -44,12 +48,13 @@ import com.movie.hdonline.R;
  * @author hdtua_000
  *
  */
-public class Favorite extends BaseFragment implements OnItemClickListener, OnClickListener {
+public class Favorite extends BaseFragment implements OnItemClickListener, OnClickListener, OnCheckedChangeListener {
 
 	private View mContentView;
 	private ListView mListOutstanding;
 	private ListAdaperReview mAdapter;
 	private List<NameValuePair> mListParams;
+	private TextView title;
 	
 	private JSONObject mItemFilm;
 	private ViewFlipper mViewDetail;
@@ -69,6 +74,11 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	private View footerListDetail;
 	private static int countListSearch;
 	private static int countListDetail;
+	private RadioButton mRdbInfo;
+	private TextView mTxtTitleInfo;
+	private TextView mTxtContent;
+	private Button mBtnBackInfo;
+	private RelativeLayout mViewDetailMovie;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,9 +97,12 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 
 	@Override
 	protected void initControls() {
+		title = (TextView) mContentView.findViewById(R.id.title);
+		title.setText(getString(R.string.title_muc_ua_thich));
 		mListOutstanding = (ListView) mContentView.findViewById(R.id.outstanding_listView);
 		mViewDetail = (ViewFlipper) mContentView.findViewById(R.id.view_outstanding);
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
+		mViewDetailMovie = (RelativeLayout) mContentView.findViewById(R.id.view_detail_movie);
 		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
 		mListDetail = (ListView) mContentView.findViewById(R.id.list_film_related);
 		mTxtTitleDetail = (TextView) mContentView.findViewById(R.id.txt_title_detail);
@@ -100,7 +113,15 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
 		mTxtListData.setVisibility(View.GONE);
+		mRdbInfo = (RadioButton) mContentView.findViewById(R.id.btn_info);
+		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
+		mTxtContent = (TextView) mContentView.findViewById(R.id.txt_info);
+		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
+		mBtnBackInfo.setOnClickListener(this);
+		mRdbInfo.setChecked(true);
+		mRdbInfo.setOnCheckedChangeListener(this);
 		mTxtTitleFilm.setSelected(true);
+		mViewDetailMovie.setOnClickListener(this);
 		
 		
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
@@ -120,6 +141,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
 		mBtnLike.setOnClickListener(this);
+		mTxtTitleInfo.setSelected(true);
 	}
 	private void loadListFilm(String url, List<NameValuePair> listParams){
 		if (CheckConnectInternet
@@ -181,6 +203,8 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	}
 	private void updateListView(ArrayList<JSONObject> listJson){
 		mTxtListData.setVisibility(View.GONE);
+		mListDetail.setVisibility(View.VISIBLE);
+		mListOutstanding.setVisibility(View.VISIBLE);
 		if(mViewDetail.getDisplayedChild() == 0){
 			if(null == mAdapter){
 				mAdapter = new ListAdaperReview(mContext,0, listJson,false);
@@ -209,6 +233,8 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	}
 	private void showToast(String message){
 		mTxtListData.setVisibility(View.VISIBLE);
+		mListDetail.setVisibility(View.GONE);
+		mListOutstanding.setVisibility(View.GONE);
 		Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 	}
 
@@ -243,6 +269,19 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	public void onClick(View v) {
 		if(v == mBtnLike){
 			
+		}else if(v == mBtnBackInfo){
+			mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
+			mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
+			mViewDetail.showPrevious();
+		}else if(v == mViewDetailMovie){
+			mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
+			mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+			try {
+				showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			mViewDetail.setDisplayedChild(2);
 		}else if(v == mBtnBack){
 			mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 			mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
@@ -265,5 +304,26 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
 		mViewDetail.showNext();
 		}
+	}
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		if(isChecked){
+			try {
+				showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("ACTOR"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void showInfo(String title, String content){
+			mTxtTitleInfo.setText(title);
+			mTxtContent.setText(content);
 	}
 }

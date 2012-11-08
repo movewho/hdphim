@@ -23,8 +23,7 @@
         android:id="@+id/search_progress_update"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:layout_below="@+id/relayout_toolbar_top_message_view" />
+        android:layout_height="5dp" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -49,43 +48,59 @@
             android:layout_alignBottom="@+id/edit_filmname"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/edit_filmname"
-            android:background="@drawable/button_search" />
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="@drawable/btn_search" 
+            android:src="@drawable/search"/>
     </RelativeLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:gravity="center_horizontal" >
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="3" >
 
-        <Button
+        <RadioButton
             android:id="@+id/btn_movies"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_button"
+            android:layout_weight="1"
+            android:background="@drawable/radio_btn_info"
             android:text="@string/movies"
+            android:button="@null"
+            android:lines="1"
+            android:gravity="center"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
-        <Button
+        <RadioButton
             android:id="@+id/btn_drama"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/blue_button"
+            android:layout_weight="1"
+            android:background="@drawable/radio_btn_info"
+            android:button="@null"
+            android:lines="1"
+            android:gravity="center"
             android:text="@string/drama"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
-        <Button
+        <RadioButton
             android:id="@+id/btn_movie_theaters"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/blue_button"
+            android:layout_weight="1"
+            android:background="@drawable/radio_btn_info"
+            android:lines="1"
+            android:gravity="center"
+            android:button="@null"
             android:text="@string/movie_theaters"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
-    </LinearLayout>
+    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:fadingEdge="none"
         android:scrollbars="none" >
     </ListView>
  <LinearLayout android:layout_width="match_parent"

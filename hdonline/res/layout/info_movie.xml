@@ -33,34 +33,52 @@
             android:textStyle="bold"/>
         
     </LinearLayout>
-	<LinearLayout 
+	<RadioGroup 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
 	    android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:weightSum="2"
 	    android:gravity="center_horizontal">
-	    <Button android:id="@+id/btn_info"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/info"
-	        android:background="@drawable/btn_info"/>
-	    <Button android:id="@+id/btn_comment"
-	        android:layout_width="wrap_content"
+
+		<RadioButton
+		    android:id="@+id/btn_info"
+		    android:layout_width="0px"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="@drawable/radio_btn_info"
+		    android:button="@null"
+		    android:gravity="center"
+		    android:textStyle="bold"
+		    android:textColor="@android:color/white"
+		    android:text="@string/info" />
+
+	    <RadioButton android:id="@+id/btn_comment"
+	        android:layout_width="0px"
+	        android:layout_weight="1"
 	        android:layout_height="wrap_content"
 	        android:layout_marginLeft="-1dp"
-	        android:background="@drawable/btn_comment"
+	        android:button="@null"
+	        android:gravity="center"
+		    android:textStyle="bold"
+		    android:textColor="@android:color/white"
+	        android:background="@drawable/radio_btn_info"
 	        android:text="@string/comment"/>
-	</LinearLayout>
+	</RadioGroup>
 	<ScrollView 
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:scrollbars="none">
-	<TextView android:id="@+id/txt_info"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
 	    android:layout_marginTop="10dp"
 	    android:layout_marginLeft="10dp"
 	    android:layout_marginRight="10dp"
+	    android:scrollbars="none">
+	    
+	<TextView android:id="@+id/txt_info"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:textColor="@android:color/black"
 	    android:background="@drawable/background_movie_detail"/>
 	</ScrollView>
 </LinearLayout>

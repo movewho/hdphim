@@ -9,6 +9,7 @@
     android:layout_height="fill_parent">
         <include layout="@layout/list_search_film"/>
         <include layout="@layout/detail_film"/>
+        <include layout="@layout/info_movie"/>
 </ViewFlipper>
 
 </LinearLayout>

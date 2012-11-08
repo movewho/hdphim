@@ -25,9 +25,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -44,7 +47,7 @@ import com.movie.hdonline.R;
  * @author nguyenquocchinh
  *
  */
-public class ReviewMore extends BaseFragment implements OnClickListener, OnItemClickListener{
+public class ReviewMore extends BaseFragment implements OnClickListener, OnItemClickListener, OnCheckedChangeListener{
 	
 	private View mContentView;
 	private ListView mListView;
@@ -73,6 +76,11 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 	private View footerListDetail;
 	private static int countListSearch;
 	private static int countListDetail;
+	private RadioButton mRdbInfo;
+	private TextView mTxtTitleInfo;
+	private TextView mTxtContent;
+	private Button mBtnBackInfo;
+	private RelativeLayout mViewDetailMovie;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +104,7 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnPreDay = (RadioButton) mContentView.findViewById(R.id.button_pre_day);
 		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.review_more_progress_update);
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
+		mViewDetailMovie = (RelativeLayout) mContentView.findViewById(R.id.view_detail_movie);
 		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
 		mListDetail = (ListView) mContentView.findViewById(R.id.list_film_related);
 		mTxtTitleDetail = (TextView) mContentView.findViewById(R.id.txt_title_detail);
@@ -105,9 +114,32 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
 		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
+		mRdbInfo = (RadioButton) mContentView.findViewById(R.id.btn_info);
+		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
+		mTxtContent = (TextView) mContentView.findViewById(R.id.txt_info);
+		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
+		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		initActions();
+	}
+	
+	private void initActions(){
+		mListDetail.addFooterView(footerListDetail);
+		mListView.addFooterView(footerListSearch);
+		mListView.setOnItemClickListener(this);
+		mBtnPreAll.setOnClickListener(this);
+		mProgressUpdate.setVisibility(View.GONE);
+		mProgressDetail.setVisibility(View.INVISIBLE);
+		mBtnLike.setOnClickListener(this);
+		mListDetail.setOnItemClickListener(this);
+		mBtnBack.setOnClickListener(this);
 		mTxtListData.setVisibility(View.GONE);
+		mBtnBackInfo.setOnClickListener(this);
+		mRdbInfo.setChecked(true);
+		mRdbInfo.setOnCheckedChangeListener(this);
 		mTxtTitleFilm.setSelected(true);
-		
+		mViewDetailMovie.setOnClickListener(this);
+		mTxtTitleInfo.setSelected(true);
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
 		if(null == listAdapter){
 			countListSearch = 1;
@@ -117,23 +149,12 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		}else{
 			mListView.setAdapter(listAdapter);
 		}
-		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		mListDetail.addFooterView(footerListDetail);
-		mListView.addFooterView(footerListSearch);
-		mListView.setOnItemClickListener(this);
-		mBtnPreAll.setOnClickListener(this);
 		mBtnPreAll.setTag(listLink[1]);
 		mBtnPreAll.setChecked(true);
 		mBtnPreWeek.setOnClickListener(this);
 		mBtnPreWeek.setTag(listLink[3]);
 		mBtnPreDay.setOnClickListener(this);
 		mBtnPreDay.setTag(listLink[2]);
-		mProgressUpdate.setVisibility(View.GONE);
-		mProgressDetail.setVisibility(View.INVISIBLE);
-		mBtnLike.setOnClickListener(this);
-		mListDetail.setOnItemClickListener(this);
-		mBtnBack.setOnClickListener(this);
 	}
 
 	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
@@ -189,6 +210,8 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 	}
 private void updateListView(ArrayList<JSONObject> listJson){
 	mTxtListData.setVisibility(View.GONE);
+	mListView.setVisibility(View.VISIBLE);
+	mListDetail.setVisibility(View.VISIBLE);
 	if(mViewDetail.getDisplayedChild() == 0){
 		if(null == listAdapter){
 	listAdapter = new ListAdaperReview(mContext,0, listJson,false);
@@ -220,6 +243,19 @@ private void updateListView(ArrayList<JSONObject> listJson){
 public void onClick(View v) {
 	if(v == mBtnLike){
 		
+	}else if(v == mBtnBackInfo){
+		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
+		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
+		mViewDetail.showPrevious();
+	}else if(v == mViewDetailMovie){
+		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
+		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+		try {
+			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		mViewDetail.setDisplayedChild(2);
 	}else if(v == mBtnBack){
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
@@ -242,6 +278,8 @@ private void loadListFilm(String url, List<NameValuePair> listParams){
 }
 private void showToast(String message){
 	mTxtListData.setVisibility(View.VISIBLE);
+	mListView.setVisibility(View.GONE);
+	mListDetail.setVisibility(View.GONE);
 	Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 }
 
@@ -285,5 +323,26 @@ private void showDetail(JSONObject data){
 	mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
 	mViewDetail.showNext();
 	}
+}
+@Override
+public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+	if(isChecked){
+		try {
+			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}else{
+		try {
+			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("ACTOR"));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+private void showInfo(String title, String content){
+		mTxtTitleInfo.setText(title);
+		mTxtContent.setText(content);
 }
 }
