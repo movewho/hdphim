@@ -137,11 +137,12 @@ public class GetDataJsonFromServer {
 	            int len = params.size();
 	            for (int i = 0; i < len; i++) {
 	            	para.setParameter(params.get(i).getName(), params.get(i).getValue());
-				}
+				}   
 	            
 	            httpost.setParams(para);
 	            httpost.setEntity(new UrlEncodedFormEntity(params));
 	            HttpResponse response = httpclient.execute(httpost);
+	            
 	            HttpEntity entity = response.getEntity();
 	            is = entity.getContent();
 	            

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--     android:id="@+id/layout" -->
+<!--     android:layout_width="fill_parent" -->
+<!--     android:layout_height="wrap_content" -->
+<!--     android:paddingLeft="3dp" > -->
+
+<!--     <ImageView -->
+<!--         android:id="@+id/imageIcon" -->
+<!--         android:layout_width="wrap_content" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignParentLeft="true" -->
+<!--         android:layout_marginRight="10dp" -->
+<!--         android:src="@drawable/icon" /> -->
+
+<!--     <LinearLayout -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="wrap_content" -->
+<!--         android:layout_alignParentTop="true" -->
+<!--         android:layout_toRightOf="@+id/imageIcon" -->
+<!--         android:orientation="vertical" > -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/title" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="Tiêu đề" /> -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/txtTaps" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="Tập 1" /> -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/txtpublic" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="VTM Mobile" /> -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/textDescriptions" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="Mô tả" /> -->
+<!--     </LinearLayout> -->
+
+<!-- </RelativeLayout> -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+   
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp" 
+        android:paddingBottom="10dp" 
+        android:paddingLeft="10dp" 
+        android:paddingRight="10dp" 
+        android:layout_marginLeft="5dp" 
+        android:layout_marginRight="5dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full Name"
+            android:textStyle="bold" />
+
+        
+    </LinearLayout>
+
+</LinearLayout>

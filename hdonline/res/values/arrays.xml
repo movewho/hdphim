@@ -58,10 +58,83 @@
 		<item>http://hdonline.vn/danh-sach/de-cu.html</item>
 	</string-array>
 	
-	<!-- link search movies -->
-	<string-array name="link_search_movies">
-	    <item>http://hdonline.vn/danh-sach/phim-le.html</item>
-	    <item>http://hdonline.vn/danh-sach/phim-bo.html</item>
-	    <item>http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
+	    <!-- by order label -->
+    <string-array name="byorder_abel">
+		<item>Xếp theo ngày</item>
+		<item>Xếp theo năm</item>
+		<item>Xếp theo tên</item>
+		<item>Xếp theo lượt xem</item>
+		<item>Xếp theo bình chọn</item>
+		<item>Xếp theo điểm IMDB</item>
+	</string-array>
+
+	<!-- by order value -->
+	<string-array name="byorder_value">
+		<item>year</item>
+		<item>name</item>
+		<item>view</item>
+		<item>rate</item>
+		<item>imdb</item>	
+	</string-array>  
+	
+		<!-- by sort albel -->
+	<string-array name="bysort_label">
+		<item>Tăng dần</item>
+		<item>Giản dần</item>
+	</string-array>  
+	
+		<!-- by sort albel -->
+	<string-array name="bysort_value">
+		<item>asc</item>
+		<item>desc</item>
+	</string-array> 
+	
+		<!-- by cat -->
+	<string-array name="bycat_label">
+		<item>TL-Phim Hành Động</item>
+		<item>TL-Phim Phiêu Lưu</item>
+		<item>TL-Phim Kinh Dị</item>
+		<item>TL-Phim Tình Cảm</item>
+		<item>TL-Phim Hoạt Hình</item>
+		<item>TL-Phim Võ Thuật</item>
+		<item>TL-Phim hài hước</item>
+		<item>TL-Phim tâm Lý</item>
+		<item>TL-Phim Viễn Tưởng</item>
+		<item>TL-Phim Thần Thoại</item>
+		<item>TL-Phim Chiến Tranh</item>
+		<item>TL-Phim Cổ Trang</item>
+		<item>TL-Phim Âm Nhạc</item>
+		<item>TL-Hình Sự</item>
+		<item>TL-Tv-Show</item>
+		<item>AC-3D</item>
+		<item>AC-Khoa Học</item>
+		<item>AC-Tài liệu</item>
+		<item>AC-Gia đình</item>
+		<item>AC-Lịch sử</item>
+	</string-array>
+
+		<!-- by country -->
+	<string-array name="bycat_counttry">
+		<item>Việt nam</item>
+		<item>Trung quốc</item>
+		<item>Hàn quốc</item>
+		<item>Đài loan</item>
+		<item>Mỹ</item>
+		<item>Châu âu</item>
+		<item>Nhật bản</item>
+		<item>Hồng kông</item>
+		<item>Thái lan</item>
+		<item>Châu á</item>
+		<item>Ấn độ</item>
+	</string-array>
+	
+	<string-array name="selection_list">
+	    <item>Tài khoản</item>
+	    <item>Thể loại</item>
+	    
+	</string-array>
+		<string-array name="selection_list_key">
+	    <item>AC</item>
+	    <item>TL</item>
 	</string-array>
 </resources>

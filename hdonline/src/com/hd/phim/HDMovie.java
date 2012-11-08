@@ -4,15 +4,27 @@
 package com.hd.phim;
 
 import java.util.ArrayList;
-
+import java.util.Collections;
 import shared.ui.actionscontentview.ActionsContentView;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
+
+import com.hd.phim.Utility.Configs;
+import com.hd.phim.custome.CustomViewPager;
+import com.hd.phim.custome.CustomeTextView;
+import com.hd.phim.data.adapter.SitesAdapter;
+import com.hd.phim.data.sectionlist.SectionListAdapter;
+import com.hd.phim.data.sectionlist.SectionListItem;
+import com.hd.phim.data.sectionlist.SectionListView;
+import com.hd.phim.data.sectionlist.StandardArrayAdapter;
+import com.movie.hdonline.R;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,17 +33,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
-
-import com.hd.phim.Utility.Configs;
-import com.hd.phim.Utility.MyDialog;
-import com.hd.phim.Utility.MyDialog.OnMyDialogListener;
-import com.hd.phim.custome.CustomViewPager;
-import com.movie.hdonline.R;
 
 /**
  * @author nguyenquocchinh
@@ -68,8 +74,84 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
     private ImageButton buttonSwitchlayout;
     private ImageButton buttonSwitchOnMenu;
     private ActionsContentView actionContentView;
-    private ListView menuList;
+    private SectionListView menuList;
 	
+    
+    private StandardArrayAdapter arrayAdapter;
+    private SectionListAdapter sectionAdapter;
+    private SectionListView listView;
+    private  ArrayList<String>ListInput=new ArrayList<String>();
+    private  ArrayList<ArrayList<String>> ListItems =new ArrayList<ArrayList<String>>();
+
+  //-------------------------------------------------------------------------------
+    
+    public  ArrayList<String> getListString()
+    {
+    	String[] theloai = getResources().getStringArray(R.array.bycat_label);
+        ArrayList<String> pairList=new ArrayList<String>();
+        for (int i = 0; i < theloai.length; i++) {
+			pairList.add(i, theloai[i]);
+		}
+        Collections.sort(pairList);
+        return pairList;
+    }
+//-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+    public  ArrayList<ArrayList<String>>GetListItiems (ArrayList<String>listInPut)
+    {
+        ArrayList<ArrayList<String>> Items =new ArrayList<ArrayList<String>>();
+        ArrayList<String>Item;
+        for(int i=0;i<listInPut.size();)
+        {
+            Item=new ArrayList<String>();
+            String s1=listInPut.get(i).substring(0, 2);//String.valueOf(listInPut.get(i).charAt(0));
+            for(int j =i+1;j<listInPut.size();++j)
+            {
+                String s2=listInPut.get(j).substring(0, 2);//String.valueOf(listInPut.get(j).charAt(0));
+                if(s1.equals(s2))
+                {
+                    Item.add(listInPut.get(j));
+                    listInPut.remove(j);
+                    j=j-1;
+                }
+            }
+            Item.add(listInPut.get(i));
+            listInPut.remove(i);
+            Items.add(Item);
+        }
+        return Items;
+        
+    }
+    
+    ArrayList<SectionListItem> exampleArray=new ArrayList<SectionListItem>();
+    public ArrayList<SectionListItem> getListItems(ArrayList<ArrayList<String>>Arr)
+    {
+        //GetListItiems(getListString());
+        for(int i=0;i<Arr.size();++i)
+        {
+            String title = Arr.get(i).get(0).substring(0, 2);//String.valueOf(Arr.get(i).get(0).charAt(0));
+            for(int j=0;j<Arr.get(i).size();++j)
+            {
+                exampleArray.add(new SectionListItem(Arr.get(i).get(j).substring(3, Arr.get(i).get(j).length()),getLabel(title)));
+            }
+        }
+        return exampleArray;
+    }
+//----------------------------------------------------------------------------------
+  
+public String getLabel(String title)
+{
+	String[] section = getResources().getStringArray(R.array.selection_list);
+	String[] sectionKey = getResources().getStringArray(R.array.selection_list_key);
+	for (int i = 0; i < section.length; i++) {
+		if(title.equals(sectionKey[i]))
+		{
+			return section[i];
+		}
+	}
+	
+	return "#";
+}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -85,9 +167,14 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
         actionContentView = (ActionsContentView) findViewById(R.id.content);
         actionContentView.setClickable(true);
         
-        menuList = (ListView) findViewById(R.id.actions);
+        menuList = (SectionListView) findViewById(R.id.actions);
         //final SitesAdapter actionsAdapter = new SitesAdapter(getApplicationContext(), R.array.bycat_counttry, R.array.bycat_counttry, R.array.iconsArrayRes);
-        //menuList.setAdapter(actionsAdapter);
+        ListInput=getListString();
+        ListItems=GetListItiems(ListInput);
+        getListItems(ListItems);
+        arrayAdapter = new StandardArrayAdapter(this, R.id.title, exampleArray);
+        sectionAdapter = new SectionListAdapter(getLayoutInflater(), arrayAdapter);
+        menuList.setAdapter(sectionAdapter);
         menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -114,7 +201,7 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
 
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_XEM_NHIEU_NHAT),titleXemNhieuNhat, ReviewMore.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_reviewmore), Configs.SCREEN_XEM_NHIEU_NHAT);
         
-        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_TIM_KIEM),titleTimKiem,Search.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_search), Configs.SCREEN_TIM_KIEM);
+        mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_TIM_KIEM),titleTimKiem,Outstanding.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_search), Configs.SCREEN_TIM_KIEM);
 
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MUC_UA_THICH),titleMucUaThich, Favorite.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_favorite), Configs.SCREEN_MUC_UA_THICH);
         
@@ -278,19 +365,5 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
 		@Override
 		public void onPageScrollStateChanged(int state) {
 		}
-	}
-	@Override
-	public void onBackPressed() {
-		MyDialog mDialog = new MyDialog(this);
-		mDialog.setMessage(getString(R.string.you_want_exit));
-		mDialog.setOnMyDialogListener(new OnMyDialogListener() {
-			
-			public void onItemClick(boolean isOk) {
-				if(isOk){
-					HDMovie.this.finish();
-				}
-			}
-		});
-		mDialog.show();
 	}
 }

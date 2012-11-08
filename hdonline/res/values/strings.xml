@@ -27,75 +27,6 @@
     <string name="label_week">Tuần này</string>
     <string name="label_all">Tất cả</string>
     
-    <!-- by order label -->
-    <string-array name="byorder_abel">
-		<item>Xếp theo ngày</item>
-		<item>Xếp theo năm</item>
-		<item>Xếp theo tên</item>
-		<item>Xếp theo lượt xem</item>
-		<item>Xếp theo bình chọn</item>
-		<item>Xếp theo điểm IMDB</item>
-	</string-array>
-
-	<!-- by order value -->
-	<string-array name="byorder_value">
-		<item>year</item>
-		<item>name</item>
-		<item>view</item>
-		<item>rate</item>
-		<item>imdb</item>	
-	</string-array>  
-	
-		<!-- by sort albel -->
-	<string-array name="bysort_label">
-		<item>Tăng dần</item>
-		<item>Giản dần</item>
-	</string-array>  
-	
-		<!-- by sort albel -->
-	<string-array name="bysort_value">
-		<item>asc</item>
-		<item>desc</item>
-	</string-array> 
-	
-		<!-- by cat -->
-	<string-array name="bycat_label">
-		<item>Phim Hành Động</item>
-		<item>Phim Phiêu Lưu</item>
-		<item>Phim Kinh Dị</item>
-		<item>Phim Tình Cảm</item>
-		<item>Phim Hoạt Hình</item>
-		<item>Phim Võ Thuật</item>
-		<item>Phim hài hước</item>
-		<item>Phim tâm Lý</item>
-		<item>Phim Viễn Tưởng</item>
-		<item>Phim Thần Thoại</item>
-		<item>Phim Chiến Tranh</item>
-		<item>Phim Cổ Trang</item>
-		<item>Phim Âm Nhạc</item>
-		<item>Hình Sự</item>
-		<item>Tv-Show</item>
-		<item>3D</item>
-		<item>Khoa Học</item>
-		<item>Tài liệu</item>
-		<item>Gia đình</item>
-		<item>Lịch sử</item>
-	</string-array>
-
-		<!-- by country -->
-	<string-array name="bycat_counttry">
-		<item>Việt nam</item>
-		<item>Trung quốc</item>
-		<item>Hàn quốc</item>
-		<item>Đài loan</item>
-		<item>Mỹ</item>
-		<item>Châu âu</item>
-		<item>Nhật bản</item>
-		<item>Hồng kông</item>
-		<item>Thái lan</item>
-		<item>Châu á</item>
-		<item>Ấn độ</item>
-	</string-array>
 	
 	<!-- login -->
 	<string name="login_url">http://hdonline.vn/thanh-vien/dang-nhap.html</string>
@@ -127,27 +58,4 @@
 	<string name="male">Nam</string>
 	<string name="female">Nữ</string>
 	<string name="confirm_pass_wrong">Mật khẩu không trùng</string>
-	<string name="email_address_not_valid">Địa chỉ email không đúng</string>
-	<string name="not_agree">Bạn chưa đồng ý với điều khoản của chúng tôi</string>
-	
-	<!-- detailfilm -->
-	<string name="like">Ưa thích</string>
-	<string name="related_videos">Video liên quan</string>
-	<string name="back">Quay lại</string>
-	<string name="list_not_data">Không có danh sách</string>
-	
-	<!-- searchfilm -->
-	<string name="link_search_movies">http://hdonline.vn/tim-kiem/</string>
-	<string name="search">Tìm kiếm</string>
-	<string name="list_new_film">Danh sách phim mới</string>
-	<string name="movies">Phim lẻ</string>
-	<string name="drama">Phim bộ</string>
-	<string name="movie_theaters">Phim chiếu rạp</string>
-	<string name="enter_filmname">Nhập tên phim</string>
-	<string name="view_more">Thêm kết quả</string>
-	
-	<!-- dialog -->
-	<string name="OK">Đồng ý</string>
-	<string name="cancel">Hủy bỏ</string>
-	<string name="you_want_exit">Bạn có muốn thoát ứng dụng?</string>
 </resources>
