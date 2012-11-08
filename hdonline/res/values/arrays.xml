@@ -137,4 +137,10 @@
 	    <item>AC</item>
 	    <item>TL</item>
 	</string-array>
+	
+		<string-array name="link_search_movies">
+		    <item>http://hdonline.vn/danh-sach/phim-le.html</item>
+		    <item >http://hdonline.vn/danh-sach/phim-bo.html</item>
+		    <item >http://hdonline.vn/danh-sach/phim-chieu-rap.html</item>
+		</string-array>
 </resources>
