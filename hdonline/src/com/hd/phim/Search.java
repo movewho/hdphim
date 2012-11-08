@@ -201,7 +201,10 @@ private void updateListView(ArrayList<JSONObject> listJson){
 	mListSearch.setBackgroundColor(Color.BLUE);
 	mListSearch.setAdapter(listAdapter);
 	}else{
-		listAdapter.addAll(listJson);
+		int n = listJson.size();
+		for (int i=0; i<n; i++){
+			listAdapter.add(listJson.get(i));
+		}
 		listAdapter.notifyDataSetChanged();
 	}
 	}else if(mViewDetail.getDisplayedChild() == 1){
@@ -210,7 +213,10 @@ private void updateListView(ArrayList<JSONObject> listJson){
 		mListDetail.setBackgroundColor(Color.BLUE);
 		mListDetail.setAdapter(mAdapterDetail);
 		}else{
-			mAdapterDetail.addAll(listJson);
+			int n = listJson.size();
+			for (int i=0; i<n; i++){
+				mAdapterDetail.add(listJson.get(i));
+			}
 			mAdapterDetail.notifyDataSetChanged();
 		}
 	}

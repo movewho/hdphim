@@ -14,6 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +65,10 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	private String url;
 	private ProgressBar mProgressDetail;
 	private TextView mTxtListData;
+	private View footerListSearch;
+	private View footerListDetail;
+	private static int countListSearch;
+	private static int countListDetail;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,11 +105,17 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		
 		String[] listLink = getResources().getStringArray(R.array.link_top_movies);
 		if(null == mAdapter){
+			countListSearch = 1;
+			countListDetail = 1;
 			url = listLink[5];
 		loadListFilm(url,mListParams);
 		}else{
 			mListOutstanding.setAdapter(mAdapter);
 		}
+		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		mListDetail.addFooterView(footerListDetail);
+		mListOutstanding.addFooterView(footerListSearch);
 		mListOutstanding.setOnItemClickListener(this);
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
@@ -171,14 +182,30 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	private void updateListView(ArrayList<JSONObject> listJson){
 		mTxtListData.setVisibility(View.GONE);
 		if(mViewDetail.getDisplayedChild() == 0){
-			mAdapter = new ListAdaperReview(mContext,0, listJson,false);
-			mListOutstanding.setBackgroundColor(Color.BLUE);
-			mListOutstanding.setAdapter(mAdapter);
-			}else if(mViewDetail.getDisplayedChild() == 1){
-				mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
-				mListDetail.setBackgroundColor(Color.BLUE);
-				mListDetail.setAdapter(mAdapterDetail);
-			}
+			if(null == mAdapter){
+				mAdapter = new ListAdaperReview(mContext,0, listJson,false);
+				mListOutstanding.setBackgroundColor(Color.BLUE);
+				mListOutstanding.setAdapter(mAdapter);
+				}else{
+					int n = listJson.size();
+					for (int i=0; i<n; i++){
+						mAdapter.add(listJson.get(i));
+					}
+					mAdapter.notifyDataSetChanged();
+				}
+				}else if(mViewDetail.getDisplayedChild() == 1){
+					if(null == mAdapterDetail){
+					mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
+					mListDetail.setBackgroundColor(Color.BLUE);
+					mListDetail.setAdapter(mAdapterDetail);
+					}else{
+						int n = listJson.size();
+						for (int i=0; i<n; i++){
+							mAdapterDetail.add(listJson.get(i));
+						}
+						mAdapterDetail.notifyDataSetChanged();
+					}
+				}
 	}
 	private void showToast(String message){
 		mTxtListData.setVisibility(View.VISIBLE);
@@ -189,11 +216,27 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		if(mViewDetail.getDisplayedChild() == 0){
-			mItemFilm = mAdapter.getItem(position);
-			}else {
-				mItemFilm = mAdapterDetail.getItem(position);
+			if(view == footerListSearch){
+				countListSearch++;
+				onCreateParams(url, countListSearch);
+			}else{
+				mItemFilm = mAdapter.getItem(position);
+				showDetail(mItemFilm);
+				onCreateParams(url, countListDetail);
 			}
+		}else if(view == footerListDetail){
+				countListDetail++;
+				onCreateParams(url, countListDetail);
+			}else{
+			mItemFilm = mAdapterDetail.getItem(position);
 			showDetail(mItemFilm);
+			}
+	}
+	private void onCreateParams(String url, int page){
+		ArrayList<NameValuePair> mListRelated = new ArrayList<NameValuePair>();
+		mListRelated.add(new BasicNameValuePair("format", "json"));
+		mListRelated.add(new BasicNameValuePair("page", ""+page));
+		loadListFilm(url,mListRelated);
 	}
 
 	@Override
@@ -209,16 +252,11 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	
 	private void showDetail(JSONObject data){
 		try {
-			ArrayList<NameValuePair> mListRelated = new ArrayList<NameValuePair>();
-			mListRelated.add(new BasicNameValuePair("format", "json"));
-			mListRelated.add(new BasicNameValuePair("page", "1"));
 			mSmartImgDetail.setImageUrl(data.getString("IMG"));
 			mTxtTitleDetail.setText(data.getString("TITLE"));
 			mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
 			mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
 			mTxtTitleFilm.setText(data.getString("NAME"));
-			mListRelated.add(new BasicNameValuePair("bycat", data.getString("CAT")));
-			loadListFilm(url,mListRelated);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
