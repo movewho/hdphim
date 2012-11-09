@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroung_login"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical" >
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" 
+	    android:layout_marginBottom="30dp"
+	    android:text="@string/title_change_pass"
+        android:textColor="#2E9AFE"
+	    android:textStyle="bold"
+	    android:textSize="25sp"/>
+    <EditText
+        android:id="@+id/edit_old_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/background_edittext"
+        android:ems="10"
+        android:lines="1"
+        android:inputType="textPassword"
+        android:hint="@string/old_pass" />
+	<EditText
+        android:id="@+id/edit_new_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/background_edittext"
+        android:ems="10"
+        android:lines="1"
+        android:inputType="textPassword"
+        android:hint="@string/new_pass" />
+	<EditText
+        android:id="@+id/edit_confirm_new_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/background_edittext"
+        android:ems="10"
+        android:lines="1"
+        android:inputType="textPassword"
+        android:hint="@string/confirm_new_pass" />
+
+    <Button
+        android:id="@+id/btn_change_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/blue_button"
+        android:text="@string/title_change_pass"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

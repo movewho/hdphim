@@ -19,8 +19,12 @@
             </intent-filter>
         </activity>
 <!--         <activity android:name="com.hd.phim.HDMovie"></activity> -->
-		<activity android:name="com.hd.phim.ForgotPassword"></activity>
-		<activity android:name="com.hd.phim.Register"></activity>
+		<activity android:name="com.hd.phim.ForgotPassword"
+		    android:windowSoftInputMode="adjustResize"></activity>
+		<activity android:name="com.hd.phim.Register"
+		    android:windowSoftInputMode="adjustResize"></activity>
+		<activity android:name="com.hd.phim.ChangePassword"
+		    android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>

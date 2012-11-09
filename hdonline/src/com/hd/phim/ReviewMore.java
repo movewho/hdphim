@@ -148,13 +148,16 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 			mListView.setAdapter(listAdapter);
 		}
 		mBtnPreAll.setTag(listLink[1]);
-		mBtnPreAll.setChecked(true);
 		mBtnPreWeek.setOnClickListener(this);
 		mBtnPreWeek.setTag(listLink[3]);
 		mBtnPreDay.setOnClickListener(this);
 		mBtnPreDay.setTag(listLink[2]);
 	}
-
+@Override
+public void onResume() {
+	super.onResume();
+	mBtnPreAll.setChecked(true);
+}
 	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
 
 		private JSONArray jsonArray;
@@ -261,6 +264,7 @@ public void onClick(View v) {
 		mViewDetail.showPrevious();
 	}else{
 		url = v.getTag().toString();
+		if(null != listAdapter)
 		listAdapter.clear();
 	loadListFilm(url,mListParams);
 	}

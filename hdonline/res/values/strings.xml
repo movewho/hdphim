@@ -11,6 +11,7 @@
     <string name="base_url">http://hdonline.vn/index.php</string>
     <string name="not_connect_internet">Không có kết nối internet!</string>
     <string name="not_json_data">Đang cập nhật</string>
+    <string name="count_view"><b>%s</b> %s lần</string>
     
     <!-- more -->
     <string name="label_edit">Sửa</string>
@@ -57,46 +58,6 @@
 		<item>asc</item>
 		<item>desc</item>
 	</string-array> 
-	
-		<!-- by cat -->
-	<string-array name="bycat_label">
-		<item>Phim Hành Động</item>
-		<item>Phim Phiêu Lưu</item>
-		<item>Phim Kinh Dị</item>
-		<item>Phim Tình Cảm</item>
-		<item>Phim Hoạt Hình</item>
-		<item>Phim Võ Thuật</item>
-		<item>Phim hài hước</item>
-		<item>Phim tâm Lý</item>
-		<item>Phim Viễn Tưởng</item>
-		<item>Phim Thần Thoại</item>
-		<item>Phim Chiến Tranh</item>
-		<item>Phim Cổ Trang</item>
-		<item>Phim Âm Nhạc</item>
-		<item>Hình Sự</item>
-		<item>Tv-Show</item>
-		<item>3D</item>
-		<item>Khoa Học</item>
-		<item>Tài liệu</item>
-		<item>Gia đình</item>
-		<item>Lịch sử</item>
-	</string-array>
-
-		<!-- by country -->
-	<string-array name="bycat_counttry">
-		<item>Việt nam</item>
-		<item>Trung quốc</item>
-		<item>Hàn quốc</item>
-		<item>Đài loan</item>
-		<item>Mỹ</item>
-		<item>Châu âu</item>
-		<item>Nhật bản</item>
-		<item>Hồng kông</item>
-		<item>Thái lan</item>
-		<item>Châu á</item>
-		<item>Ấn độ</item>
-	</string-array>
-	
 	<!-- login -->
 	<string name="login_url">http://hdonline.vn/thanh-vien/dang-nhap.html</string>
 	<string name="edit_empty">Trường này chưa được nhập</string>
@@ -115,6 +76,11 @@
 	<string name="get_password">Lấy Mật Khẩu</string>
 	<string name="security_url">http://hdonline.vn/security.php</string>
 	
+	<!-- change pass -->
+	<string name="title_change_pass">Đổi mật khẩu</string>
+	<string name="old_pass">Mật khẩu cũ</string>
+	<string name="new_pass">Mật khẩu mới</string>
+	<string name="confirm_new_pass">Xác nhận mật khẩu mới</string>
 	<!-- register -->
 	<string name="title_register">Đăng ký</string>
 	<string name="regis_url">http://hdonline.vn/thanh-vien/dang-ky.html</string>

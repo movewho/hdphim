@@ -8,12 +8,14 @@ import java.util.Collections;
 
 import shared.ui.actionscontentview.ActionsContentView;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +33,7 @@ import com.hd.phim.Utility.Configs;
 import com.hd.phim.Utility.MyDialog;
 import com.hd.phim.Utility.MyDialog.OnMyDialogListener;
 import com.hd.phim.custome.CustomViewPager;
+import com.hd.phim.data.adapter.CatMovie;
 import com.hd.phim.data.sectionlist.SectionListAdapter;
 import com.hd.phim.data.sectionlist.SectionListItem;
 import com.hd.phim.data.sectionlist.SectionListView;
@@ -109,6 +112,7 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
                 if(s1.equals(s2))
                 {
                     Item.add(listInPut.get(j));
+                    Log.w("@@@@", listInPut.get(j));
                     listInPut.remove(j);
                     j=j-1;
                 }
@@ -125,12 +129,14 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
     public ArrayList<SectionListItem> getListItems(ArrayList<ArrayList<String>>Arr)
     {
         //GetListItiems(getListString());
+    	String[] listLink = getResources().getStringArray(R.array.bycat_key);
         for(int i=0;i<Arr.size();++i)
         {
             String title = Arr.get(i).get(0).substring(0, 2);//String.valueOf(Arr.get(i).get(0).charAt(0));
             for(int j=0;j<Arr.get(i).size();++j)
             {
-                exampleArray.add(new SectionListItem(Arr.get(i).get(j), getLabel(title)));
+                exampleArray.add(new SectionListItem((new CatMovie(Arr.get(i).get(j).subSequence(3, Arr.get(i).get(j).length()).toString(),listLink[i])), getLabel(title)));
+                Log.w("###", Arr.get(i).get(j));
             }
         }
         return exampleArray;
@@ -178,6 +184,10 @@ public String getLabel(String title)
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				if(checkItemClick(parent.getAdapter().getItem(position).toString(), getResources().getStringArray(R.array.bycat_label)[20].toString())){
+					Intent i = new Intent(HDMovie.this, ChangePassword.class);
+					startActivity(i);
+				}
 				actionContentView.showContent();
 			}
         	        	
@@ -205,7 +215,13 @@ public String getLabel(String title)
         
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_THEM), titleThem, More.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_more), Configs.SCREEN_THEM);
 	}
-
+	
+	private boolean checkItemClick(String listLabel, String string){
+		Log.e("listLabel", listLabel);
+		string = string.substring(3, string.length());
+		Log.e("string", string);
+		return listLabel.equals(string);
+	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 		// TODO Auto-generated method stub

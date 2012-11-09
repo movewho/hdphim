@@ -110,9 +110,33 @@
         <item>TL-Khoa Học</item>
         <item>TL-Tài liệu</item>
         <item>TL-Gia đình</item>
-        <item>TL-Lịch sử</item>
+        <item>AC-Quên mật khẩu</item>
+        <item>AC-Đổi mật khẩu</item>
     </string-array>
-
+    <!-- by cat -->
+    <string-array name="bycat_key">
+        <item>http://hdonline.vn/xem-phim-hanh-dong.html</item>
+        <item>http://hdonline.vn/xem-phim-phieu-luu.html</item>
+        <item>http://hdonline.vn/xem-phim-kinh-di.html</item>
+        <item>http://hdonline.vn/xem-phim-tinh-cam.html</item>
+        <item>http://hdonline.vn/xem-phim-hoat-hinh.html</item>
+        <item>http://hdonline.vn/xem-phim-vo-thuat.html</item>
+        <item>http://hdonline.vn/xem-phim-hai-huoc.html</item>
+        <item>http://hdonline.vn/xem-phim-tam-ly.html</item>
+        <item>http://hdonline.vn/xem-phim-vien-tuong.html</item>
+        <item>http://hdonline.vn/xem-phim-than-thoai.html</item>
+        <item>http://hdonline.vn/xem-phim-chien-tranh.html</item>
+        <item>http://hdonline.vn/xem-phim-da-su-co-trang.html</item>
+        <item>http://hdonline.vn/xem-phim-the-thao-am-nhac.html</item>
+        <item>http://hdonline.vn/xem-phim-hinh-su.html</item>
+        <item>http://hdonline.vn/xem-phim-tv-show.html</item>
+        <item>http://hdonline.vn/xem-phim-3d.html</item>
+        <item>http://hdonline.vn/xem-phim-khoa-hoc.html</item>
+        <item>http://hdonline.vn/xem-phim-tai-lieu.html</item>
+        <item>http://hdonline.vn/xem-phim-gia-dinh.html</item>
+        <item>http://hdonline.vn/thanh-vien/quen-mat-khau.html</item>
+        <item>http://hdonline.vn/thanh-vien/doi-mat-khau.html</item>
+    </string-array>
     <!-- by country -->
     <string-array name="bycat_counttry">
         <item>Việt nam</item>

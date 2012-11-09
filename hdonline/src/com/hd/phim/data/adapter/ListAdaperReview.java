@@ -4,11 +4,13 @@
 package com.hd.phim.data.adapter;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +66,8 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 		try {
 			holder.title.setText(mJson.get(position).getString("TITLE"));
 			if(!seachFilm){
-				holder.viewCount.setText(ConverDecimalToPercent.converDecimalToPercent(mJson.get(position).getString("IMDB"))+"% "+mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count));
+				String temp = " <font color=green><b>%s</b></font> %s";
+				holder.viewCount.setText(Html.fromHtml(new Formatter().format(temp, ConverDecimalToPercent.converDecimalToPercent(mJson.get(position).getString("IMDB"))+"% ",mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count)).toString()));
 				holder.time.setText(mJson.get(position).getString("TIME")+" "+mJson.get(position).getString("UPDATE"));
 			}else{
 				holder.viewCount.setText(mJson.get(position).getString("VIEWED")+" "+mContext.getString(R.string.count));
