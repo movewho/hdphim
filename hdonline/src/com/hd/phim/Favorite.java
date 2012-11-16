@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -39,6 +41,7 @@ import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
+import com.hd.phim.data.adapter.ListAdaperReview.OnPlayClickListener;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.loopj.android.image.SmartImageView;
 import com.movie.hdonline.R;
@@ -47,7 +50,7 @@ import com.movie.hdonline.R;
  * @author hdtua_000
  *
  */
-public class Favorite extends BaseFragment implements OnItemClickListener, OnClickListener, OnCheckedChangeListener {
+public class Favorite extends BaseFragment implements OnItemClickListener, OnClickListener, OnCheckedChangeListener, OnPlayClickListener {
 
 	private View mContentView;
 	private ListView mListFavorite;
@@ -77,6 +80,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	private TextView mTxtContent;
 	private Button mBtnBackInfo;
 	private RelativeLayout mViewDetailMovie;
+	private ImageView mBtnDetailPlay;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,7 +118,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
 		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		
+		mBtnDetailPlay = (ImageView) mContentView.findViewById(R.id.btn_detail_play);
 	}
 
 	@Override
@@ -141,6 +145,17 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mRdbInfo.setOnCheckedChangeListener(this);
 		mTxtTitleFilm.setSelected(true);
 		mViewDetailMovie.setOnClickListener(this);
+		mBtnDetailPlay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+					onPlayClickListener(mItemFilm.getString("URL"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	private void loadListFilm(String url, List<NameValuePair> listParams){
 		if (CheckConnectInternet
@@ -207,6 +222,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		if(mViewDetail.getDisplayedChild() == 0){
 			if(null == mAdapter){
 				mAdapter = new ListAdaperReview(mContext,0, listJson,false);
+				mAdapter.setOnPlayClickListener(this);
 				mListFavorite.setBackgroundColor(Color.BLUE);
 				mListFavorite.setAdapter(mAdapter);
 				}else{
@@ -219,6 +235,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 				}else if(mViewDetail.getDisplayedChild() == 1){
 					if(null == mAdapterDetail){
 					mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
+					mAdapterDetail.setOnPlayClickListener(this);
 					mListDetail.setBackgroundColor(Color.BLUE);
 					mListDetail.setAdapter(mAdapterDetail);
 					}else{
@@ -325,5 +342,12 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	private void showInfo(String title, String content){
 			mTxtTitleInfo.setText(title);
 			mTxtContent.setText(content);
+	}
+
+	@Override
+	public void onPlayClickListener(String url) {
+		Intent i = new Intent(getActivity(), PlayMovies.class);
+		i.putExtra("PATH", url);
+		startActivity(i);
 	}
 }

@@ -10,13 +10,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hd.phim.PlayMovies;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.loopj.android.image.SmartImageView;
 import com.movie.hdonline.R;
@@ -33,6 +37,7 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 	private ArrayList<JSONObject> mJson;
 	private Context mContext;
 	private boolean seachFilm;
+	private OnPlayClickListener mListener;
 	
 	public ListAdaperReview(Context context, int textViewResourceId,
 			ArrayList<JSONObject> objects, boolean isSearch) {
@@ -46,7 +51,7 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
+		final int index = position;
 		Holder holder;
 		if(convertView == null)
 		{
@@ -56,6 +61,7 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 			holder.title = (TextView) convertView.findViewById(R.id.txt_title);
 			holder.viewCount = (TextView) convertView.findViewById(R.id.txt_count_view);
 			holder.time = (TextView) convertView.findViewById(R.id.text_time);
+			holder.btnPlay = (ImageView) convertView.findViewById(R.id.btn_play);
 			holder.thumbnai = (SmartImageView) convertView.findViewById(R.id.image_movie);
 			convertView.setTag(holder);
 		}
@@ -75,7 +81,19 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 				holder.time.setText(mJson.get(position).getString("TIME"));
 
 			}
+			
 			holder.thumbnai.setImageUrl(mJson.get(position).getString("IMG"));
+			holder.btnPlay.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					try {
+						mListener.onPlayClickListener(mJson.get(index).getString("URL"));
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -85,9 +103,16 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 
 	static class Holder
 	{
-		TextView title;
-		TextView viewCount;
-		TextView time;
-		SmartImageView thumbnai;
+		private TextView title;
+		private TextView viewCount;
+		private TextView time;
+		private ImageView btnPlay;
+		private SmartImageView thumbnai;
+	}
+	public interface OnPlayClickListener{
+		public abstract void onPlayClickListener(String url);
+	}
+	public void setOnPlayClickListener(OnPlayClickListener listener){
+		mListener = listener;
 	}
 }

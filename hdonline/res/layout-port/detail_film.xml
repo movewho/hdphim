@@ -105,7 +105,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@android:id/empty"
+        android:id="@+id/btn_detail_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

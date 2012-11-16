@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -41,6 +43,7 @@ import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
+import com.hd.phim.data.adapter.ListAdaperReview.OnPlayClickListener;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.loopj.android.image.SmartImageView;
 import com.movie.hdonline.R;
@@ -49,7 +52,7 @@ import com.movie.hdonline.R;
  * @author hdtua_000
  *
  */
-public class Search extends BaseFragment implements OnItemClickListener, OnClickListener, OnCheckedChangeListener{
+public class Search extends BaseFragment implements OnItemClickListener, OnClickListener, OnCheckedChangeListener, OnPlayClickListener{
 	private View mContentView;
 	private ListView mListSearch;
 	private List<NameValuePair> mListParams;
@@ -85,6 +88,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private TextView mTxtContent;
 	private Button mBtnBackInfo;
 	private RelativeLayout mViewDetailMovie;
+	private ImageView mBtnDetailPlay;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,7 +131,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
 		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		
+		mBtnDetailPlay = (ImageView) mContentView.findViewById(R.id.btn_detail_play);
 	}
 	@Override
 	protected void initActions() {
@@ -160,6 +164,17 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mTxtTitleFilm.setSelected(true);
 		mViewDetailMovie.setOnClickListener(this);
 		mTxtTitleInfo.setSelected(true);
+		mBtnDetailPlay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+					onPlayClickListener(mItemFilm.getString("URL"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	class LoadData extends AsyncTask<String, Boolean, JSONArray>{
 
@@ -220,6 +235,7 @@ private void updateListView(ArrayList<JSONObject> listJson){
 	if(mViewDetail.getDisplayedChild() == 0){
 		if(null == listAdapter){
 	listAdapter = new ListAdaperReview(mContext,0, listJson, true);
+	listAdapter.setOnPlayClickListener(this);
 	mListSearch.setBackgroundColor(Color.BLUE);
 	mListSearch.setAdapter(listAdapter);
 	}else{
@@ -232,6 +248,7 @@ private void updateListView(ArrayList<JSONObject> listJson){
 	}else if(mViewDetail.getDisplayedChild() == 1){
 		if(null == mAdapterDetail){
 		mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
+		mAdapterDetail.setOnPlayClickListener(this);
 		mListDetail.setBackgroundColor(Color.BLUE);
 		mListDetail.setAdapter(mAdapterDetail);
 		}else{
@@ -363,6 +380,13 @@ public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 private void showInfo(String title, String content){
 		mTxtTitleInfo.setText(title);
 		mTxtContent.setText(content);
+}
+
+@Override
+public void onPlayClickListener(String url) {
+	Intent i = new Intent(getActivity(), PlayMovies.class);
+	i.putExtra("PATH", url);
+	startActivity(i);
 }
 
 }

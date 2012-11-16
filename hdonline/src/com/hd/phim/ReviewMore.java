@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,8 +26,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -39,6 +41,7 @@ import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
+import com.hd.phim.data.adapter.ListAdaperReview.OnPlayClickListener;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.loopj.android.image.SmartImageView;
 import com.movie.hdonline.R;
@@ -47,7 +50,7 @@ import com.movie.hdonline.R;
  * @author nguyenquocchinh
  *
  */
-public class ReviewMore extends BaseFragment implements OnClickListener, OnItemClickListener, OnCheckedChangeListener{
+public class ReviewMore extends BaseFragment implements OnClickListener, OnItemClickListener, OnCheckedChangeListener, OnPlayClickListener{
 	
 	private View mContentView;
 	private ListView mListView;
@@ -81,6 +84,7 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 	private TextView mTxtContent;
 	private Button mBtnBackInfo;
 	private RelativeLayout mViewDetailMovie;
+	private ImageView mBtnDetailPlay;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,6 +124,7 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
 		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
+		mBtnDetailPlay = (ImageView) mContentView.findViewById(R.id.btn_detail_play);
 	}
 	@Override
 	protected void initActions() {
@@ -152,6 +157,17 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mBtnPreWeek.setTag(listLink[3]);
 		mBtnPreDay.setOnClickListener(this);
 		mBtnPreDay.setTag(listLink[2]);
+		mBtnDetailPlay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				try {
+					onPlayClickListener(mItemFilm.getString("URL"));
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 @Override
 public void onResume() {
@@ -216,6 +232,7 @@ private void updateListView(ArrayList<JSONObject> listJson){
 	if(mViewDetail.getDisplayedChild() == 0){
 		if(null == listAdapter){
 	listAdapter = new ListAdaperReview(mContext,0, listJson,false);
+	listAdapter.setOnPlayClickListener(this);
 	mListView.setBackgroundColor(Color.BLUE);
 	mListView.setAdapter(listAdapter);
 		}else{
@@ -228,6 +245,7 @@ private void updateListView(ArrayList<JSONObject> listJson){
 	}else if(mViewDetail.getDisplayedChild() == 1){
 		if(null == mAdapterDetail){
 		mAdapterDetail = new ListAdaperReview(mContext, 0, listJson,false);
+		mAdapterDetail.setOnPlayClickListener(this);
 		mListDetail.setBackgroundColor(Color.BLUE);
 		mListDetail.setAdapter(mAdapterDetail);
 		}else{
@@ -347,5 +365,12 @@ public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 private void showInfo(String title, String content){
 		mTxtTitleInfo.setText(title);
 		mTxtContent.setText(content);
+}
+
+@Override
+public void onPlayClickListener(String url) {
+	Intent i = new Intent(getActivity(), PlayMovies.class);
+	i.putExtra("PATH", url);
+	startActivity(i);
 }
 }
