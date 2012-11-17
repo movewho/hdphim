@@ -10,4 +10,5 @@
     android:drawablePadding="6dip"
     android:textAppearance="?android:attr/textAppearanceLarge"
     android:textColor="@android:color/white"
+    android:background="@drawable/background_item_menu"
     />

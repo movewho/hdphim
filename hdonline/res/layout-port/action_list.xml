@@ -38,7 +38,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-2.5dp"
             android:cacheColorHint="@color/actions_bg"
-            android:dividerHeight="@dimen/divider_size" >
+            android:dividerHeight="@dimen/divider_size" 
+            android:listSelector="@drawable/background_item_menu"
+            >
         </com.hd.phim.data.sectionlist.SectionListView>
 <!--  </RelativeLayout> -->
     </FrameLayout>

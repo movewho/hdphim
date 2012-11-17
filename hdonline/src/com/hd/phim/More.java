@@ -3,6 +3,7 @@
  */
 package com.hd.phim;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,8 @@ public class More extends BaseFragment{
 	@Override
 	protected void initActions() {
 		final ListAdapterMore listAdapter = new ListAdapterMore(getActivity().getApplicationContext(), R.array.titleArrayRes, R.array.urlsArrayRes, R.array.iconsArrayRes);
+		mListView.setCacheColorHint(Color.TRANSPARENT);
+        mListView.requestFocus(0);
 		mListView.setAdapter(listAdapter);
 		
 	}

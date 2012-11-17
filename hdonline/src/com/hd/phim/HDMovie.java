@@ -9,6 +9,7 @@ import java.util.Collections;
 import shared.ui.actionscontentview.ActionsContentView;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
@@ -178,6 +180,8 @@ public String getLabel(String title)
         getListItems(ListItems);
         arrayAdapter = new StandardArrayAdapter(this, R.id.title, exampleArray);
         sectionAdapter = new SectionListAdapter(getLayoutInflater(), arrayAdapter);
+        menuList.setCacheColorHint(Color.TRANSPARENT);
+        menuList.requestFocus(0);
         menuList.setAdapter(sectionAdapter);
         menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
