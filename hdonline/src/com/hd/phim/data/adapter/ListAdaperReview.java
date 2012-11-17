@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hd.phim.PlayMovies;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.loopj.android.image.SmartImageView;
 import com.movie.hdonline.R;

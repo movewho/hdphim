@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.hd.phim.Utility.CallIntentPlayMovies;
 import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
@@ -369,8 +370,6 @@ private void showInfo(String title, String content){
 
 @Override
 public void onPlayClickListener(String url) {
-	Intent i = new Intent(getActivity(), PlayMovies.class);
-	i.putExtra("PATH", url);
-	startActivity(i);
+	CallIntentPlayMovies.play(url, getActivity());
 }
 }
