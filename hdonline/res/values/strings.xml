@@ -28,7 +28,7 @@
     <string name="label_week">Tuần này</string>
     <string name="label_all">Tất cả</string>
     
-    <!-- by order label -->
+    <!--  label -->
     <string-array name="byorder_abel">
 		<item>Xếp theo ngày</item>
 		<item>Xếp theo năm</item>
@@ -48,7 +48,7 @@
 	</string-array>  
 	
 		<!-- by sort albel -->
-	<string-array name="bysort_label">
+	<string-array name="bysort_labelbysort_labelbysort_labelbysort_label">
 		<item>Tăng dần</item>
 		<item>Giản dần</item>
 	</string-array>  

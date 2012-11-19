@@ -40,7 +40,7 @@ public class PlayMovies extends Activity implements OnClickListener {
 	private void initVar(){
 		path = this.getIntent().getStringExtra("PATH");
 		Log.e("path", path);
-		path = "rtsp://116.193.76.73/vod/mp4:sample.mp4";
+		path = "rtsp://s1.hdonline.vn/m1/mp4:phimle/2012/03/WarHorse.mp4";
 	}
 	private void initView(){
 		mVideoView = (VideoView) this.findViewById(R.id.video_view);

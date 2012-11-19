@@ -21,7 +21,7 @@ public class CallIntentPlayMovies {
 //		i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //		i.putExtra("PATH", url);
 //		activity.startActivity(i);
-        String videoUrl = "rtsp://116.193.76.73/vod/mp4:sample.mp4";
+        String videoUrl = "rtsp://s1.hdonline.vn/s1/mp4:/s1/phimle/2012/03/WarHorse.mp4";
         Intent i = new Intent(Intent.ACTION_VIEW);  
         i.setData(Uri.parse(videoUrl));  
         activity.startActivity(i); 

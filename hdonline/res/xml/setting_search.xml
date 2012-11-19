@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <PreferenceCategory android:title="Sắp xếp theo thứ tự" android:key="byOrderLabel"><ListPreference android:entryValues="@array/byorder_value" android:entries="@array/byorder_abel" android:key="byOrder"/></PreferenceCategory>
+    <PreferenceCategory android:title="Sắp xếp theo thứ tự alphabet" android:key="bySortLabel">
+        <ListPreference android:entries="@array/bysort_label" android:entryValues="@array/bysort_value" android:summary="Sắp xếp theo thứ tự alphabet"/>
+    </PreferenceCategory>    
+
+</PreferenceScreen>

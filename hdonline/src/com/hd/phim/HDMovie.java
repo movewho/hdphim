@@ -18,6 +18,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -31,6 +34,7 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.hd.phim.Utility.CallIntentPlayMovies;
 import com.hd.phim.Utility.Configs;
 import com.hd.phim.Utility.MyDialog;
 import com.hd.phim.Utility.MyDialog.OnMyDialogListener;
@@ -218,6 +222,8 @@ public String getLabel(String title)
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_MUC_UA_THICH),titleMucUaThich, Favorite.class, null,mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_favorite), Configs.SCREEN_MUC_UA_THICH);
         
         mTabsAdapter.addTab(mTabHost.newTabSpec(TAB_THEM), titleThem, More.class, null, mTabHost.getTabWidget(), R.layout.tab_indicator, getResources().getDrawable(R.drawable.button_more), Configs.SCREEN_THEM);
+        
+
 	}
 	
 	private boolean checkItemClick(String listLabel, String string){
@@ -397,5 +403,33 @@ public String getLabel(String title)
 			}
 		});
 		dialog.show();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.movies_menu, menu);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+		case R.id.menu_help:
+			
+			break;
+		case R.id.menu_refresh:
+			
+			break;
+		case R.id.menu_preferences:
+			
+			break;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+		
+		return true;
 	}
 }
