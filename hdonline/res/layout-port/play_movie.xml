@@ -2,12 +2,108 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#FAFAFA" >
     <VideoView 
                 android:id="@+id/video_view"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-    <LinearLayout
+                android:layout_height="200dp"/>
+    <ImageView 
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/video_view"
+        android:layout_alignBottom="@+id/video_view"
+        android:src="@drawable/btn_play"
+        android:layout_centerHorizontal="true"/>
+    <RelativeLayout 
+        android:id="@+id/bar_like"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/video_view"
+        android:background="@drawable/color_bar_like">
+        <ImageView 
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_like"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+        <ImageView android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/btn_add"
+            android:layout_toLeftOf="@+id/btn_like"/>
+    </RelativeLayout>
+    <TextView android:id="@+id/play_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bar_like"
+        
+        android:layout_marginLeft="5dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Đường sơn đại địa chấn"/>
+    <TextView android:id="@+id/play_txt_post_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/play_title"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="by phuc hanh"/>
+    <TextView android:id="@+id/play_count_views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/play_txt_post_by"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="17,234 views"/>
+    <RadioGroup 
+        android:id="@+id/bar_comment"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/play_count_views"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <RadioButton android:id="@+id/play_btn_relative"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Relative Videos"
+            android:gravity="center"
+            android:checked="true"
+            android:textStyle="bold"
+            android:button="@null"
+            android:textColor="@android:color/white"
+            android:background="@drawable/radio_btn_info"/>
+        <RadioButton android:id="@+id/play_btn_comment"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Comment"
+            android:button="@null"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/radio_btn_info"
+            android:textStyle="bold"/>
+    </RadioGroup>
+    <ViewFlipper android:id="@+id/play_viewfliper_comment"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bar_comment">
+        <include layout="@layout/list_movies"/>
+        <TextView 
+            android:id="@+id/play_videos_comment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textColor="@android:color/black"/>
+    </ViewFlipper>
+    <!-- <LinearLayout
             android:orientation="horizontal"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -32,6 +128,6 @@
                      android:layout_width="0px"
                      android:layout_weight="1"
                      android:src="@drawable/btn_stop"/>
-    </LinearLayout>
+    </LinearLayout> -->
 
 </RelativeLayout>

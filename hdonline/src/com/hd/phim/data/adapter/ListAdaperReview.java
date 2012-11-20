@@ -86,11 +86,7 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 				
 				@Override
 				public void onClick(View v) {
-					try {
-						mListener.onPlayClickListener(mJson.get(index).getString("URL"));
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
+						mListener.onPlayClickListener(mJson.get(index));
 				}
 			});
 		} catch (JSONException e) {
@@ -109,7 +105,7 @@ public class ListAdaperReview extends ArrayAdapter<JSONObject>{
 		private SmartImageView thumbnai;
 	}
 	public interface OnPlayClickListener{
-		public abstract void onPlayClickListener(String url);
+		public abstract void onPlayClickListener(JSONObject item);
 	}
 	public void setOnPlayClickListener(OnPlayClickListener listener){
 		mListener = listener;

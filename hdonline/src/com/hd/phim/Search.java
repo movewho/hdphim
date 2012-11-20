@@ -88,8 +88,8 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private TextView mTxtTitleInfo;
 	private TextView mTxtContent;
 	private Button mBtnBackInfo;
-	private RelativeLayout mViewDetailMovie;
-	private ImageView mBtnDetailPlay;
+	private RelativeLayout mViewVideos;
+	private ImageView mBtnShowDetail;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,7 +115,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnMovieTheater = (RadioButton) mContentView.findViewById(R.id.btn_movie_theaters);
 		mProgressUpdate = (ProgressBar) mContentView.findViewById(R.id.search_progress_update);
 		mTxtListSearchData = (TextView) mContentView.findViewById(R.id.txt_list_search_not_data);
-		mViewDetailMovie = (RelativeLayout) mContentView.findViewById(R.id.view_detail_movie);
+		mViewVideos = (RelativeLayout) mContentView.findViewById(R.id.view_detail_movie);
 		mProgressDetail = (ProgressBar) mContentView.findViewById(R.id.detail_progress_update);
 		mSmartImgDetail = (SmartImageView) mContentView.findViewById(R.id.image_movie_detail);
 		mListDetail = (ListView) mContentView.findViewById(R.id.list_film_related);
@@ -132,7 +132,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnBackInfo = (Button) mContentView.findViewById(R.id.btn_info_back);
 		footerListSearch = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
 		footerListDetail = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.footer_list, null, false);
-		mBtnDetailPlay = (ImageView) mContentView.findViewById(R.id.btn_detail_play);
+		mBtnShowDetail = (ImageView) mContentView.findViewById(R.id.btn_detail_play);
 	}
 	@Override
 	protected void initActions() {
@@ -163,17 +163,21 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mRdbInfo.setChecked(true);
 		mRdbInfo.setOnCheckedChangeListener(this);
 		mTxtTitleFilm.setSelected(true);
-		mViewDetailMovie.setOnClickListener(this);
+		mViewVideos.setOnClickListener(this);
 		mTxtTitleInfo.setSelected(true);
-		mBtnDetailPlay.setOnClickListener(new OnClickListener() {
+		mBtnShowDetail.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
+				mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
+				mRdbInfo.setSelected(true);
 				try {
-					onPlayClickListener(mItemFilm.getString("URL"));
+					showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
+				mViewDetail.setDisplayedChild(2);
 			}
 		});
 	}
@@ -270,16 +274,9 @@ public void onClick(View v) {
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
 		mViewDetail.showPrevious();
-	}else if(v == mViewDetailMovie){
-		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_right);
-		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_right);
-		mRdbInfo.setSelected(true);
-		try {
-			showInfo(mItemFilm.getString("NAME"), mItemFilm.getString("DETAIL"));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		mViewDetail.setDisplayedChild(2);
+	}else if(v == mViewVideos){
+			onPlayClickListener(mItemFilm);
+		
 	}else if(v == mBtnBack){
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
@@ -384,8 +381,10 @@ private void showInfo(String title, String content){
 }
 
 @Override
-public void onPlayClickListener(String url) {
-	CallIntentPlayMovies.play(url, getActivity());
+public void onPlayClickListener(JSONObject item) {
+	Intent i = new Intent(getActivity(), PlayMovies.class);
+	i.putExtra("OBJ", item.toString());
+	startActivity(i);
 }
 
 }

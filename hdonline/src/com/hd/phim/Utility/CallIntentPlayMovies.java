@@ -7,8 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.hd.phim.PlayMovies;
-
 /**
  * @author nguyenquocchinh
  *
