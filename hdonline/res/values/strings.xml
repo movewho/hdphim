@@ -120,4 +120,8 @@
 	<!-- info movies -->
 	<string name="info">Thông tin</string>
 	<string name="comment">Bình luận</string>
+	
+	<!-- link -->
+	<string name="link_like_movie">http://hdonline.vn/index.php</string>
+	<string name="link_add_movie">http://hdonline.vn/index.php</string>
 </resources>

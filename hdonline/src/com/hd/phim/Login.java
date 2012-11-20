@@ -111,11 +111,6 @@ private class LoginSever extends AsyncTask<String, Boolean, JSONObject>{
 			} catch (SSLPeerUnverifiedException e) {
 				e.printStackTrace();
 			}
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 		publishProgress(false);
 		return jsonObj;
