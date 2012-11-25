@@ -69,7 +69,6 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 	private TextView mTxtTitleDetail;
 	private TextView mTxtCountDetail;
 	private TextView mTxtTimeDetail;
-	private Button mBtnLike;
 	private ListAdaperReview mAdapterDetail;
 	private Button mBtnBack;
 	private TextView mTxtTitleFilm;
@@ -115,7 +114,6 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mTxtTitleDetail = (TextView) mContentView.findViewById(R.id.txt_title_detail);
 		mTxtCountDetail = (TextView) mContentView.findViewById(R.id.txt_count_view_detail);
 		mTxtTimeDetail = (TextView) mContentView.findViewById(R.id.text_time_detail);
-		mBtnLike = (Button) mContentView.findViewById(R.id.btn_like);
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
 		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
@@ -134,7 +132,6 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 		mListView.setOnItemClickListener(this);
 		mBtnPreAll.setOnClickListener(this);
 		mProgressUpdate.setVisibility(View.GONE);
-		mBtnLike.setOnClickListener(this);
 		mListDetail.setOnItemClickListener(this);
 		mBtnBack.setOnClickListener(this);
 		mTxtListData.setVisibility(View.GONE);
@@ -265,9 +262,7 @@ private void updateListView(ArrayList<JSONObject> listJson){
 
 @Override
 public void onClick(View v) {
-	if(v == mBtnLike){
-		
-	}else if(v == mBtnBackInfo){
+	if(v == mBtnBackInfo){
 		mViewDetail.setInAnimation(getActivity(),R.anim.fade_in_left);
 		mViewDetail.setOutAnimation(getActivity(),R.anim.fade_out_left);
 		mViewDetail.showPrevious();

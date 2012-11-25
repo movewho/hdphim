@@ -3,22 +3,22 @@
 
     <!-- icon array res -->
     <string-array name="iconsArrayRes">
-        <item>@drawable/recent</item>
-        <item>@drawable/top_rated</item>
-        <item>@drawable/history</item>
-        <item>@drawable/my_movie</item>
         <item>@drawable/register</item>
+        <item>@drawable/my_movie</item>
+        <item>@drawable/top_rated</item>
         <item>@drawable/playlist</item>
+        <item >@android:drawable/ic_menu_help</item>
+        <item >@android:drawable/ic_delete</item>
     </string-array>
 
     <!-- title array res -->
     <string-array name="titleArrayRes">
-        <item>@string/label_recent</item>
+        <item >@string/label_info_acc</item>
+        <item>@string/label_movie_like</item>
         <item>@string/label_top_rated</item>
-        <item>@string/label_history</item>
-        <item>@string/label_mymovie</item>
-        <item>@string/label_register</item>
-        <item>@string/label_playlist</item>
+        <item >@string/label_notification</item>
+        <item >@string/label_guide</item>
+        <item >@string/label_exit</item>
     </string-array>
 
     <!-- url arraty res -->

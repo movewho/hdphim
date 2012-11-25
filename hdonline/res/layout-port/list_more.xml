@@ -12,8 +12,8 @@
     <RelativeLayout
         android:id="@+id/relayout_toolbar_top_message_view"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/top_bar" >
+        android:layout_height="50dp"
+        android:background="@android:color/black" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -25,10 +25,12 @@
                 android:id="@+id/button_pre_toolbar_top_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_button" 
+           		 android:layout_marginTop="5dp"
+           		 android:layout_marginBottom="5dp"
+                android:background="@drawable/btn_black_grey" 
                 android:text="@string/label_edit"
                 android:textColor="@android:color/white"
-            android:textStyle="bold"/>
+           		 android:textStyle="bold"/>
 
 
         </LinearLayout>
@@ -58,7 +60,7 @@
             android:id="@+id/button_back_toolbar_top_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_button"
+            android:background="@drawable/btn_black_grey"
             android:text="@string/lable_login"
             android:textColor="@android:color/white"
             android:textStyle="bold"/>

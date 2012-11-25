@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">hdonline</string>
     <!-- Tieu de cua tab-->
-    <string name="title_noi_bat">Nổi bật</string>
+    <string name="title_noi_bat">Mới nhất</string>
     <string name="title_xem_nhieu_nhat">Xem nhiều</string>
     <string name="title_timkiem">Tìm kiếm</string>
-    <string name="title_muc_ua_thich">Ưa thích</string>
+    <string name="title_muc_ua_thich">Trailer</string>
     <string name="title_them">Thêm</string>
     <!-- item listView -->
     <string name="count">lần</string>
@@ -17,9 +17,12 @@
     <string name="label_edit">Sửa</string>
     <string name="lable_login">Đăng nhập</string>
     <string name="label_recent">Gần đây nhất</string>
-    <string name="label_top_rated">Xếp hạng nhất</string>
-    <string name="label_history">Lịch sử</string>
-    <string name="label_mymovie">Video của tôi</string>
+    <string name="label_top_rated">Bảng xếp hạng</string>
+    <string name="label_info_acc">Thông tin tài khoản</string>
+   <string name="label_notification">Thông báo</string>
+    <string name="label_exit">Thoát</string>
+    <string name="label_guide">Hướng dẫn</string>
+    <string name="label_movie_like">Phim yêu thích</string>
     <string name="label_register">Đăng ký</string>
     <string name="label_playlist">Danh sách phát</string>
     
@@ -49,7 +52,7 @@
 	
 		<!-- by sort albel -->
 	<string-array name="bysort_labelbysort_labelbysort_labelbysort_label">
-		<item>Tăng dần</item>
+		<item>Tăng Dần</item>
 		<item>Giản dần</item>
 	</string-array>  
 	
@@ -120,8 +123,10 @@
 	<!-- info movies -->
 	<string name="info">Thông tin</string>
 	<string name="comment">Bình luận</string>
+	<string name="noi_dung_phim">Nội dung phim</string>
 	
 	<!-- link -->
 	<string name="link_like_movie">http://hdonline.vn/index.php</string>
 	<string name="link_add_movie">http://hdonline.vn/index.php</string>
+	<string name="link_img_poster">hdonline.vn/skin/new-tmp/img/poster.jpg</string>
 </resources>
