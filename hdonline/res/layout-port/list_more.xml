@@ -25,9 +25,11 @@
                 android:id="@+id/button_pre_toolbar_top_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-           		 android:layout_marginTop="5dp"
-           		 android:layout_marginBottom="5dp"
-                android:background="@drawable/btn_black_grey" 
+                android:background="@drawable/dialog_change_sub_btn" 
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
                 android:text="@string/label_edit"
                 android:textColor="@android:color/white"
            		 android:textStyle="bold"/>
@@ -57,10 +59,15 @@
         android:layout_alignParentLeft="true">
 
         <Button
-            android:id="@+id/button_back_toolbar_top_detail"
+            android:id="@+id/list_more_btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_black_grey"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_gravity="center_vertical"
             android:text="@string/lable_login"
             android:textColor="@android:color/white"
             android:textStyle="bold"/>

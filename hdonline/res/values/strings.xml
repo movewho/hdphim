@@ -120,6 +120,18 @@
 	<string name="cancel">Hủy bỏ</string>
 	<string name="you_want_exit">Bạn có muốn thoát ứng dụng?</string>
 	
+	<!-- dialog change sub -->
+	<string name="text_font">Font chữ</string>
+	<string name="text_size">Cỡ Chữ</string>
+	<string name="text_background">Nền chữ</string>
+	<string name="text_color">Màu chữ</string>
+	<string name="text_border_color">Viền chữ</string>
+	<string name="label_default">Mặc định</string>
+	<string name="label_completed">Hoàn tất</string>
+	<string name="label_plus">Tăng</string>
+	<string name="label_sub">Giảm</string>
+	<string name="label_show_hide">Hiện/Ẩn</string>
+	
 	<!-- info movies -->
 	<string name="info">Thông tin</string>
 	<string name="comment">Bình luận</string>

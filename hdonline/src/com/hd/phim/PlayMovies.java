@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hd.phim.Utility.CallIntentPlayMovies;
+import com.hd.phim.Utility.DialogChangeSubStyle;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.movie.hdonline.R;
 
@@ -97,8 +98,10 @@ public class PlayMovies extends Activity implements OnClickListener, OnCheckedCh
 	@Override
 	public void onClick(View v) {
 		if(v == mPlay){
-		CallIntentPlayMovies.play(path, this);
-		this.finish();
+			DialogChangeSubStyle dl = new DialogChangeSubStyle(this);
+			dl.show();
+//		CallIntentPlayMovies.play(path, this);
+//		this.finish();
 		}else if(v == mImgLike){
 			listParams =  new ArrayList<NameValuePair>();
 			listParams.add(new BasicNameValuePair("like_movie", "true"));

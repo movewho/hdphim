@@ -4,8 +4,8 @@
     <!-- icon array res -->
     <string-array name="iconsArrayRes">
         <item>@drawable/register</item>
-        <item>@drawable/my_movie</item>
         <item>@drawable/top_rated</item>
+        <item>@drawable/my_movie</item>
         <item>@drawable/playlist</item>
         <item >@android:drawable/ic_menu_help</item>
         <item >@android:drawable/ic_delete</item>

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dialog_change_sub_txt_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="@android:color/white"
+            android:text="@string/text_font" />
+
+        <Button
+            android:id="@+id/dialog_change_sub_imgbtn_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textColor="@android:color/white"
+            android:text="Arial" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dialog_change_sub_txt_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="@android:color/white"
+            android:text="@string/text_size" />
+
+        <Button
+            android:id="@+id/dialog_change_sub_btn_size_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textColor="@android:color/white"
+            android:text="@string/label_plus" />
+
+        <Button
+            android:id="@+id/dialog_change_sub_btn_size_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textColor="@android:color/white"
+            android:text="@string/label_sub" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dialog_change_sub_txt_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:textColor="@android:color/white"
+            android:text="@string/text_background" />
+
+        <Button
+            android:id="@+id/dialog_change_sub_btn_show_txt_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textColor="@android:color/white"
+            android:text="@string/label_show_hide" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dialog_change_sub_txt_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:text="@string/text_color" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:weightSum="8" >
+
+            <RadioButton
+                android:id="@+id/radbtn_black_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_black" />
+
+            <RadioButton
+                android:id="@+id/radbtn_blue_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_blue" />
+
+            <RadioButton
+                android:id="@+id/radbtn_green_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_green" />
+
+            <RadioButton
+                android:id="@+id/radbtn_cyan_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_cyan" />
+
+            <RadioButton
+                android:id="@+id/radbtn_red_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_red" />
+
+            <RadioButton
+                android:id="@+id/radbtn_ping_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_ping" />
+
+            <RadioButton
+                android:id="@+id/radbtn_yellow_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_yellow" />
+
+            <RadioButton
+                android:id="@+id/radbtn_white_txt_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_white" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dialog_change_sub_txt_background_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:text="@string/text_border_color" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:weightSum="8" >
+
+            <RadioButton
+                android:id="@+id/radbtn_black_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_black" />
+
+            <RadioButton
+                android:id="@+id/radbtn_blue_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_blue" />
+
+            <RadioButton
+                android:id="@+id/radbtn_green_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_green" />
+
+            <RadioButton
+                android:id="@+id/radbtn_cyan_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_cyan" />
+
+            <RadioButton
+                android:id="@+id/radbtn_red_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_red" />
+
+            <RadioButton
+                android:id="@+id/radbtn_ping_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_ping" />
+
+            <RadioButton
+                android:id="@+id/radbtn_yellow_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_yellow" />
+
+            <RadioButton
+                android:id="@+id/radbtn_white_text_border_color"
+                android:layout_width="0px"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:button="@drawable/radbtn_white" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" 
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/dialog_change_sub_btn_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textColor="@android:color/white"
+            android:text="@string/label_completed" />
+
+        <Button
+            android:id="@+id/dialog_change_sub_btn_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/dialog_change_sub_btn_completed"
+            android:background="@drawable/dialog_change_sub_btn"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:textColor="@android:color/white"
+            android:text="@string/label_default" />
+    </RelativeLayout>
+
+</LinearLayout>
