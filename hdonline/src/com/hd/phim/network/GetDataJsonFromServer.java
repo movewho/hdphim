@@ -161,6 +161,7 @@ public class GetDataJsonFromServer {
 	            }
 	            is.close();
 	            result=sb.toString();
+	            Log.w("ket qua",result);
 	    }catch(Exception e){
 	            Log.e(Configs.TAG_LOG, "Error converting result "+e.toString());
 	    }

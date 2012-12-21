@@ -49,7 +49,7 @@
     <!-- link top movies -->
     <string-array name="link_top_movies">
         <item>http://hdonline.vn/danh-sach/top-imdb.html</item>
-        <item>http://hdonline.vn/danh-sach/xem-nhieu.html</item>
+        <item>http://hdonline.vn/danh-sach/phim-moi.html</item>
         <item>http://hdonline.vn/danh-sach/xem-nhieu-trong-ngay.html</item>
         <item>http://hdonline.vn/danh-sach/xem-nhieu-trong-tuan.html</item>
         <item>http://hdonline.vn/danh-sach/xem-nhieu-trong-thang.html</item>
@@ -109,14 +109,69 @@
         <item>TL-3D</item>
         <item>TL-Khoa Học</item>
         <item>TL-Tài liệu</item>
-        <item>TL-Gia đình</item>
-        <item>AC-Quên mật khẩu</item>
-        <item>AC-Đổi mật khẩu</item>
+        <item>TL-Gia đình</item>       
+        <item>CT-Việt nam</item>
+        <item>CT-Trung quốc</item>
+        <item>CT-Hàn quốc</item>
+        <item>CT-Đài loan</item>
+        <item>CT-Mỹ</item>
+        <item>CT-Châu âu</item>
+        <item>CT-Nhật bản</item>
+        <item>CT-Hồng kông</item>
+        <item>CT-Thái lan</item>
+        <item>CT-Châu á</item>
+        <item>CT-Ấn độ</item>
+        <item>YR-2007</item>
+        <item>YR-2008</item>
+        <item>YR-2009</item>
+        <item>YR-2010</item>
+        <item>YR-2011</item>
+        <item>YR-2012</item>
+        
+    </string-array>
+    <!-- link phim quoc gia -->
+    <string-array name = "link_bycat_lable">
+        <item>http://hdonline.vn/xem-phim-hanh-dong.html</item>
+        <item >http://hdonline.vn/xem-phim-phieu-luu.html</item>
+        <item >http://hdonline.vn/xem-phim-kinh-di.html</item>
+        <item >http://hdonline.vn/xem-phim-tinh-cam.html</item>
+        <item >http://hdonline.vn/xem-phim-hoat-hinh.html</item>
+        <item >http://hdonline.vn/xem-phim-vo-thuat.html</item>
+        <item >http://hdonline.vn/xem-phim-hai-huoc.html</item>
+        <item >http://hdonline.vn/xem-phim-tam-ly.html</item>
+        <item >http://hdonline.vn/xem-phim-vien-tuong.html</item>
+        <item >http://hdonline.vn/xem-phim-than-thoai.html</item>
+        <item >http://hdonline.vn/xem-phim-chien-tranh.html</item>
+        <item >http://hdonline.vn/xem-phim-da-su-co-trang.html</item>
+        <item >http://hdonline.vn/xem-phim-the-thao-am-nhac.html</item>
+        <item >http://hdonline.vn/xem-phim-hinh-su.html</item>
+        <item >http://hdonline.vn/xem-phim-tv-show.html</item>
+        <item >http://hdonline.vn/xem-phim-3d.html</item>
+        <item >http://hdonline.vn/xem-phim-khoa-hoc.html</item>
+        <item >http://hdonline.vn/xem-phim-tai-lieu.html</item>
+        <item >http://hdonline.vn/xem-phim-gia-dinh.html</item>
+        <item >http://hdonline.vn/phim-bo-viet-nam.html</item>
+        <item >http://hdonline.vn/phim-bo-trung-quoc.html</item>
+        <item >http://hdonline.vn/phim-bo-han-quoc.html</item>
+        <item >http://hdonline.vn/phim-bo-dai-loan.html</item>
+        <item >http://hdonline.vn/phim-bo-my.html</item>
+        <item >http://hdonline.vn/phim-bo-chau-au.html</item>
+        <item >http://hdonline.vn/phim-bo-nhat-ban.html</item>
+        <item >http://hdonline.vn/phim-bo-hong-kong.html</item>
+        <item >http://hdonline.vn/phim-bo-thai-lan.html</item>
+        <item >http://hdonline.vn/phim-bo-chau-a.html</item>
+        <item >http://hdonline.vn/phim-bo-an-do.html</item>
+        <item >http://hdonline.vn/danh-sach/phim-theo-nam/2007.html</item>
+        <item >http://hdonline.vn/danh-sach/phim-theo-nam/2008.html</item>
+        <item >http://hdonline.vn/danh-sach/phim-theo-nam/2009.html</item>
+        <item >http://hdonline.vn/danh-sach/phim-theo-nam/2010.html</item>
+        <item >http://hdonline.vn/danh-sach/phim-theo-nam/2011.html</item>
+        <item >http://hdonline.vn/danh-sach/phim-theo-nam/2012.html</item>
     </string-array>
     <!-- by cat -->
     <string-array name="bycat_key">
         <item>http://hdonline.vn/xem-phim-hanh-dong.html</item>
-        <item>http://hdonline.vn/xem-phim-phieu-luu.html</item>
+        <item> http://hdonline.vn/xem-phim-phieu-luu.html </item>
         <item>http://hdonline.vn/xem-phim-kinh-di.html</item>
         <item>http://hdonline.vn/xem-phim-tinh-cam.html</item>
         <item>http://hdonline.vn/xem-phim-hoat-hinh.html</item>
@@ -152,12 +207,16 @@
         <item>Ấn độ</item>
     </string-array>
     <string-array name="selection_list">
-        <item>Tài khoản</item>
+        
         <item>Thể loại</item>
+        <item>Quốc Gia</item>
+        <item>Năm</item>
     </string-array>
     <string-array name="selection_list_key">
-        <item>AC</item>
+        
         <item>TL</item>
+        <item>CT</item>
+        <item>YR</item>
     </string-array>
     <string-array name="link_search_movies">
         <item>http://hdonline.vn/danh-sach/phim-le.html</item>

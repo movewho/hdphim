@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.network.GetDataJsonFromServer;
+import com.hd.phim.data.adapter.MD5String;
 import com.movie.hdonline.R;
 
 /**
@@ -87,10 +88,18 @@ public void onClick(View v) {
 		break;
 	}
 }
+
 private void connectServer(){
 	if(CheckConnectInternet.checkInternetConnection(Login.this)){
 		mLogin = new LoginSever();
-		mLogin.execute(getString(R.string.login_url));
+		
+		MD5String md5 = new MD5String();
+		String str = md5.ConverStringToMD5();
+		Log.w("token la ",str);
+		
+		String url = getString(R.string.login_url)+"?token="+str+"&username="+edtitUsername.getText().toString()+"&pass="+editPassword.getText().toString();
+		Log.w("url la ", url);
+		mLogin.execute(url);
 	}else{
 		showToast(getString(R.string.not_connect_internet));
 	}
@@ -142,10 +151,12 @@ private class LoginSever extends AsyncTask<String, Boolean, JSONObject>{
 		mPrgDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		mPrgDialog.setMessage(getString(R.string.connecting));
 		
+		
+		
 		listParams =  new ArrayList<NameValuePair>();
-		listParams.add(new BasicNameValuePair("login_box", "true"));
-		listParams.add(new BasicNameValuePair("username", edtitUsername.getText().toString()));
-		listParams.add(new BasicNameValuePair("pass", editPassword.getText().toString()));
+		//listParams.add(new BasicNameValuePair("token", str));
+		//listParams.add(new BasicNameValuePair("username", edtitUsername.getText().toString()));
+		//listParams.add(new BasicNameValuePair("pass", editPassword.getText().toString()));
 	}
 }
 private void showToast(String message){
@@ -157,16 +168,23 @@ private void moveActivity(Class<?> className){
 	overridePendingTransition(R.anim.fade_in_right, R.anim.fade_out_right);
 }
 private void checkLoginCompleted(JSONObject jsonData){
-	try {
-		showToast(jsonData.getString("message"));
+	//try {
+		//showToast(jsonData.getString("message"));
 		
-		if(jsonData.getBoolean("success")){
-			moveActivity(HDMovie.class);
-			this.finish();
+		try {
+			showToast("Bạn đã đăng nhập thành công vào hệ thống.!");
+			if(jsonData.getBoolean("success")){
+				moveActivity(HDMovie.class);
+				this.finish();
+			//}
+//} catch (JSONException e) {
+//	Log.e("get json", "loi");
+//	e.printStackTrace();
+}
+		} catch (JSONException e) {
+			showToast("Bạn đã đăng nhập không thành công.!");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	} catch (JSONException e) {
-		Log.e("get json", "loi");
-		e.printStackTrace();
-	}
 }
 }

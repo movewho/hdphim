@@ -4,6 +4,7 @@
 package com.hd.phim;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.net.ssl.SSLPeerUnverifiedException;
@@ -40,6 +41,7 @@ public class ForgotPassword extends Activity implements OnClickListener {
 	private Button mBtnGetPass;
 	private LoginSever mConnect;
 	private boolean isValid;
+	private JSONObject mItemMovies;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class ForgotPassword extends Activity implements OnClickListener {
 		initVar();
 		initView();
 		initActions();
+		
 	}
 
 	private void initVar() {

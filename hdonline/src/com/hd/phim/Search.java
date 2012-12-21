@@ -44,6 +44,7 @@ import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
+import com.hd.phim.data.adapter.MD5String;
 import com.hd.phim.data.adapter.ListAdaperReview.OnPlayClickListener;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.loopj.android.image.SmartImageView;
@@ -74,7 +75,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private TextView mTxtTimeDetail;
 	private ListAdaperReview mAdapterDetail;
 	private Button mBtnBack;
-	private TextView mTxtTitleFilm;
+	//private TextView mTxtTitleFilm;
 	private String url;
 	private ProgressBar mProgressDetail;
 	private TextView mTxtListData;
@@ -89,11 +90,13 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private Button mBtnBackInfo;
 	private RelativeLayout mViewVideos;
 	private ImageView mBtnShowDetail;
-	
+	private String str;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.search_film, null);
+        MD5String md5 = new MD5String();
+		str = md5.ConverStringToMD5();
         return mContentView;
 	}
 
@@ -122,7 +125,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mTxtCountDetail = (TextView) mContentView.findViewById(R.id.txt_count_view_detail);
 		mTxtTimeDetail = (TextView) mContentView.findViewById(R.id.text_time_detail);
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
-		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
+		//mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
 		mRdbInfo = (RadioButton) mContentView.findViewById(R.id.btn_info);
 		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
@@ -159,7 +162,7 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 		mBtnBackInfo.setOnClickListener(this);
 		mRdbInfo.setChecked(true);
 		mRdbInfo.setOnCheckedChangeListener(this);
-		mTxtTitleFilm.setSelected(true);
+		//mTxtTitleFilm.setSelected(true);
 		mViewVideos.setOnClickListener(this);
 		mTxtTitleInfo.setSelected(true);
 		mBtnShowDetail.setOnClickListener(new OnClickListener() {
@@ -340,10 +343,11 @@ private void onCreateParams(String url, int page){
 private void showDetail(JSONObject data){
 	try {
 		mSmartImgDetail.setImageUrl(data.getString("IMG"));
-		mTxtTitleDetail.setText(data.getString("TITLE"));
+		//mTxtTitleDetail.setText(data.getString("TITLE"));
+		mTxtTitleDetail.setText(str);
 		mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
 		mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
-		mTxtTitleFilm.setText(data.getString("NAME"));
+		//mTxtTitleFilm.setText(data.getString("NAME"));
 	} catch (JSONException e) {
 		e.printStackTrace();
 	}

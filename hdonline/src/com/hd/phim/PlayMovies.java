@@ -63,7 +63,9 @@ public class PlayMovies extends Activity implements OnClickListener, OnCheckedCh
 	private void initVar(){
 		try {
 			mItemMovies = new JSONObject(getIntent().getStringExtra("OBJ"));
-			path = mItemMovies.getString("URL");
+			
+			path = mItemMovies.getString("ID");
+			Log.w("link phim",path);
 		} catch (JSONException e) {
 			Log.e("PlayMovies - get URL", e.toString());
 		}
@@ -98,8 +100,8 @@ public class PlayMovies extends Activity implements OnClickListener, OnCheckedCh
 	@Override
 	public void onClick(View v) {
 		if(v == mPlay){
-//			DialogChangeSubStyle dl = new DialogChangeSubStyle(this);
-//			dl.show();
+			DialogChangeSubStyle dl = new DialogChangeSubStyle(this);
+			dl.show();
 		CallIntentPlayMovies.play(path, this);
 		this.finish();
 		}else if(v == mImgLike){

@@ -44,6 +44,7 @@ import com.hd.phim.data.adapter.ListAdaperReview;
 import com.hd.phim.data.adapter.ListAdaperReview.OnPlayClickListener;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.loopj.android.image.SmartImageView;
+import com.hd.phim.data.adapter.MD5String;
 import com.movie.hdonline.R;
 
 /**
@@ -66,7 +67,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	private TextView mTxtTimeDetail;
 	private ListAdaperReview mAdapterDetail;
 	private Button mBtnBack;
-	private TextView mTxtTitleFilm;
+	//private TextView mTxtTitleFilm;
 	private String url;
 	private ProgressBar mProgressDetail;
 	private TextView mTxtListData;
@@ -108,7 +109,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mTxtCountDetail = (TextView) mContentView.findViewById(R.id.txt_count_view_detail);
 		mTxtTimeDetail = (TextView) mContentView.findViewById(R.id.text_time_detail);
 		mBtnBack = (Button) mContentView.findViewById(R.id.btn_detail_back);
-		mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
+		//mTxtTitleFilm = (TextView) mContentView.findViewById(R.id.title_detail_film);
 		mTxtListData = (TextView) mContentView.findViewById(R.id.txt_not_data);
 		mRdbInfo = (RadioButton) mContentView.findViewById(R.id.btn_info);
 		mTxtTitleInfo = (TextView) mContentView.findViewById(R.id.title_info_film);
@@ -127,6 +128,10 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		if(null == mAdapter){
 			countListSearch = 1;
 			countListDetail = 1;
+			
+			MD5String md5 = new MD5String();
+			String str = md5.ConverStringToMD5();
+			
 			url = listLink[5];
 		loadListFilm(url,mListParams);
 		}else{
@@ -140,7 +145,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 		mBtnBackInfo.setOnClickListener(this);
 		mRdbInfo.setChecked(true);
 		mRdbInfo.setOnCheckedChangeListener(this);
-		mTxtTitleFilm.setSelected(true);
+		//mTxtTitleFilm.setSelected(true);
 		mViewVideos.setOnClickListener(this);
 		mBtnShowDetail.setOnClickListener(new OnClickListener() {
 			
@@ -304,7 +309,7 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 			mTxtTitleDetail.setText(data.getString("TITLE"));
 			mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
 			mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
-			mTxtTitleFilm.setText(data.getString("NAME"));
+			//mTxtTitleFilm.setText(data.getString("NAME"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
