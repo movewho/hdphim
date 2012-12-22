@@ -89,11 +89,8 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
     private SectionListView listView;
     private  ArrayList<String>ListInput=new ArrayList<String>();
     private  ArrayList<ArrayList<String>> ListItems =new ArrayList<ArrayList<String>>();
-    
-  
 
   //-------------------------------------------------------------------------------
-    
     
     public  ArrayList<String> getListString()
     {
@@ -135,11 +132,10 @@ public class HDMovie extends FragmentActivity implements OnItemClickListener, On
     }
     
     ArrayList<SectionListItem> exampleArray=new ArrayList<SectionListItem>();
-    
     public ArrayList<SectionListItem> getListItems(ArrayList<ArrayList<String>>Arr)
     {
         //GetListItiems(getListString());
-    	String[] listLink = getResources().getStringArray(R.array.link_bycat_lable);
+    	String[] listLink = getResources().getStringArray(R.array.bycat_key);
         for(int i=0;i<Arr.size();++i)
         {
             String title = Arr.get(i).get(0).substring(0, 2);//String.valueOf(Arr.get(i).get(0).charAt(0));
@@ -195,12 +191,11 @@ public String getLabel(String title)
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) { 
-					Outstanding outs = new Outstanding("nguyenthanhan");
-					//mViewPager.setCurrentItem(position);
-					//Intent i = new Intent(HDMovie.this,Outstanding.class);
-					//i.putExtra("link", getResources().getStringArray(R.array.link_bycat_lable)[position]);
-					//startActivity(i);
+					int position, long id) {
+				if(checkItemClick(parent.getAdapter().getItem(position).toString(), getResources().getStringArray(R.array.bycat_label)[20].toString())){
+					Intent i = new Intent(HDMovie.this, ChangePassword.class);
+					startActivity(i);
+				}
 				actionContentView.showContent();
 			}
         	        	
@@ -352,8 +347,6 @@ public String getLabel(String title)
 			// hide Layout hide screen
 			switch (position) {
 			case 0:
-				//Inten i = new Intent();
-				
 				mCurrentTab = TAB_LIST_NOIBAT;
 				break;
 			case 1:
