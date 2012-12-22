@@ -44,7 +44,6 @@ import com.hd.phim.Utility.CheckConnectInternet;
 import com.hd.phim.Utility.ConverDecimalToPercent;
 import com.hd.phim.custome.BaseFragment;
 import com.hd.phim.data.adapter.ListAdaperReview;
-import com.hd.phim.data.adapter.MD5String;
 import com.hd.phim.data.adapter.ListAdaperReview.OnPlayClickListener;
 import com.hd.phim.network.GetDataJsonFromServer;
 import com.loopj.android.image.SmartImageView;
@@ -90,13 +89,11 @@ public class Search extends BaseFragment implements OnItemClickListener, OnClick
 	private Button mBtnBackInfo;
 	private RelativeLayout mViewVideos;
 	private ImageView mBtnShowDetail;
-	private String str;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.search_film, null);
-        MD5String md5 = new MD5String();
-		str = md5.ConverStringToMD5();
         return mContentView;
 	}
 
@@ -343,8 +340,7 @@ private void onCreateParams(String url, int page){
 private void showDetail(JSONObject data){
 	try {
 		mSmartImgDetail.setImageUrl(data.getString("IMG"));
-		//mTxtTitleDetail.setText(data.getString("TITLE"));
-		mTxtTitleDetail.setText(str);
+		mTxtTitleDetail.setText(data.getString("TITLE"));
 		mTxtCountDetail.setText(ConverDecimalToPercent.converDecimalToPercent(data.getString("IMDB"))+"% "+data.getString("VIEWED")+" "+mContext.getString(R.string.count));
 		mTxtTimeDetail.setText(data.getString("TIME")+" "+data.getString("UPDATE"));
 		//mTxtTitleFilm.setText(data.getString("NAME"));

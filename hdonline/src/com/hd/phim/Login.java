@@ -168,18 +168,15 @@ private void moveActivity(Class<?> className){
 	overridePendingTransition(R.anim.fade_in_right, R.anim.fade_out_right);
 }
 private void checkLoginCompleted(JSONObject jsonData){
-	//try {
-		//showToast(jsonData.getString("message"));
+	
 		
 		try {
 			showToast("Bạn đã đăng nhập thành công vào hệ thống.!");
 			if(jsonData.getBoolean("success")){
 				moveActivity(HDMovie.class);
 				this.finish();
-			//}
-//} catch (JSONException e) {
-//	Log.e("get json", "loi");
-//	e.printStackTrace();
+			
+
 }
 		} catch (JSONException e) {
 			showToast("Bạn đã đăng nhập không thành công.!");
