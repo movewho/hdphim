@@ -147,11 +147,11 @@ public class ReviewMore extends BaseFragment implements OnClickListener, OnItemC
 			countListSearch = 1;
 			countListDetail = 1;
 			url = listLink[1];
-		loadListFilm(listLink[1],mListParams);
+		loadListFilm(listLink[0],mListParams);
 		}else{
 			mListView.setAdapter(listAdapter);
 		}
-		mBtnPreAll.setTag(listLink[1]);
+		mBtnPreAll.setTag(listLink[0]);
 		mBtnPreWeek.setOnClickListener(this);
 		mBtnPreWeek.setTag(listLink[3]);
 		mBtnPreDay.setOnClickListener(this);
