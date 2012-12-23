@@ -339,6 +339,14 @@ public class Favorite extends BaseFragment implements OnItemClickListener, OnCli
 	@Override
 	public void onPlayClickListener(JSONObject item) {
 		Intent i = new Intent(getActivity(), PlayMovies.class);
+		try {
+			String str = item.getString("ID");
+			i.putExtra("OBJ", str);
+			startActivity(i);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		i.putExtra("OBJ", item.toString());
 		startActivity(i);
 	}

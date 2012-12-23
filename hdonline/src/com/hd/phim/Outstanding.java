@@ -340,8 +340,16 @@ public class Outstanding extends BaseFragment implements OnItemClickListener, On
 	@Override
 	public void onPlayClickListener(JSONObject item) {
 		Intent i = new Intent(getActivity(), PlayMovies.class);
-		i.putExtra("OBJ", item.toString());
-		startActivity(i);
+		String str;
+		try {
+			str = item.getString("ID");
+			i.putExtra("OBJ", str);
+			startActivity(i);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
